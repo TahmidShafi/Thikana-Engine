@@ -14,10 +14,8 @@ import unicodedata
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Set, Union
 
-try:
-    from .models import AdminLevel, AdminNode
-except (ImportError, ValueError):
-    from models import AdminLevel, AdminNode
+from .models import AdminLevel, AdminNode
+
 
 
 logger = logging.getLogger(__name__)
@@ -506,7 +504,7 @@ class BangladeshGazetteer:
         Lookup any administrative node by ID or raw ID.
         If level is provided, restricts lookup to that administrative level.
         """
-        sid = str(node_id).strip()
+        sid = node_id.strip()
         if level is not None:
             if level == AdminLevel.DIVISION:
                 return self._divisions_by_id.get(sid)
