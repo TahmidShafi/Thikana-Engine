@@ -13,6 +13,7 @@ from .phonetic_trie import (
     MeasureCollisionRate,
 )
 from .disambiguator import resolve_location_hierarchy
+from .tagger_crf import CRFAddressTagger, ENTITY_TYPES, BIO_LABELS
 
 __all__ = [
     "BangladeshGazetteer",
@@ -25,6 +26,9 @@ __all__ = [
     "PhoneticGazetteerMatcher",
     "MeasureCollisionRate",
     "resolve_location_hierarchy",
+    "CRFAddressTagger",
+    "ENTITY_TYPES",
+    "BIO_LABELS",
 ]
 
 

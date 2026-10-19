@@ -1,0 +1,2920 @@
+[
+  {
+    "id": "gold_001",
+    "raw_text": "Uttara Bank Limited, Road 27, Dhanmondi, Dhaka",
+    "normalized_text": "Uttara Bank Limited, RD# 27, Dhanmondi, Dhaka",
+    "tokens": [
+      "Uttara",
+      "Bank",
+      "Limited",
+      "RD#",
+      "27",
+      "Dhanmondi",
+      "Dhaka"
+    ],
+    "tags": [
+      "B-LANDMARK",
+      "I-LANDMARK",
+      "I-LANDMARK",
+      "B-ROAD",
+      "I-ROAD",
+      "B-THANA_UPAZILA",
+      "B-DISTRICT"
+    ],
+    "expected_thana": "Dhanmondi",
+    "expected_district": "Dhaka",
+    "is_homonym_test": true,
+    "category": "commercial_distractor"
+  },
+  {
+    "id": "gold_002",
+    "raw_text": "Noakhali Tower, 55 Purana Paltan, Dhaka",
+    "normalized_text": "Noakhali Tower, 55 Purana Paltan, Dhaka",
+    "tokens": [
+      "Noakhali",
+      "Tower",
+      "55",
+      "Purana",
+      "Paltan",
+      "Dhaka"
+    ],
+    "tags": [
+      "B-LANDMARK",
+      "I-LANDMARK",
+      "B-HOUSE",
+      "B-THANA_UPAZILA",
+      "I-THANA_UPAZILA",
+      "B-DISTRICT"
+    ],
+    "expected_thana": "Paltan",
+    "expected_district": "Dhaka",
+    "is_homonym_test": true,
+    "category": "commercial_distractor"
+  },
+  {
+    "id": "gold_003",
+    "raw_text": "Comilla Mistanna Bhandar, Section 10, Mirpur, Dhaka",
+    "normalized_text": "Comilla Mistanna Bhandar, Section 10, Mirpur, Dhaka",
+    "tokens": [
+      "Comilla",
+      "Mistanna",
+      "Bhandar",
+      "Section",
+      "10",
+      "Mirpur",
+      "Dhaka"
+    ],
+    "tags": [
+      "B-LANDMARK",
+      "I-LANDMARK",
+      "I-LANDMARK",
+      "B-BLOCK_SECTOR",
+      "I-BLOCK_SECTOR",
+      "B-THANA_UPAZILA",
+      "B-DISTRICT"
+    ],
+    "expected_thana": "Mirpur",
+    "expected_district": "Dhaka",
+    "is_homonym_test": true,
+    "category": "commercial_distractor"
+  },
+  {
+    "id": "gold_004",
+    "raw_text": "Rajshahi Sweets, Agrabad Commercial Area, Double Mooring, Chattogram",
+    "normalized_text": "Rajshahi Sweets, Agrabad Commercial Area, Double Mooring, Chattogram",
+    "tokens": [
+      "Rajshahi",
+      "Sweets",
+      "Agrabad",
+      "Commercial",
+      "Area",
+      "Double",
+      "Mooring",
+      "Chattogram"
+    ],
+    "tags": [
+      "B-LANDMARK",
+      "I-LANDMARK",
+      "B-SUBAREA",
+      "I-SUBAREA",
+      "I-SUBAREA",
+      "B-THANA_UPAZILA",
+      "I-THANA_UPAZILA",
+      "B-DISTRICT"
+    ],
+    "expected_thana": "Double Mooring",
+    "expected_district": "Chattogram",
+    "is_homonym_test": true,
+    "category": "commercial_distractor"
+  },
+  {
+    "id": "gold_005",
+    "raw_text": "Sylhet Tea House, GEC Circle, Panchlaish, Chattogram",
+    "normalized_text": "Sylhet Tea H#, GEC Circle, Panchlaish, Chattogram",
+    "tokens": [
+      "Sylhet",
+      "Tea",
+      "H#",
+      "GEC",
+      "Circle",
+      "Panchlaish",
+      "Chattogram"
+    ],
+    "tags": [
+      "B-LANDMARK",
+      "I-LANDMARK",
+      "I-LANDMARK",
+      "B-LANDMARK",
+      "I-LANDMARK",
+      "B-THANA_UPAZILA",
+      "B-DISTRICT"
+    ],
+    "expected_thana": "Panchlaish",
+    "expected_district": "Chattogram",
+    "is_homonym_test": true,
+    "category": "commercial_distractor"
+  },
+  {
+    "id": "gold_006",
+    "raw_text": "Barisal Plaza, KDA Avenue, Sonadanga, Khulna",
+    "normalized_text": "Barisal Plaza, KDA RD#, Sonadanga, Khulna",
+    "tokens": [
+      "Barisal",
+      "Plaza",
+      "KDA",
+      "RD#",
+      "Sonadanga",
+      "Khulna"
+    ],
+    "tags": [
+      "B-LANDMARK",
+      "I-LANDMARK",
+      "B-ROAD",
+      "I-ROAD",
+      "B-THANA_UPAZILA",
+      "B-DISTRICT"
+    ],
+    "expected_thana": "Sonadanga",
+    "expected_district": "Khulna",
+    "is_homonym_test": true,
+    "category": "commercial_distractor"
+  },
+  {
+    "id": "gold_007",
+    "raw_text": "Bogra Curd Corner, Shaheb Bazar, Boalia, Rajshahi",
+    "normalized_text": "Bogra Curd Corner, Shaheb Bazar, Boalia, Rajshahi",
+    "tokens": [
+      "Bogra",
+      "Curd",
+      "Corner",
+      "Shaheb",
+      "Bazar",
+      "Boalia",
+      "Rajshahi"
+    ],
+    "tags": [
+      "B-LANDMARK",
+      "I-LANDMARK",
+      "I-LANDMARK",
+      "B-SUBAREA",
+      "I-SUBAREA",
+      "B-THANA_UPAZILA",
+      "B-DISTRICT"
+    ],
+    "expected_thana": "Boalia",
+    "expected_district": "Rajshahi",
+    "is_homonym_test": true,
+    "category": "commercial_distractor"
+  },
+  {
+    "id": "gold_008",
+    "raw_text": "Khulna Cloth Store, Station Road, Kotwali, Rangpur",
+    "normalized_text": "Khulna Cloth Store, Station RD#, Kotwali, Rangpur",
+    "tokens": [
+      "Khulna",
+      "Cloth",
+      "Store",
+      "Station",
+      "RD#",
+      "Kotwali",
+      "Rangpur"
+    ],
+    "tags": [
+      "B-LANDMARK",
+      "I-LANDMARK",
+      "I-LANDMARK",
+      "B-ROAD",
+      "I-ROAD",
+      "B-THANA_UPAZILA",
+      "B-DISTRICT"
+    ],
+    "expected_thana": "Kotwali",
+    "expected_district": "Rangpur",
+    "is_homonym_test": true,
+    "category": "commercial_distractor"
+  },
+  {
+    "id": "gold_009",
+    "raw_text": "Faridpur Enterprise, Jubilee Road, Kotwali, Chattogram",
+    "normalized_text": "Faridpur Enterprise, Jubilee RD#, Kotwali, Chattogram",
+    "tokens": [
+      "Faridpur",
+      "Enterprise",
+      "Jubilee",
+      "RD#",
+      "Kotwali",
+      "Chattogram"
+    ],
+    "tags": [
+      "B-LANDMARK",
+      "I-LANDMARK",
+      "B-ROAD",
+      "I-ROAD",
+      "B-THANA_UPAZILA",
+      "B-DISTRICT"
+    ],
+    "expected_thana": "Kotwali",
+    "expected_district": "Chattogram",
+    "is_homonym_test": true,
+    "category": "commercial_distractor"
+  },
+  {
+    "id": "gold_010",
+    "raw_text": "Kushtia Rice Agency, Khatunganj, Kotwali, Chattogram",
+    "normalized_text": "Kushtia Rice Agency, Khatunganj, Kotwali, Chattogram",
+    "tokens": [
+      "Kushtia",
+      "Rice",
+      "Agency",
+      "Khatunganj",
+      "Kotwali",
+      "Chattogram"
+    ],
+    "tags": [
+      "B-LANDMARK",
+      "I-LANDMARK",
+      "I-LANDMARK",
+      "B-SUBAREA",
+      "B-THANA_UPAZILA",
+      "B-DISTRICT"
+    ],
+    "expected_thana": "Kotwali",
+    "expected_district": "Chattogram",
+    "is_homonym_test": true,
+    "category": "commercial_distractor"
+  },
+  {
+    "id": "gold_011",
+    "raw_text": "Mymensingh Medical Hall, College Road, Bogura Sadar, Bogura",
+    "normalized_text": "Mymensingh Medical Hall, College RD#, Bogura Sadar, Bogura",
+    "tokens": [
+      "Mymensingh",
+      "Medical",
+      "Hall",
+      "College",
+      "RD#",
+      "Bogura",
+      "Sadar",
+      "Bogura"
+    ],
+    "tags": [
+      "B-LANDMARK",
+      "I-LANDMARK",
+      "I-LANDMARK",
+      "B-ROAD",
+      "I-ROAD",
+      "B-THANA_UPAZILA",
+      "I-THANA_UPAZILA",
+      "B-DISTRICT"
+    ],
+    "expected_thana": "Bogura Sadar",
+    "expected_district": "Bogura",
+    "is_homonym_test": true,
+    "category": "commercial_distractor"
+  },
+  {
+    "id": "gold_012",
+    "raw_text": "Rangpur Engineering Works, Station Road, Tongi, Gazipur",
+    "normalized_text": "Rangpur Engineering Works, Station RD#, Tongi, Gazipur",
+    "tokens": [
+      "Rangpur",
+      "Engineering",
+      "Works",
+      "Station",
+      "RD#",
+      "Tongi",
+      "Gazipur"
+    ],
+    "tags": [
+      "B-LANDMARK",
+      "I-LANDMARK",
+      "I-LANDMARK",
+      "B-ROAD",
+      "I-ROAD",
+      "B-THANA_UPAZILA",
+      "B-DISTRICT"
+    ],
+    "expected_thana": "Tongi",
+    "expected_district": "Gazipur",
+    "is_homonym_test": true,
+    "category": "commercial_distractor"
+  },
+  {
+    "id": "gold_013",
+    "raw_text": "Tangail Saree Biponi, Elephant Road, New Market, Dhaka",
+    "normalized_text": "Tangail Saree Biponi, Elephant RD#, New Market, Dhaka",
+    "tokens": [
+      "Tangail",
+      "Saree",
+      "Biponi",
+      "Elephant",
+      "RD#",
+      "New",
+      "Market",
+      "Dhaka"
+    ],
+    "tags": [
+      "B-LANDMARK",
+      "I-LANDMARK",
+      "I-LANDMARK",
+      "B-ROAD",
+      "I-ROAD",
+      "B-THANA_UPAZILA",
+      "I-THANA_UPAZILA",
+      "B-DISTRICT"
+    ],
+    "expected_thana": "New Market",
+    "expected_district": "Dhaka",
+    "is_homonym_test": true,
+    "category": "commercial_distractor"
+  },
+  {
+    "id": "gold_014",
+    "raw_text": "Dinajpur Store, Zero Point, Motijheel, Dhaka",
+    "normalized_text": "Dinajpur Store, Zero Point, Motijheel, Dhaka",
+    "tokens": [
+      "Dinajpur",
+      "Store",
+      "Zero",
+      "Point",
+      "Motijheel",
+      "Dhaka"
+    ],
+    "tags": [
+      "B-LANDMARK",
+      "I-LANDMARK",
+      "B-LANDMARK",
+      "I-LANDMARK",
+      "B-THANA_UPAZILA",
+      "B-DISTRICT"
+    ],
+    "expected_thana": "Motijheel",
+    "expected_district": "Dhaka",
+    "is_homonym_test": true,
+    "category": "commercial_distractor"
+  },
+  {
+    "id": "gold_015",
+    "raw_text": "Jessore Transport Agency, Shahid Tajuddin Ahmed Sarani, Tejgaon, Dhaka",
+    "normalized_text": "Jessore Transport Agency, Shahid Tajuddin Ahmed Sarani, Tejgaon, Dhaka",
+    "tokens": [
+      "Jessore",
+      "Transport",
+      "Agency",
+      "Shahid",
+      "Tajuddin",
+      "Ahmed",
+      "Sarani",
+      "Tejgaon",
+      "Dhaka"
+    ],
+    "tags": [
+      "B-LANDMARK",
+      "I-LANDMARK",
+      "I-LANDMARK",
+      "B-ROAD",
+      "I-ROAD",
+      "I-ROAD",
+      "I-ROAD",
+      "B-THANA_UPAZILA",
+      "B-DISTRICT"
+    ],
+    "expected_thana": "Tejgaon",
+    "expected_district": "Dhaka",
+    "is_homonym_test": true,
+    "category": "commercial_distractor"
+  },
+  {
+    "id": "gold_016",
+    "raw_text": "Holding 45, Tajmahal Road, Mohammadpur, Dhaka",
+    "normalized_text": "H# 45, Tajmahal RD#, Mohammadpur, Dhaka",
+    "tokens": [
+      "H#",
+      "45",
+      "Tajmahal",
+      "RD#",
+      "Mohammadpur",
+      "Dhaka"
+    ],
+    "tags": [
+      "B-HOUSE",
+      "I-HOUSE",
+      "B-ROAD",
+      "I-ROAD",
+      "B-THANA_UPAZILA",
+      "B-DISTRICT"
+    ],
+    "expected_thana": "Mohammadpur",
+    "expected_district": "Dhaka",
+    "is_homonym_test": true,
+    "category": "homonym_disambiguation"
+  },
+  {
+    "id": "gold_017",
+    "raw_text": "Village: Mohammadpur, Upazila: Chatkhil, Noakhali",
+    "normalized_text": "Village: Mohammadpur, Upazila: Chatkhil, Noakhali",
+    "tokens": [
+      "Village",
+      ":",
+      "Mohammadpur",
+      "Upazila",
+      ":",
+      "Chatkhil",
+      "Noakhali"
+    ],
+    "tags": [
+      "O",
+      "O",
+      "B-SUBAREA",
+      "O",
+      "O",
+      "B-THANA_UPAZILA",
+      "B-DISTRICT"
+    ],
+    "expected_thana": "Chatkhil",
+    "expected_district": "Noakhali",
+    "is_homonym_test": true,
+    "category": "homonym_disambiguation"
+  },
+  {
+    "id": "gold_018",
+    "raw_text": "Chowdhury Bari, Village: Mohammadpur, Upazila: Mohammadpur, Magura",
+    "normalized_text": "Chowdhury H#, Village: Mohammadpur, Upazila: Mohammadpur, Magura",
+    "tokens": [
+      "Chowdhury",
+      "H#",
+      "Village",
+      ":",
+      "Mohammadpur",
+      "Upazila",
+      ":",
+      "Mohammadpur",
+      "Magura"
+    ],
+    "tags": [
+      "B-HOUSE",
+      "I-HOUSE",
+      "O",
+      "O",
+      "B-SUBAREA",
+      "O",
+      "O",
+      "B-THANA_UPAZILA",
+      "B-DISTRICT"
+    ],
+    "expected_thana": "Mohammadpur",
+    "expected_district": "Magura",
+    "is_homonym_test": true,
+    "category": "homonym_disambiguation"
+  },
+  {
+    "id": "gold_019",
+    "raw_text": "House 12, Road 4, Section 11, Mirpur, Dhaka",
+    "normalized_text": "H# 12, RD# 4, Section 11, Mirpur, Dhaka",
+    "tokens": [
+      "H#",
+      "12",
+      "RD#",
+      "4",
+      "Section",
+      "11",
+      "Mirpur",
+      "Dhaka"
+    ],
+    "tags": [
+      "B-HOUSE",
+      "I-HOUSE",
+      "B-ROAD",
+      "I-ROAD",
+      "B-BLOCK_SECTOR",
+      "I-BLOCK_SECTOR",
+      "B-THANA_UPAZILA",
+      "B-DISTRICT"
+    ],
+    "expected_thana": "Mirpur",
+    "expected_district": "Dhaka",
+    "is_homonym_test": true,
+    "category": "homonym_disambiguation"
+  },
+  {
+    "id": "gold_020",
+    "raw_text": "Mirpur College Road, Mirpur Bazar, Mirpur, Kushtia",
+    "normalized_text": "Mirpur College RD#, Mirpur Bazar, Mirpur, Kushtia",
+    "tokens": [
+      "Mirpur",
+      "College",
+      "RD#",
+      "Mirpur",
+      "Bazar",
+      "Mirpur",
+      "Kushtia"
+    ],
+    "tags": [
+      "B-ROAD",
+      "I-ROAD",
+      "I-ROAD",
+      "B-SUBAREA",
+      "I-SUBAREA",
+      "B-THANA_UPAZILA",
+      "B-DISTRICT"
+    ],
+    "expected_thana": "Mirpur",
+    "expected_district": "Kushtia",
+    "is_homonym_test": true,
+    "category": "homonym_disambiguation"
+  },
+  {
+    "id": "gold_021",
+    "raw_text": "Halishahar Housing Estate, Block G, Halishahar, Chattogram",
+    "normalized_text": "Halishahar Housing Estate, BLK# G, Halishahar, Chattogram",
+    "tokens": [
+      "Halishahar",
+      "Housing",
+      "Estate",
+      "BLK#",
+      "G",
+      "Halishahar",
+      "Chattogram"
+    ],
+    "tags": [
+      "B-SUBAREA",
+      "I-SUBAREA",
+      "I-SUBAREA",
+      "B-BLOCK_SECTOR",
+      "I-BLOCK_SECTOR",
+      "B-THANA_UPAZILA",
+      "B-DISTRICT"
+    ],
+    "expected_thana": "Halishahar",
+    "expected_district": "Chattogram",
+    "is_homonym_test": true,
+    "category": "homonym_disambiguation"
+  },
+  {
+    "id": "gold_022",
+    "raw_text": "Shahjalal Upashahar, Block D, Main Road, Kotwali, Sylhet",
+    "normalized_text": "Shahjalal Upashahar, BLK# D, Main RD#, Kotwali, Sylhet",
+    "tokens": [
+      "Shahjalal",
+      "Upashahar",
+      "BLK#",
+      "D",
+      "Main",
+      "RD#",
+      "Kotwali",
+      "Sylhet"
+    ],
+    "tags": [
+      "B-SUBAREA",
+      "I-SUBAREA",
+      "B-BLOCK_SECTOR",
+      "I-BLOCK_SECTOR",
+      "B-ROAD",
+      "I-ROAD",
+      "B-THANA_UPAZILA",
+      "B-DISTRICT"
+    ],
+    "expected_thana": "Kotwali",
+    "expected_district": "Sylhet",
+    "is_homonym_test": true,
+    "category": "homonym_disambiguation"
+  },
+  {
+    "id": "gold_023",
+    "raw_text": "Chandgaon Residential Area, Block B, Road 3, Chandgaon, Chattogram",
+    "normalized_text": "Chandgaon Residential Area, BLK# B, RD# 3, Chandgaon, Chattogram",
+    "tokens": [
+      "Chandgaon",
+      "Residential",
+      "Area",
+      "BLK#",
+      "B",
+      "RD#",
+      "3",
+      "Chandgaon",
+      "Chattogram"
+    ],
+    "tags": [
+      "B-SUBAREA",
+      "I-SUBAREA",
+      "I-SUBAREA",
+      "B-BLOCK_SECTOR",
+      "I-BLOCK_SECTOR",
+      "B-ROAD",
+      "I-ROAD",
+      "B-THANA_UPAZILA",
+      "B-DISTRICT"
+    ],
+    "expected_thana": "Chandgaon",
+    "expected_district": "Chattogram",
+    "is_homonym_test": true,
+    "category": "homonym_disambiguation"
+  },
+  {
+    "id": "gold_024",
+    "raw_text": "Durgapur Bazar, Upazila: Durgapur, Netrokona",
+    "normalized_text": "Durgapur Bazar, Upazila: Durgapur, Netrokona",
+    "tokens": [
+      "Durgapur",
+      "Bazar",
+      "Upazila",
+      ":",
+      "Durgapur",
+      "Netrokona"
+    ],
+    "tags": [
+      "B-SUBAREA",
+      "I-SUBAREA",
+      "O",
+      "O",
+      "B-THANA_UPAZILA",
+      "B-DISTRICT"
+    ],
+    "expected_thana": "Durgapur",
+    "expected_district": "Netrokona",
+    "is_homonym_test": true,
+    "category": "homonym_disambiguation"
+  },
+  {
+    "id": "gold_025",
+    "raw_text": "Durgapur Thana More, Durgapur, Rajshahi",
+    "normalized_text": "Durgapur Thana More, Durgapur, Rajshahi",
+    "tokens": [
+      "Durgapur",
+      "Thana",
+      "More",
+      "Durgapur",
+      "Rajshahi"
+    ],
+    "tags": [
+      "B-LANDMARK",
+      "I-LANDMARK",
+      "I-LANDMARK",
+      "B-THANA_UPAZILA",
+      "B-DISTRICT"
+    ],
+    "expected_thana": "Durgapur",
+    "expected_district": "Rajshahi",
+    "is_homonym_test": true,
+    "category": "homonym_disambiguation"
+  },
+  {
+    "id": "gold_026",
+    "raw_text": "Daulatpur College Road, Daulatpur, Kushtia",
+    "normalized_text": "Daulatpur College RD#, Daulatpur, Kushtia",
+    "tokens": [
+      "Daulatpur",
+      "College",
+      "RD#",
+      "Daulatpur",
+      "Kushtia"
+    ],
+    "tags": [
+      "B-ROAD",
+      "I-ROAD",
+      "I-ROAD",
+      "B-THANA_UPAZILA",
+      "B-DISTRICT"
+    ],
+    "expected_thana": "Daulatpur",
+    "expected_district": "Kushtia",
+    "is_homonym_test": true,
+    "category": "homonym_disambiguation"
+  },
+  {
+    "id": "gold_027",
+    "raw_text": "Daulatpur Bazar, Daulatpur, Manikganj",
+    "normalized_text": "Daulatpur Bazar, Daulatpur, Manikganj",
+    "tokens": [
+      "Daulatpur",
+      "Bazar",
+      "Daulatpur",
+      "Manikganj"
+    ],
+    "tags": [
+      "B-SUBAREA",
+      "I-SUBAREA",
+      "B-THANA_UPAZILA",
+      "B-DISTRICT"
+    ],
+    "expected_thana": "Daulatpur",
+    "expected_district": "Manikganj",
+    "is_homonym_test": true,
+    "category": "homonym_disambiguation"
+  },
+  {
+    "id": "gold_028",
+    "raw_text": "Raipur Bazar Road, Raipur, Lakshmipur",
+    "normalized_text": "Raipur Bazar RD#, Raipur, Lakshmipur",
+    "tokens": [
+      "Raipur",
+      "Bazar",
+      "RD#",
+      "Raipur",
+      "Lakshmipur"
+    ],
+    "tags": [
+      "B-ROAD",
+      "I-ROAD",
+      "I-ROAD",
+      "B-THANA_UPAZILA",
+      "B-DISTRICT"
+    ],
+    "expected_thana": "Raipur",
+    "expected_district": "Lakshmipur",
+    "is_homonym_test": true,
+    "category": "homonym_disambiguation"
+  },
+  {
+    "id": "gold_029",
+    "raw_text": "Holding 10, Road 4, Postcode 1216, Mirpur, Dhaka",
+    "normalized_text": "H# 10, RD# 4, Postcode 1216, Mirpur, Dhaka",
+    "tokens": [
+      "H#",
+      "10",
+      "RD#",
+      "4",
+      "Postcode",
+      "1216",
+      "Mirpur",
+      "Dhaka"
+    ],
+    "tags": [
+      "B-HOUSE",
+      "I-HOUSE",
+      "B-ROAD",
+      "I-ROAD",
+      "O",
+      "O",
+      "B-THANA_UPAZILA",
+      "B-DISTRICT"
+    ],
+    "expected_thana": "Mirpur",
+    "expected_district": "Dhaka",
+    "is_homonym_test": true,
+    "category": "homonym_disambiguation"
+  },
+  {
+    "id": "gold_030",
+    "raw_text": "House 14, Road 8, Dhanmondi, Dhaka",
+    "normalized_text": "H# 14, RD# 8, Dhanmondi, Dhaka",
+    "tokens": [
+      "H#",
+      "14",
+      "RD#",
+      "8",
+      "Dhanmondi",
+      "Dhaka"
+    ],
+    "tags": [
+      "B-HOUSE",
+      "I-HOUSE",
+      "B-ROAD",
+      "I-ROAD",
+      "B-THANA_UPAZILA",
+      "B-DISTRICT"
+    ],
+    "expected_thana": "Dhanmondi",
+    "expected_district": "Dhaka",
+    "is_homonym_test": false,
+    "category": "dhaka_metro"
+  },
+  {
+    "id": "gold_031",
+    "raw_text": "Flat 5A, Plot 22, Road 11, Block D, Banani, Dhaka",
+    "normalized_text": "Flat 5A, Plot 22, RD# 11, BLK# D, Banani, Dhaka",
+    "tokens": [
+      "Flat",
+      "5A",
+      "Plot",
+      "22",
+      "RD#",
+      "11",
+      "BLK#",
+      "D",
+      "Banani",
+      "Dhaka"
+    ],
+    "tags": [
+      "B-FLOOR_FLAT",
+      "I-FLOOR_FLAT",
+      "B-HOUSE",
+      "I-HOUSE",
+      "B-ROAD",
+      "I-ROAD",
+      "B-BLOCK_SECTOR",
+      "I-BLOCK_SECTOR",
+      "B-THANA_UPAZILA",
+      "B-DISTRICT"
+    ],
+    "expected_thana": "Banani",
+    "expected_district": "Dhaka",
+    "is_homonym_test": false,
+    "category": "dhaka_metro"
+  },
+  {
+    "id": "gold_032",
+    "raw_text": "Level 4, House 35, Road 27, Gulshan 1, Dhaka",
+    "normalized_text": "FL# 4, H# 35, RD# 27, Gulshan 1, Dhaka",
+    "tokens": [
+      "FL#",
+      "4",
+      "H#",
+      "35",
+      "RD#",
+      "27",
+      "Gulshan",
+      "1",
+      "Dhaka"
+    ],
+    "tags": [
+      "B-FLOOR_FLAT",
+      "I-FLOOR_FLAT",
+      "B-HOUSE",
+      "I-HOUSE",
+      "B-ROAD",
+      "I-ROAD",
+      "B-SUBAREA",
+      "I-SUBAREA",
+      "B-DISTRICT"
+    ],
+    "expected_thana": "Gulshan",
+    "expected_district": "Dhaka",
+    "is_homonym_test": false,
+    "category": "dhaka_metro"
+  },
+  {
+    "id": "gold_033",
+    "raw_text": "Holding 88, Road 2, Sector 4, Uttara, Dhaka",
+    "normalized_text": "H# 88, RD# 2, SEC# 4, Uttara, Dhaka",
+    "tokens": [
+      "H#",
+      "88",
+      "RD#",
+      "2",
+      "SEC#",
+      "4",
+      "Uttara",
+      "Dhaka"
+    ],
+    "tags": [
+      "B-HOUSE",
+      "I-HOUSE",
+      "B-ROAD",
+      "I-ROAD",
+      "B-BLOCK_SECTOR",
+      "I-BLOCK_SECTOR",
+      "B-THANA_UPAZILA",
+      "B-DISTRICT"
+    ],
+    "expected_thana": "Uttara",
+    "expected_district": "Dhaka",
+    "is_homonym_test": false,
+    "category": "dhaka_metro"
+  },
+  {
+    "id": "gold_034",
+    "raw_text": "House 12/B, Lane 5, Block C, Bashundhara R/A, Vatara, Dhaka",
+    "normalized_text": "H# 12/B, RD# 5, BLK# C, Bashundhara R/A, Vatara, Dhaka",
+    "tokens": [
+      "H#",
+      "12/B",
+      "RD#",
+      "5",
+      "BLK#",
+      "C",
+      "Bashundhara",
+      "R/A",
+      "Vatara",
+      "Dhaka"
+    ],
+    "tags": [
+      "B-HOUSE",
+      "I-HOUSE",
+      "B-ROAD",
+      "I-ROAD",
+      "B-BLOCK_SECTOR",
+      "I-BLOCK_SECTOR",
+      "B-SUBAREA",
+      "I-SUBAREA",
+      "B-THANA_UPAZILA",
+      "B-DISTRICT"
+    ],
+    "expected_thana": "Vatara",
+    "expected_district": "Dhaka",
+    "is_homonym_test": false,
+    "category": "dhaka_metro"
+  },
+  {
+    "id": "gold_035",
+    "raw_text": "Shop 14, Level 2, Shimanto Square, Dhanmondi, Dhaka",
+    "normalized_text": "Shop 14, FL# 2, Shimanto Square, Dhanmondi, Dhaka",
+    "tokens": [
+      "Shop",
+      "14",
+      "FL#",
+      "2",
+      "Shimanto",
+      "Square",
+      "Dhanmondi",
+      "Dhaka"
+    ],
+    "tags": [
+      "B-HOUSE",
+      "I-HOUSE",
+      "B-FLOOR_FLAT",
+      "I-FLOOR_FLAT",
+      "B-LANDMARK",
+      "I-LANDMARK",
+      "B-THANA_UPAZILA",
+      "B-DISTRICT"
+    ],
+    "expected_thana": "Dhanmondi",
+    "expected_district": "Dhaka",
+    "is_homonym_test": false,
+    "category": "dhaka_metro"
+  },
+  {
+    "id": "gold_036",
+    "raw_text": "Bari 7, Rasta 3, Block A, Lalmatia, Mohammadpur, Dhaka",
+    "normalized_text": "H# 7, RD# 3, BLK# A, Lalmatia, Mohammadpur, Dhaka",
+    "tokens": [
+      "H#",
+      "7",
+      "RD#",
+      "3",
+      "BLK#",
+      "A",
+      "Lalmatia",
+      "Mohammadpur",
+      "Dhaka"
+    ],
+    "tags": [
+      "B-HOUSE",
+      "I-HOUSE",
+      "B-ROAD",
+      "I-ROAD",
+      "B-BLOCK_SECTOR",
+      "I-BLOCK_SECTOR",
+      "B-SUBAREA",
+      "B-THANA_UPAZILA",
+      "B-DISTRICT"
+    ],
+    "expected_thana": "Mohammadpur",
+    "expected_district": "Dhaka",
+    "is_homonym_test": false,
+    "category": "dhaka_metro"
+  },
+  {
+    "id": "gold_037",
+    "raw_text": "Holding 50, Kazi Nazrul Islam Avenue, Farmgate, Tejgaon, Dhaka",
+    "normalized_text": "H# 50, Kazi Nazrul Islam RD#, Farmgate, Tejgaon, Dhaka",
+    "tokens": [
+      "H#",
+      "50",
+      "Kazi",
+      "Nazrul",
+      "Islam",
+      "RD#",
+      "Farmgate",
+      "Tejgaon",
+      "Dhaka"
+    ],
+    "tags": [
+      "B-HOUSE",
+      "I-HOUSE",
+      "B-ROAD",
+      "I-ROAD",
+      "I-ROAD",
+      "I-ROAD",
+      "B-SUBAREA",
+      "B-THANA_UPAZILA",
+      "B-DISTRICT"
+    ],
+    "expected_thana": "Tejgaon",
+    "expected_district": "Dhaka",
+    "is_homonym_test": false,
+    "category": "dhaka_metro"
+  },
+  {
+    "id": "gold_038",
+    "raw_text": "Plot 10, Road 2, Block J, Baridhara, Vatara, Dhaka",
+    "normalized_text": "Plot 10, RD# 2, BLK# J, Baridhara, Vatara, Dhaka",
+    "tokens": [
+      "Plot",
+      "10",
+      "RD#",
+      "2",
+      "BLK#",
+      "J",
+      "Baridhara",
+      "Vatara",
+      "Dhaka"
+    ],
+    "tags": [
+      "B-HOUSE",
+      "I-HOUSE",
+      "B-ROAD",
+      "I-ROAD",
+      "B-BLOCK_SECTOR",
+      "I-BLOCK_SECTOR",
+      "B-SUBAREA",
+      "B-THANA_UPAZILA",
+      "B-DISTRICT"
+    ],
+    "expected_thana": "Vatara",
+    "expected_district": "Dhaka",
+    "is_homonym_test": false,
+    "category": "dhaka_metro"
+  },
+  {
+    "id": "gold_039",
+    "raw_text": "House 3, Road 17, Sector 7, Uttara Model Town, Uttara, Dhaka",
+    "normalized_text": "H# 3, RD# 17, SEC# 7, Uttara Model Town, Uttara, Dhaka",
+    "tokens": [
+      "H#",
+      "3",
+      "RD#",
+      "17",
+      "SEC#",
+      "7",
+      "Uttara",
+      "Model",
+      "Town",
+      "Uttara",
+      "Dhaka"
+    ],
+    "tags": [
+      "B-HOUSE",
+      "I-HOUSE",
+      "B-ROAD",
+      "I-ROAD",
+      "B-BLOCK_SECTOR",
+      "I-BLOCK_SECTOR",
+      "B-SUBAREA",
+      "I-SUBAREA",
+      "I-SUBAREA",
+      "B-THANA_UPAZILA",
+      "B-DISTRICT"
+    ],
+    "expected_thana": "Uttara",
+    "expected_district": "Dhaka",
+    "is_homonym_test": false,
+    "category": "dhaka_metro"
+  },
+  {
+    "id": "gold_040",
+    "raw_text": "Flat B2, 4th Floor, Shantinagar Plaza, Shantinagar, Paltan, Dhaka",
+    "normalized_text": "Flat B2, 4th FL#, Shantinagar Plaza, Shantinagar, Paltan, Dhaka",
+    "tokens": [
+      "Flat",
+      "B2",
+      "4th",
+      "FL#",
+      "Shantinagar",
+      "Plaza",
+      "Shantinagar",
+      "Paltan",
+      "Dhaka"
+    ],
+    "tags": [
+      "B-FLOOR_FLAT",
+      "I-FLOOR_FLAT",
+      "B-FLOOR_FLAT",
+      "I-FLOOR_FLAT",
+      "B-LANDMARK",
+      "I-LANDMARK",
+      "B-SUBAREA",
+      "B-THANA_UPAZILA",
+      "B-DISTRICT"
+    ],
+    "expected_thana": "Paltan",
+    "expected_district": "Dhaka",
+    "is_homonym_test": false,
+    "category": "dhaka_metro"
+  },
+  {
+    "id": "gold_041",
+    "raw_text": "Holding 105, Malibagh Chowdhury Para, Ramna, Dhaka",
+    "normalized_text": "H# 105, Malibagh Chowdhury Para, Ramna, Dhaka",
+    "tokens": [
+      "H#",
+      "105",
+      "Malibagh",
+      "Chowdhury",
+      "Para",
+      "Ramna",
+      "Dhaka"
+    ],
+    "tags": [
+      "B-HOUSE",
+      "I-HOUSE",
+      "B-SUBAREA",
+      "I-SUBAREA",
+      "I-SUBAREA",
+      "B-THANA_UPAZILA",
+      "B-DISTRICT"
+    ],
+    "expected_thana": "Ramna",
+    "expected_district": "Dhaka",
+    "is_homonym_test": false,
+    "category": "dhaka_metro"
+  },
+  {
+    "id": "gold_042",
+    "raw_text": "House 24, Road 2, Block F, Aftabnagar, Badda, Dhaka",
+    "normalized_text": "H# 24, RD# 2, BLK# F, Aftabnagar, Badda, Dhaka",
+    "tokens": [
+      "H#",
+      "24",
+      "RD#",
+      "2",
+      "BLK#",
+      "F",
+      "Aftabnagar",
+      "Badda",
+      "Dhaka"
+    ],
+    "tags": [
+      "B-HOUSE",
+      "I-HOUSE",
+      "B-ROAD",
+      "I-ROAD",
+      "B-BLOCK_SECTOR",
+      "I-BLOCK_SECTOR",
+      "B-SUBAREA",
+      "B-THANA_UPAZILA",
+      "B-DISTRICT"
+    ],
+    "expected_thana": "Badda",
+    "expected_district": "Dhaka",
+    "is_homonym_test": false,
+    "category": "dhaka_metro"
+  },
+  {
+    "id": "gold_043",
+    "raw_text": "Holding 15, Green Road, Kalabagan, Dhaka",
+    "normalized_text": "H# 15, Green RD#, Kalabagan, Dhaka",
+    "tokens": [
+      "H#",
+      "15",
+      "Green",
+      "RD#",
+      "Kalabagan",
+      "Dhaka"
+    ],
+    "tags": [
+      "B-HOUSE",
+      "I-HOUSE",
+      "B-ROAD",
+      "I-ROAD",
+      "B-THANA_UPAZILA",
+      "B-DISTRICT"
+    ],
+    "expected_thana": "Kalabagan",
+    "expected_district": "Dhaka",
+    "is_homonym_test": false,
+    "category": "dhaka_metro"
+  },
+  {
+    "id": "gold_044",
+    "raw_text": "Plot 6, Avenue 1, Section 6, Block C, Mirpur, Dhaka",
+    "normalized_text": "Plot 6, RD# 1, Section 6, BLK# C, Mirpur, Dhaka",
+    "tokens": [
+      "Plot",
+      "6",
+      "RD#",
+      "1",
+      "Section",
+      "6",
+      "BLK#",
+      "C",
+      "Mirpur",
+      "Dhaka"
+    ],
+    "tags": [
+      "B-HOUSE",
+      "I-HOUSE",
+      "B-ROAD",
+      "I-ROAD",
+      "B-BLOCK_SECTOR",
+      "I-BLOCK_SECTOR",
+      "B-BLOCK_SECTOR",
+      "I-BLOCK_SECTOR",
+      "B-THANA_UPAZILA",
+      "B-DISTRICT"
+    ],
+    "expected_thana": "Mirpur",
+    "expected_district": "Dhaka",
+    "is_homonym_test": false,
+    "category": "dhaka_metro"
+  },
+  {
+    "id": "gold_045",
+    "raw_text": "House 42, Road 13/A, Sector 11, Uttara, Dhaka",
+    "normalized_text": "H# 42, RD# 13/A, SEC# 11, Uttara, Dhaka",
+    "tokens": [
+      "H#",
+      "42",
+      "RD#",
+      "13/A",
+      "SEC#",
+      "11",
+      "Uttara",
+      "Dhaka"
+    ],
+    "tags": [
+      "B-HOUSE",
+      "I-HOUSE",
+      "B-ROAD",
+      "I-ROAD",
+      "B-BLOCK_SECTOR",
+      "I-BLOCK_SECTOR",
+      "B-THANA_UPAZILA",
+      "B-DISTRICT"
+    ],
+    "expected_thana": "Uttara",
+    "expected_district": "Dhaka",
+    "is_homonym_test": false,
+    "category": "dhaka_metro"
+  },
+  {
+    "id": "gold_046",
+    "raw_text": "Flat 3C, House 19, Road 4, DOHS Banani, Dhaka",
+    "normalized_text": "Flat 3C, H# 19, RD# 4, DOHS Banani, Dhaka",
+    "tokens": [
+      "Flat",
+      "3C",
+      "H#",
+      "19",
+      "RD#",
+      "4",
+      "DOHS",
+      "Banani",
+      "Dhaka"
+    ],
+    "tags": [
+      "B-FLOOR_FLAT",
+      "I-FLOOR_FLAT",
+      "B-HOUSE",
+      "I-HOUSE",
+      "B-ROAD",
+      "I-ROAD",
+      "B-SUBAREA",
+      "I-SUBAREA",
+      "B-DISTRICT"
+    ],
+    "expected_thana": "Banani",
+    "expected_district": "Dhaka",
+    "is_homonym_test": false,
+    "category": "dhaka_metro"
+  },
+  {
+    "id": "gold_047",
+    "raw_text": "Holding 21, Indira Road, Tejgaon, Dhaka",
+    "normalized_text": "H# 21, Indira RD#, Tejgaon, Dhaka",
+    "tokens": [
+      "H#",
+      "21",
+      "Indira",
+      "RD#",
+      "Tejgaon",
+      "Dhaka"
+    ],
+    "tags": [
+      "B-HOUSE",
+      "I-HOUSE",
+      "B-ROAD",
+      "I-ROAD",
+      "B-THANA_UPAZILA",
+      "B-DISTRICT"
+    ],
+    "expected_thana": "Tejgaon",
+    "expected_district": "Dhaka",
+    "is_homonym_test": false,
+    "category": "dhaka_metro"
+  },
+  {
+    "id": "gold_048",
+    "raw_text": "Flat 4A, Sanmar Ocean City, GEC More, Nasirabad, Panchlaish, Chattogram",
+    "normalized_text": "Flat 4A, Sanmar Ocean City, GEC More, Nasirabad, Panchlaish, Chattogram",
+    "tokens": [
+      "Flat",
+      "4A",
+      "Sanmar",
+      "Ocean",
+      "City",
+      "GEC",
+      "More",
+      "Nasirabad",
+      "Panchlaish",
+      "Chattogram"
+    ],
+    "tags": [
+      "B-FLOOR_FLAT",
+      "I-FLOOR_FLAT",
+      "B-LANDMARK",
+      "I-LANDMARK",
+      "I-LANDMARK",
+      "B-LANDMARK",
+      "I-LANDMARK",
+      "B-SUBAREA",
+      "B-THANA_UPAZILA",
+      "B-DISTRICT"
+    ],
+    "expected_thana": "Panchlaish",
+    "expected_district": "Chattogram",
+    "is_homonym_test": false,
+    "category": "metro_regional"
+  },
+  {
+    "id": "gold_049",
+    "raw_text": "Holding 12, Road 1, Block H, Halishahar Housing Estate, Halishahar, Chattogram",
+    "normalized_text": "H# 12, RD# 1, BLK# H, Halishahar Housing Estate, Halishahar, Chattogram",
+    "tokens": [
+      "H#",
+      "12",
+      "RD#",
+      "1",
+      "BLK#",
+      "H",
+      "Halishahar",
+      "Housing",
+      "Estate",
+      "Halishahar",
+      "Chattogram"
+    ],
+    "tags": [
+      "B-HOUSE",
+      "I-HOUSE",
+      "B-ROAD",
+      "I-ROAD",
+      "B-BLOCK_SECTOR",
+      "I-BLOCK_SECTOR",
+      "B-SUBAREA",
+      "I-SUBAREA",
+      "I-SUBAREA",
+      "B-THANA_UPAZILA",
+      "B-DISTRICT"
+    ],
+    "expected_thana": "Halishahar",
+    "expected_district": "Chattogram",
+    "is_homonym_test": false,
+    "category": "metro_regional"
+  },
+  {
+    "id": "gold_050",
+    "raw_text": "Plot 8, Road 4, Chandgaon Residential Area, Chandgaon, Chattogram",
+    "normalized_text": "Plot 8, RD# 4, Chandgaon Residential Area, Chandgaon, Chattogram",
+    "tokens": [
+      "Plot",
+      "8",
+      "RD#",
+      "4",
+      "Chandgaon",
+      "Residential",
+      "Area",
+      "Chandgaon",
+      "Chattogram"
+    ],
+    "tags": [
+      "B-HOUSE",
+      "I-HOUSE",
+      "B-ROAD",
+      "I-ROAD",
+      "B-SUBAREA",
+      "I-SUBAREA",
+      "I-SUBAREA",
+      "B-THANA_UPAZILA",
+      "B-DISTRICT"
+    ],
+    "expected_thana": "Chandgaon",
+    "expected_district": "Chattogram",
+    "is_homonym_test": false,
+    "category": "metro_regional"
+  },
+  {
+    "id": "gold_051",
+    "raw_text": "Shop 25, Akhtaruzzaman Center, Agrabad Commercial Area, Double Mooring, Chattogram",
+    "normalized_text": "Shop 25, Akhtaruzzaman Center, Agrabad Commercial Area, Double Mooring, Chattogram",
+    "tokens": [
+      "Shop",
+      "25",
+      "Akhtaruzzaman",
+      "Center",
+      "Agrabad",
+      "Commercial",
+      "Area",
+      "Double",
+      "Mooring",
+      "Chattogram"
+    ],
+    "tags": [
+      "B-HOUSE",
+      "I-HOUSE",
+      "B-LANDMARK",
+      "I-LANDMARK",
+      "B-SUBAREA",
+      "I-SUBAREA",
+      "I-SUBAREA",
+      "B-THANA_UPAZILA",
+      "I-THANA_UPAZILA",
+      "B-DISTRICT"
+    ],
+    "expected_thana": "Double Mooring",
+    "expected_district": "Chattogram",
+    "is_homonym_test": false,
+    "category": "metro_regional"
+  },
+  {
+    "id": "gold_052",
+    "raw_text": "Holding 102, Strand Road, Sadarghat, Kotwali, Chattogram",
+    "normalized_text": "H# 102, Strand RD#, Sadarghat, Kotwali, Chattogram",
+    "tokens": [
+      "H#",
+      "102",
+      "Strand",
+      "RD#",
+      "Sadarghat",
+      "Kotwali",
+      "Chattogram"
+    ],
+    "tags": [
+      "B-HOUSE",
+      "I-HOUSE",
+      "B-ROAD",
+      "I-ROAD",
+      "B-SUBAREA",
+      "B-THANA_UPAZILA",
+      "B-DISTRICT"
+    ],
+    "expected_thana": "Kotwali",
+    "expected_district": "Chattogram",
+    "is_homonym_test": false,
+    "category": "metro_regional"
+  },
+  {
+    "id": "gold_053",
+    "raw_text": "House 15, Lane 2, Mehedibag, Kotwali, Chattogram",
+    "normalized_text": "H# 15, RD# 2, Mehedibag, Kotwali, Chattogram",
+    "tokens": [
+      "H#",
+      "15",
+      "RD#",
+      "2",
+      "Mehedibag",
+      "Kotwali",
+      "Chattogram"
+    ],
+    "tags": [
+      "B-HOUSE",
+      "I-HOUSE",
+      "B-ROAD",
+      "I-ROAD",
+      "B-SUBAREA",
+      "B-THANA_UPAZILA",
+      "B-DISTRICT"
+    ],
+    "expected_thana": "Kotwali",
+    "expected_district": "Chattogram",
+    "is_homonym_test": false,
+    "category": "metro_regional"
+  },
+  {
+    "id": "gold_054",
+    "raw_text": "Holding 45, CDA Avenue, Muradpur, Panchlaish, Chattogram",
+    "normalized_text": "H# 45, CDA RD#, Muradpur, Panchlaish, Chattogram",
+    "tokens": [
+      "H#",
+      "45",
+      "CDA",
+      "RD#",
+      "Muradpur",
+      "Panchlaish",
+      "Chattogram"
+    ],
+    "tags": [
+      "B-HOUSE",
+      "I-HOUSE",
+      "B-ROAD",
+      "I-ROAD",
+      "B-SUBAREA",
+      "B-THANA_UPAZILA",
+      "B-DISTRICT"
+    ],
+    "expected_thana": "Panchlaish",
+    "expected_district": "Chattogram",
+    "is_homonym_test": false,
+    "category": "metro_regional"
+  },
+  {
+    "id": "gold_055",
+    "raw_text": "Flat 6B, Equity Heights, Katalganj, Panchlaish, Chattogram",
+    "normalized_text": "Flat 6B, Equity Heights, Katalganj, Panchlaish, Chattogram",
+    "tokens": [
+      "Flat",
+      "6B",
+      "Equity",
+      "Heights",
+      "Katalganj",
+      "Panchlaish",
+      "Chattogram"
+    ],
+    "tags": [
+      "B-FLOOR_FLAT",
+      "I-FLOOR_FLAT",
+      "B-LANDMARK",
+      "I-LANDMARK",
+      "B-SUBAREA",
+      "B-THANA_UPAZILA",
+      "B-DISTRICT"
+    ],
+    "expected_thana": "Panchlaish",
+    "expected_district": "Chattogram",
+    "is_homonym_test": false,
+    "category": "metro_regional"
+  },
+  {
+    "id": "gold_056",
+    "raw_text": "Holding 80, Station Road, Kotwali, Chattogram",
+    "normalized_text": "H# 80, Station RD#, Kotwali, Chattogram",
+    "tokens": [
+      "H#",
+      "80",
+      "Station",
+      "RD#",
+      "Kotwali",
+      "Chattogram"
+    ],
+    "tags": [
+      "B-HOUSE",
+      "I-HOUSE",
+      "B-ROAD",
+      "I-ROAD",
+      "B-THANA_UPAZILA",
+      "B-DISTRICT"
+    ],
+    "expected_thana": "Kotwali",
+    "expected_district": "Chattogram",
+    "is_homonym_test": false,
+    "category": "metro_regional"
+  },
+  {
+    "id": "gold_057",
+    "raw_text": "Plot 14, Sector 2, CEPZ, Patenga, Chattogram",
+    "normalized_text": "Plot 14, SEC# 2, CEPZ, Patenga, Chattogram",
+    "tokens": [
+      "Plot",
+      "14",
+      "SEC#",
+      "2",
+      "CEPZ",
+      "Patenga",
+      "Chattogram"
+    ],
+    "tags": [
+      "B-HOUSE",
+      "I-HOUSE",
+      "B-BLOCK_SECTOR",
+      "I-BLOCK_SECTOR",
+      "B-SUBAREA",
+      "B-THANA_UPAZILA",
+      "B-DISTRICT"
+    ],
+    "expected_thana": "Patenga",
+    "expected_district": "Chattogram",
+    "is_homonym_test": false,
+    "category": "metro_regional"
+  },
+  {
+    "id": "gold_058",
+    "raw_text": "House 12, Road 3, Block E, Shahjalal Upashahar, Kotwali, Sylhet",
+    "normalized_text": "H# 12, RD# 3, BLK# E, Shahjalal Upashahar, Kotwali, Sylhet",
+    "tokens": [
+      "H#",
+      "12",
+      "RD#",
+      "3",
+      "BLK#",
+      "E",
+      "Shahjalal",
+      "Upashahar",
+      "Kotwali",
+      "Sylhet"
+    ],
+    "tags": [
+      "B-HOUSE",
+      "I-HOUSE",
+      "B-ROAD",
+      "I-ROAD",
+      "B-BLOCK_SECTOR",
+      "I-BLOCK_SECTOR",
+      "B-SUBAREA",
+      "I-SUBAREA",
+      "B-THANA_UPAZILA",
+      "B-DISTRICT"
+    ],
+    "expected_thana": "Kotwali",
+    "expected_district": "Sylhet",
+    "is_homonym_test": false,
+    "category": "metro_regional"
+  },
+  {
+    "id": "gold_059",
+    "raw_text": "Holding 45, Amberkhana Point, Airport Road, Kotwali, Sylhet",
+    "normalized_text": "H# 45, Amberkhana Point, Airport RD#, Kotwali, Sylhet",
+    "tokens": [
+      "H#",
+      "45",
+      "Amberkhana",
+      "Point",
+      "Airport",
+      "RD#",
+      "Kotwali",
+      "Sylhet"
+    ],
+    "tags": [
+      "B-HOUSE",
+      "I-HOUSE",
+      "B-LANDMARK",
+      "I-LANDMARK",
+      "B-ROAD",
+      "I-ROAD",
+      "B-THANA_UPAZILA",
+      "B-DISTRICT"
+    ],
+    "expected_thana": "Kotwali",
+    "expected_district": "Sylhet",
+    "is_homonym_test": false,
+    "category": "metro_regional"
+  },
+  {
+    "id": "gold_060",
+    "raw_text": "Flat 2A, Al Hamra Shopping City, Zindabazar, Kotwali, Sylhet",
+    "normalized_text": "Flat 2A, Al Hamra Shopping City, Zindabazar, Kotwali, Sylhet",
+    "tokens": [
+      "Flat",
+      "2A",
+      "Al",
+      "Hamra",
+      "Shopping",
+      "City",
+      "Zindabazar",
+      "Kotwali",
+      "Sylhet"
+    ],
+    "tags": [
+      "B-FLOOR_FLAT",
+      "I-FLOOR_FLAT",
+      "B-LANDMARK",
+      "I-LANDMARK",
+      "I-LANDMARK",
+      "I-LANDMARK",
+      "B-SUBAREA",
+      "B-THANA_UPAZILA",
+      "B-DISTRICT"
+    ],
+    "expected_thana": "Kotwali",
+    "expected_district": "Sylhet",
+    "is_homonym_test": false,
+    "category": "metro_regional"
+  },
+  {
+    "id": "gold_061",
+    "raw_text": "Holding 78, Subidbazar, Sylhet Sadar, Sylhet",
+    "normalized_text": "H# 78, Subidbazar, Sylhet Sadar, Sylhet",
+    "tokens": [
+      "H#",
+      "78",
+      "Subidbazar",
+      "Sylhet",
+      "Sadar",
+      "Sylhet"
+    ],
+    "tags": [
+      "B-HOUSE",
+      "I-HOUSE",
+      "B-SUBAREA",
+      "B-THANA_UPAZILA",
+      "I-THANA_UPAZILA",
+      "B-DISTRICT"
+    ],
+    "expected_thana": "Sylhet Sadar",
+    "expected_district": "Sylhet",
+    "is_homonym_test": false,
+    "category": "metro_regional"
+  },
+  {
+    "id": "gold_062",
+    "raw_text": "House 5, Lane 1, Shibganj, Kotwali, Sylhet",
+    "normalized_text": "H# 5, RD# 1, Shibganj, Kotwali, Sylhet",
+    "tokens": [
+      "H#",
+      "5",
+      "RD#",
+      "1",
+      "Shibganj",
+      "Kotwali",
+      "Sylhet"
+    ],
+    "tags": [
+      "B-HOUSE",
+      "I-HOUSE",
+      "B-ROAD",
+      "I-ROAD",
+      "B-SUBAREA",
+      "B-THANA_UPAZILA",
+      "B-DISTRICT"
+    ],
+    "expected_thana": "Kotwali",
+    "expected_district": "Sylhet",
+    "is_homonym_test": false,
+    "category": "metro_regional"
+  },
+  {
+    "id": "gold_063",
+    "raw_text": "Holding 22, Kumarpara Road, Kotwali, Sylhet",
+    "normalized_text": "H# 22, Kumarpara RD#, Kotwali, Sylhet",
+    "tokens": [
+      "H#",
+      "22",
+      "Kumarpara",
+      "RD#",
+      "Kotwali",
+      "Sylhet"
+    ],
+    "tags": [
+      "B-HOUSE",
+      "I-HOUSE",
+      "B-ROAD",
+      "I-ROAD",
+      "B-THANA_UPAZILA",
+      "B-DISTRICT"
+    ],
+    "expected_thana": "Kotwali",
+    "expected_district": "Sylhet",
+    "is_homonym_test": false,
+    "category": "metro_regional"
+  },
+  {
+    "id": "gold_064",
+    "raw_text": "Holding 150, Greater Road, Kazihata, Rajputpara, Rajshahi",
+    "normalized_text": "H# 150, Greater RD#, Kazihata, Rajputpara, Rajshahi",
+    "tokens": [
+      "H#",
+      "150",
+      "Greater",
+      "RD#",
+      "Kazihata",
+      "Rajputpara",
+      "Rajshahi"
+    ],
+    "tags": [
+      "B-HOUSE",
+      "I-HOUSE",
+      "B-ROAD",
+      "I-ROAD",
+      "B-SUBAREA",
+      "B-THANA_UPAZILA",
+      "B-DISTRICT"
+    ],
+    "expected_thana": "Rajputpara",
+    "expected_district": "Rajshahi",
+    "is_homonym_test": false,
+    "category": "metro_regional"
+  },
+  {
+    "id": "gold_065",
+    "raw_text": "House 25, Road 2, Padma Residential Area, Chandrima, Rajshahi",
+    "normalized_text": "H# 25, RD# 2, Padma Residential Area, Chandrima, Rajshahi",
+    "tokens": [
+      "H#",
+      "25",
+      "RD#",
+      "2",
+      "Padma",
+      "Residential",
+      "Area",
+      "Chandrima",
+      "Rajshahi"
+    ],
+    "tags": [
+      "B-HOUSE",
+      "I-HOUSE",
+      "B-ROAD",
+      "I-ROAD",
+      "B-SUBAREA",
+      "I-SUBAREA",
+      "I-SUBAREA",
+      "B-THANA_UPAZILA",
+      "B-DISTRICT"
+    ],
+    "expected_thana": "Chandrima",
+    "expected_district": "Rajshahi",
+    "is_homonym_test": false,
+    "category": "metro_regional"
+  },
+  {
+    "id": "gold_066",
+    "raw_text": "Shop 4, New Market, Shaheb Bazar, Boalia, Rajshahi",
+    "normalized_text": "Shop 4, New Market, Shaheb Bazar, Boalia, Rajshahi",
+    "tokens": [
+      "Shop",
+      "4",
+      "New",
+      "Market",
+      "Shaheb",
+      "Bazar",
+      "Boalia",
+      "Rajshahi"
+    ],
+    "tags": [
+      "B-HOUSE",
+      "I-HOUSE",
+      "B-LANDMARK",
+      "I-LANDMARK",
+      "B-SUBAREA",
+      "I-SUBAREA",
+      "B-THANA_UPAZILA",
+      "B-DISTRICT"
+    ],
+    "expected_thana": "Boalia",
+    "expected_district": "Rajshahi",
+    "is_homonym_test": false,
+    "category": "metro_regional"
+  },
+  {
+    "id": "gold_067",
+    "raw_text": "Holding 85, Station Road, Ghoramara, Boalia, Rajshahi",
+    "normalized_text": "H# 85, Station RD#, Ghoramara, Boalia, Rajshahi",
+    "tokens": [
+      "H#",
+      "85",
+      "Station",
+      "RD#",
+      "Ghoramara",
+      "Boalia",
+      "Rajshahi"
+    ],
+    "tags": [
+      "B-HOUSE",
+      "I-HOUSE",
+      "B-ROAD",
+      "I-ROAD",
+      "B-SUBAREA",
+      "B-THANA_UPAZILA",
+      "B-DISTRICT"
+    ],
+    "expected_thana": "Boalia",
+    "expected_district": "Rajshahi",
+    "is_homonym_test": false,
+    "category": "metro_regional"
+  },
+  {
+    "id": "gold_068",
+    "raw_text": "House 12, Mujgunni Residential Area, Khalishpur, Khulna",
+    "normalized_text": "H# 12, Mujgunni Residential Area, Khalishpur, Khulna",
+    "tokens": [
+      "H#",
+      "12",
+      "Mujgunni",
+      "Residential",
+      "Area",
+      "Khalishpur",
+      "Khulna"
+    ],
+    "tags": [
+      "B-HOUSE",
+      "I-HOUSE",
+      "B-SUBAREA",
+      "I-SUBAREA",
+      "I-SUBAREA",
+      "B-THANA_UPAZILA",
+      "B-DISTRICT"
+    ],
+    "expected_thana": "Khalishpur",
+    "expected_district": "Khulna",
+    "is_homonym_test": false,
+    "category": "metro_regional"
+  },
+  {
+    "id": "gold_069",
+    "raw_text": "Holding 45, KDA Avenue, Sonadanga, Khulna",
+    "normalized_text": "H# 45, KDA RD#, Sonadanga, Khulna",
+    "tokens": [
+      "H#",
+      "45",
+      "KDA",
+      "RD#",
+      "Sonadanga",
+      "Khulna"
+    ],
+    "tags": [
+      "B-HOUSE",
+      "I-HOUSE",
+      "B-ROAD",
+      "I-ROAD",
+      "B-THANA_UPAZILA",
+      "B-DISTRICT"
+    ],
+    "expected_thana": "Sonadanga",
+    "expected_district": "Khulna",
+    "is_homonym_test": false,
+    "category": "metro_regional"
+  },
+  {
+    "id": "gold_070",
+    "raw_text": "Plot 10, Road 3, Boyra Main Road, Khalishpur, Khulna",
+    "normalized_text": "Plot 10, RD# 3, Boyra Main RD#, Khalishpur, Khulna",
+    "tokens": [
+      "Plot",
+      "10",
+      "RD#",
+      "3",
+      "Boyra",
+      "Main",
+      "RD#",
+      "Khalishpur",
+      "Khulna"
+    ],
+    "tags": [
+      "B-HOUSE",
+      "I-HOUSE",
+      "B-ROAD",
+      "I-ROAD",
+      "B-ROAD",
+      "I-ROAD",
+      "I-ROAD",
+      "B-THANA_UPAZILA",
+      "B-DISTRICT"
+    ],
+    "expected_thana": "Khalishpur",
+    "expected_district": "Khulna",
+    "is_homonym_test": false,
+    "category": "metro_regional"
+  },
+  {
+    "id": "gold_071",
+    "raw_text": "Holding 220, Sir Iqbal Road, Khulna Sadar, Khulna",
+    "normalized_text": "H# 220, Sir Iqbal RD#, Khulna Sadar, Khulna",
+    "tokens": [
+      "H#",
+      "220",
+      "Sir",
+      "Iqbal",
+      "RD#",
+      "Khulna",
+      "Sadar",
+      "Khulna"
+    ],
+    "tags": [
+      "B-HOUSE",
+      "I-HOUSE",
+      "B-ROAD",
+      "I-ROAD",
+      "I-ROAD",
+      "B-THANA_UPAZILA",
+      "I-THANA_UPAZILA",
+      "B-DISTRICT"
+    ],
+    "expected_thana": "Khulna Sadar",
+    "expected_district": "Khulna",
+    "is_homonym_test": false,
+    "category": "metro_regional"
+  },
+  {
+    "id": "gold_072",
+    "raw_text": "C/O Abdul Karim, Village: Char Bhabanipur, Union: Char Ishwar, Hatiya, Noakhali",
+    "normalized_text": "C/O Abdul Karim, Village: Char Bhabanipur, Union: Char Ishwar, Hatiya, Noakhali",
+    "tokens": [
+      "C/O",
+      "Abdul",
+      "Karim",
+      "Village",
+      ":",
+      "Char",
+      "Bhabanipur",
+      "Union",
+      ":",
+      "Char",
+      "Ishwar",
+      "Hatiya",
+      "Noakhali"
+    ],
+    "tags": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "B-SUBAREA",
+      "I-SUBAREA",
+      "O",
+      "O",
+      "B-SUBAREA",
+      "I-SUBAREA",
+      "B-THANA_UPAZILA",
+      "B-DISTRICT"
+    ],
+    "expected_thana": "Hatiya",
+    "expected_district": "Noakhali",
+    "is_homonym_test": false,
+    "category": "rural_union"
+  },
+  {
+    "id": "gold_073",
+    "raw_text": "Care of Master Rafiq, Village: Uttar Rampur, Post: Harinarayanpur, Kushtia Sadar, Kushtia",
+    "normalized_text": "Care of Master Rafiq, Village: Uttar Rampur, Post: Harinarayanpur, Kushtia Sadar, Kushtia",
+    "tokens": [
+      "Care",
+      "of",
+      "Master",
+      "Rafiq",
+      "Village",
+      ":",
+      "Uttar",
+      "Rampur",
+      "Post",
+      ":",
+      "Harinarayanpur",
+      "Kushtia",
+      "Sadar",
+      "Kushtia"
+    ],
+    "tags": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "B-SUBAREA",
+      "I-SUBAREA",
+      "O",
+      "O",
+      "B-SUBAREA",
+      "B-THANA_UPAZILA",
+      "I-THANA_UPAZILA",
+      "B-DISTRICT"
+    ],
+    "expected_thana": "Kushtia Sadar",
+    "expected_district": "Kushtia",
+    "is_homonym_test": false,
+    "category": "rural_union"
+  },
+  {
+    "id": "gold_074",
+    "raw_text": "C/O Dr. M. Rahman, Gram: Shampur, Dakghar: Durgapur, Durgapur, Netrokona",
+    "normalized_text": "C/O Dr. M. Rahman, Gram: Shampur, Dakghar: Durgapur, Durgapur, Netrokona",
+    "tokens": [
+      "C/O",
+      "Dr",
+      "M",
+      "Rahman",
+      "Gram",
+      ":",
+      "Shampur",
+      "Dakghar",
+      ":",
+      "Durgapur",
+      "Durgapur",
+      "Netrokona"
+    ],
+    "tags": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "B-SUBAREA",
+      "O",
+      "O",
+      "B-SUBAREA",
+      "B-THANA_UPAZILA",
+      "B-DISTRICT"
+    ],
+    "expected_thana": "Durgapur",
+    "expected_district": "Netrokona",
+    "is_homonym_test": true,
+    "category": "rural_union"
+  },
+  {
+    "id": "gold_075",
+    "raw_text": "Village: Daskhin Para, Union: Fatepur, Upazila: Madhabpur, Habiganj",
+    "normalized_text": "Village: Daskhin Para, Union: Fatepur, Upazila: Madhabpur, Habiganj",
+    "tokens": [
+      "Village",
+      ":",
+      "Daskhin",
+      "Para",
+      "Union",
+      ":",
+      "Fatepur",
+      "Upazila",
+      ":",
+      "Madhabpur",
+      "Habiganj"
+    ],
+    "tags": [
+      "O",
+      "O",
+      "B-SUBAREA",
+      "I-SUBAREA",
+      "O",
+      "O",
+      "B-SUBAREA",
+      "O",
+      "O",
+      "B-THANA_UPAZILA",
+      "B-DISTRICT"
+    ],
+    "expected_thana": "Madhabpur",
+    "expected_district": "Habiganj",
+    "is_homonym_test": false,
+    "category": "rural_union"
+  },
+  {
+    "id": "gold_076",
+    "raw_text": "C/O Haji Shamsul Haque, Gram: Boro Bari, Union: Joyag, Sonaimuri, Noakhali",
+    "normalized_text": "C/O Haji Shamsul Haque, Gram: Boro H#, Union: Joyag, Sonaimuri, Noakhali",
+    "tokens": [
+      "C/O",
+      "Haji",
+      "Shamsul",
+      "Haque",
+      "Gram",
+      ":",
+      "Boro",
+      "H#",
+      "Union",
+      ":",
+      "Joyag",
+      "Sonaimuri",
+      "Noakhali"
+    ],
+    "tags": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "B-HOUSE",
+      "I-HOUSE",
+      "O",
+      "O",
+      "B-SUBAREA",
+      "B-THANA_UPAZILA",
+      "B-DISTRICT"
+    ],
+    "expected_thana": "Sonaimuri",
+    "expected_district": "Noakhali",
+    "is_homonym_test": false,
+    "category": "rural_union"
+  },
+  {
+    "id": "gold_077",
+    "raw_text": "Village: Paikpara, Post: Mirzapur, Upazila: Mirzapur, Tangail",
+    "normalized_text": "Village: Paikpara, Post: Mirzapur, Upazila: Mirzapur, Tangail",
+    "tokens": [
+      "Village",
+      ":",
+      "Paikpara",
+      "Post",
+      ":",
+      "Mirzapur",
+      "Upazila",
+      ":",
+      "Mirzapur",
+      "Tangail"
+    ],
+    "tags": [
+      "O",
+      "O",
+      "B-SUBAREA",
+      "O",
+      "O",
+      "B-SUBAREA",
+      "O",
+      "O",
+      "B-THANA_UPAZILA",
+      "B-DISTRICT"
+    ],
+    "expected_thana": "Mirzapur",
+    "expected_district": "Tangail",
+    "is_homonym_test": false,
+    "category": "rural_union"
+  },
+  {
+    "id": "gold_078",
+    "raw_text": "Gram: Gobindapur, Union: Gopalpur, Upazila: Mithapukur, Rangpur",
+    "normalized_text": "Gram: Gobindapur, Union: Gopalpur, Upazila: Mithapukur, Rangpur",
+    "tokens": [
+      "Gram",
+      ":",
+      "Gobindapur",
+      "Union",
+      ":",
+      "Gopalpur",
+      "Upazila",
+      ":",
+      "Mithapukur",
+      "Rangpur"
+    ],
+    "tags": [
+      "O",
+      "O",
+      "B-SUBAREA",
+      "O",
+      "O",
+      "B-SUBAREA",
+      "O",
+      "O",
+      "B-THANA_UPAZILA",
+      "B-DISTRICT"
+    ],
+    "expected_thana": "Mithapukur",
+    "expected_district": "Rangpur",
+    "is_homonym_test": false,
+    "category": "rural_union"
+  },
+  {
+    "id": "gold_079",
+    "raw_text": "C/O Principal Jalal Uddin, Village: Madhabpur, Union: Pathannagar, Chhagalnaiya, Feni",
+    "normalized_text": "C/O Principal Jalal Uddin, Village: Madhabpur, Union: Pathannagar, Chhagalnaiya, Feni",
+    "tokens": [
+      "C/O",
+      "Principal",
+      "Jalal",
+      "Uddin",
+      "Village",
+      ":",
+      "Madhabpur",
+      "Union",
+      ":",
+      "Pathannagar",
+      "Chhagalnaiya",
+      "Feni"
+    ],
+    "tags": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "B-SUBAREA",
+      "O",
+      "O",
+      "B-SUBAREA",
+      "B-THANA_UPAZILA",
+      "B-DISTRICT"
+    ],
+    "expected_thana": "Chhagalnaiya",
+    "expected_district": "Feni",
+    "is_homonym_test": false,
+    "category": "rural_union"
+  },
+  {
+    "id": "gold_080",
+    "raw_text": "Village: Ramchandrapur, Union: Bausha, Upazila: Bagha, Rajshahi",
+    "normalized_text": "Village: Ramchandrapur, Union: Bausha, Upazila: Bagha, Rajshahi",
+    "tokens": [
+      "Village",
+      ":",
+      "Ramchandrapur",
+      "Union",
+      ":",
+      "Bausha",
+      "Upazila",
+      ":",
+      "Bagha",
+      "Rajshahi"
+    ],
+    "tags": [
+      "O",
+      "O",
+      "B-SUBAREA",
+      "O",
+      "O",
+      "B-SUBAREA",
+      "O",
+      "O",
+      "B-THANA_UPAZILA",
+      "B-DISTRICT"
+    ],
+    "expected_thana": "Bagha",
+    "expected_district": "Rajshahi",
+    "is_homonym_test": false,
+    "category": "rural_union"
+  },
+  {
+    "id": "gold_081",
+    "raw_text": "Care of Abdus Sattar, Gram: Kanthaltoli, Union: Patharghata, Patharghata, Barguna",
+    "normalized_text": "Care of Abdus Sattar, Gram: Kanthaltoli, Union: Patharghata, Patharghata, Barguna",
+    "tokens": [
+      "Care",
+      "of",
+      "Abdus",
+      "Sattar",
+      "Gram",
+      ":",
+      "Kanthaltoli",
+      "Union",
+      ":",
+      "Patharghata",
+      "Patharghata",
+      "Barguna"
+    ],
+    "tags": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "B-SUBAREA",
+      "O",
+      "O",
+      "B-SUBAREA",
+      "B-THANA_UPAZILA",
+      "B-DISTRICT"
+    ],
+    "expected_thana": "Patharghata",
+    "expected_district": "Barguna",
+    "is_homonym_test": false,
+    "category": "rural_union"
+  },
+  {
+    "id": "gold_082",
+    "raw_text": "Village: Shialkhol, Union: Shialkhol, Sirajganj Sadar, Sirajganj",
+    "normalized_text": "Village: Shialkhol, Union: Shialkhol, Sirajganj Sadar, Sirajganj",
+    "tokens": [
+      "Village",
+      ":",
+      "Shialkhol",
+      "Union",
+      ":",
+      "Shialkhol",
+      "Sirajganj",
+      "Sadar",
+      "Sirajganj"
+    ],
+    "tags": [
+      "O",
+      "O",
+      "B-SUBAREA",
+      "O",
+      "O",
+      "B-SUBAREA",
+      "B-THANA_UPAZILA",
+      "I-THANA_UPAZILA",
+      "B-DISTRICT"
+    ],
+    "expected_thana": "Sirajganj Sadar",
+    "expected_district": "Sirajganj",
+    "is_homonym_test": false,
+    "category": "rural_union"
+  },
+  {
+    "id": "gold_083",
+    "raw_text": "C/O Nurul Islam, Village: Jagannathpur, Union: Alinagar, Bhola Sadar, Bhola",
+    "normalized_text": "C/O Nurul Islam, Village: Jagannathpur, Union: Alinagar, Bhola Sadar, Bhola",
+    "tokens": [
+      "C/O",
+      "Nurul",
+      "Islam",
+      "Village",
+      ":",
+      "Jagannathpur",
+      "Union",
+      ":",
+      "Alinagar",
+      "Bhola",
+      "Sadar",
+      "Bhola"
+    ],
+    "tags": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "B-SUBAREA",
+      "O",
+      "O",
+      "B-SUBAREA",
+      "B-THANA_UPAZILA",
+      "I-THANA_UPAZILA",
+      "B-DISTRICT"
+    ],
+    "expected_thana": "Bhola Sadar",
+    "expected_district": "Bhola",
+    "is_homonym_test": false,
+    "category": "rural_union"
+  },
+  {
+    "id": "gold_084",
+    "raw_text": "Village: Krishnapur, Dakghar: Mohanpur, Upazila: Mohanpur, Rajshahi",
+    "normalized_text": "Village: Krishnapur, Dakghar: Mohanpur, Upazila: Mohanpur, Rajshahi",
+    "tokens": [
+      "Village",
+      ":",
+      "Krishnapur",
+      "Dakghar",
+      ":",
+      "Mohanpur",
+      "Upazila",
+      ":",
+      "Mohanpur",
+      "Rajshahi"
+    ],
+    "tags": [
+      "O",
+      "O",
+      "B-SUBAREA",
+      "O",
+      "O",
+      "B-SUBAREA",
+      "O",
+      "O",
+      "B-THANA_UPAZILA",
+      "B-DISTRICT"
+    ],
+    "expected_thana": "Mohanpur",
+    "expected_district": "Rajshahi",
+    "is_homonym_test": false,
+    "category": "rural_union"
+  },
+  {
+    "id": "gold_085",
+    "raw_text": "Gram: Shibpur, Union: Belabo, Upazila: Belabo, Narsingdi",
+    "normalized_text": "Gram: Shibpur, Union: Belabo, Upazila: Belabo, Narsingdi",
+    "tokens": [
+      "Gram",
+      ":",
+      "Shibpur",
+      "Union",
+      ":",
+      "Belabo",
+      "Upazila",
+      ":",
+      "Belabo",
+      "Narsingdi"
+    ],
+    "tags": [
+      "O",
+      "O",
+      "B-SUBAREA",
+      "O",
+      "O",
+      "B-SUBAREA",
+      "O",
+      "O",
+      "B-THANA_UPAZILA",
+      "B-DISTRICT"
+    ],
+    "expected_thana": "Belabo",
+    "expected_district": "Narsingdi",
+    "is_homonym_test": false,
+    "category": "rural_union"
+  },
+  {
+    "id": "gold_086",
+    "raw_text": "C/O Master Abul Kashem, Village: Choto Kumira, Sitakunda, Chattogram",
+    "normalized_text": "C/O Master Abul Kashem, Village: Choto Kumira, Sitakunda, Chattogram",
+    "tokens": [
+      "C/O",
+      "Master",
+      "Abul",
+      "Kashem",
+      "Village",
+      ":",
+      "Choto",
+      "Kumira",
+      "Sitakunda",
+      "Chattogram"
+    ],
+    "tags": [
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "O",
+      "B-SUBAREA",
+      "I-SUBAREA",
+      "B-THANA_UPAZILA",
+      "B-DISTRICT"
+    ],
+    "expected_thana": "Sitakunda",
+    "expected_district": "Chattogram",
+    "is_homonym_test": false,
+    "category": "rural_union"
+  },
+  {
+    "id": "gold_087",
+    "raw_text": "বাসা ১২, রোড ৪, ব্লক সি, বনানী, ঢাকা",
+    "normalized_text": "H# 12, RD# 4, BLK# সি, বনানী, ঢাকা",
+    "tokens": [
+      "H#",
+      "12",
+      "RD#",
+      "4",
+      "BLK#",
+      "সি",
+      "বনানী",
+      "ঢাকা"
+    ],
+    "tags": [
+      "B-HOUSE",
+      "I-HOUSE",
+      "B-ROAD",
+      "I-ROAD",
+      "B-BLOCK_SECTOR",
+      "I-BLOCK_SECTOR",
+      "B-THANA_UPAZILA",
+      "B-DISTRICT"
+    ],
+    "expected_thana": "Banani",
+    "expected_district": "Dhaka",
+    "is_homonym_test": false,
+    "category": "bangla_script"
+  },
+  {
+    "id": "gold_088",
+    "raw_text": "ফ্ল্যাট ৩বি, হোল্ডিং ৪৫, তাজমহল রোড, মোহাম্মদপুর, ঢাকা",
+    "normalized_text": "ফ্ল্যাট 3বি, H# 45, তাজমহল RD#, মোহাম্মদপুর, ঢাকা",
+    "tokens": [
+      "ফ্ল্যাট",
+      "3",
+      "বি",
+      "H#",
+      "45",
+      "তাজমহল",
+      "RD#",
+      "মোহাম্মদপুর",
+      "ঢাকা"
+    ],
+    "tags": [
+      "B-FLOOR_FLAT",
+      "I-FLOOR_FLAT",
+      "I-FLOOR_FLAT",
+      "B-HOUSE",
+      "I-HOUSE",
+      "B-ROAD",
+      "I-ROAD",
+      "B-THANA_UPAZILA",
+      "B-DISTRICT"
+    ],
+    "expected_thana": "Mohammadpur",
+    "expected_district": "Dhaka",
+    "is_homonym_test": true,
+    "category": "bangla_script"
+  },
+  {
+    "id": "gold_089",
+    "raw_text": "দোকান নং ৮, নিউ মার্কেট, কোতোয়ালী, চট্টগ্রাম",
+    "normalized_text": "দোকান নং 8, নিউ মার্কেট, কোতোয়ালী, চট্টগ্রাম",
+    "tokens": [
+      "দোকান",
+      "নং",
+      "8",
+      "নিউ",
+      "মার্কেট",
+      "কোতোয়ালী",
+      "চট্টগ্রাম"
+    ],
+    "tags": [
+      "B-HOUSE",
+      "I-HOUSE",
+      "I-HOUSE",
+      "B-LANDMARK",
+      "I-LANDMARK",
+      "B-THANA_UPAZILA",
+      "B-DISTRICT"
+    ],
+    "expected_thana": "Kotwali",
+    "expected_district": "Chattogram",
+    "is_homonym_test": false,
+    "category": "bangla_script"
+  },
+  {
+    "id": "gold_090",
+    "raw_text": "বাড়ি নং ৭, সেক্টর ৩, উত্তরা, ঢাকা",
+    "normalized_text": "H# 7, SEC# 3, উত্তরা, ঢাকা",
+    "tokens": [
+      "H#",
+      "7",
+      "SEC#",
+      "3",
+      "উত্তরা",
+      "ঢাকা"
+    ],
+    "tags": [
+      "B-HOUSE",
+      "I-HOUSE",
+      "B-BLOCK_SECTOR",
+      "I-BLOCK_SECTOR",
+      "B-THANA_UPAZILA",
+      "B-DISTRICT"
+    ],
+    "expected_thana": "Uttara",
+    "expected_district": "Dhaka",
+    "is_homonym_test": false,
+    "category": "bangla_script"
+  },
+  {
+    "id": "gold_091",
+    "raw_text": "হোল্ডিং ১৫, আম্বরখানা, কোতোয়ালী, সিলেট",
+    "normalized_text": "H# 15, আম্বরখানা, কোতোয়ালী, সিলেট",
+    "tokens": [
+      "H#",
+      "15",
+      "আম্বরখানা",
+      "কোতোয়ালী",
+      "সিলেট"
+    ],
+    "tags": [
+      "B-HOUSE",
+      "I-HOUSE",
+      "B-SUBAREA",
+      "B-THANA_UPAZILA",
+      "B-DISTRICT"
+    ],
+    "expected_thana": "Kotwali",
+    "expected_district": "Sylhet",
+    "is_homonym_test": false,
+    "category": "bangla_script"
+  },
+  {
+    "id": "gold_092",
+    "raw_text": "গ্রাম: চন্ডিপুর, ডাকঘর: বাঘা, উপজেলা: বাঘা, জেলা: রাজশাহী",
+    "normalized_text": "গ্রাম: চন্ডিপুর, ডাকঘর: বাঘা, উপজেলা: বাঘা, জেলা: রাজশাহী",
+    "tokens": [
+      "গ্রাম",
+      ":",
+      "চন্ডিপুর",
+      "ডাকঘর",
+      ":",
+      "বাঘা",
+      "উপজেলা",
+      ":",
+      "বাঘা",
+      "জেলা",
+      ":",
+      "রাজশাহী"
+    ],
+    "tags": [
+      "O",
+      "O",
+      "B-SUBAREA",
+      "O",
+      "O",
+      "B-SUBAREA",
+      "O",
+      "O",
+      "B-THANA_UPAZILA",
+      "O",
+      "O",
+      "B-DISTRICT"
+    ],
+    "expected_thana": "Bagha",
+    "expected_district": "Rajshahi",
+    "is_homonym_test": false,
+    "category": "bangla_script"
+  },
+  {
+    "id": "gold_093",
+    "raw_text": "বাসা নং ২২, কেডিএ এভিনিউ, সোনাডাঙ্গা, খুলনা",
+    "normalized_text": "H# 22, কেডিএ এভিনিউ, সোনাডাঙ্গা, খুলনা",
+    "tokens": [
+      "H#",
+      "22",
+      "কেডিএ",
+      "এভিনিউ",
+      "সোনাডাঙ্গা",
+      "খুলনা"
+    ],
+    "tags": [
+      "B-HOUSE",
+      "I-HOUSE",
+      "B-ROAD",
+      "I-ROAD",
+      "B-THANA_UPAZILA",
+      "B-DISTRICT"
+    ],
+    "expected_thana": "Sonadanga",
+    "expected_district": "Khulna",
+    "is_homonym_test": false,
+    "category": "bangla_script"
+  },
+  {
+    "id": "gold_094",
+    "raw_text": "basha 12, rd 4, mirpur dosh, dhaka",
+    "normalized_text": "H# 12, RD# 4, mirpur dosh, dhaka",
+    "tokens": [
+      "H#",
+      "12",
+      "RD#",
+      "4",
+      "mirpur",
+      "dosh",
+      "dhaka"
+    ],
+    "tags": [
+      "B-HOUSE",
+      "I-HOUSE",
+      "B-ROAD",
+      "I-ROAD",
+      "B-SUBAREA",
+      "I-SUBAREA",
+      "B-DISTRICT"
+    ],
+    "expected_thana": "Mirpur",
+    "expected_district": "Dhaka",
+    "is_homonym_test": false,
+    "category": "banglish_typo_landmark"
+  },
+  {
+    "id": "gold_095",
+    "raw_text": "H# 45/A, rasta char, blok B, uttora, dhaka",
+    "normalized_text": "H# 45/A, RD# 4, blok B, uttora, dhaka",
+    "tokens": [
+      "H#",
+      "45/A",
+      "RD#",
+      "4",
+      "blok",
+      "B",
+      "uttora",
+      "dhaka"
+    ],
+    "tags": [
+      "B-HOUSE",
+      "I-HOUSE",
+      "B-ROAD",
+      "I-ROAD",
+      "B-BLOCK_SECTOR",
+      "I-BLOCK_SECTOR",
+      "B-THANA_UPAZILA",
+      "B-DISTRICT"
+    ],
+    "expected_thana": "Uttara",
+    "expected_district": "Dhaka",
+    "is_homonym_test": false,
+    "category": "banglish_typo_landmark"
+  },
+  {
+    "id": "gold_096",
+    "raw_text": "near shia mosque, tajmahal road, mohammadpur, dhaka",
+    "normalized_text": "REL_NEAR shia mosque, tajmahal RD#, mohammadpur, dhaka",
+    "tokens": [
+      "REL_NEAR",
+      "shia",
+      "mosque",
+      "tajmahal",
+      "RD#",
+      "mohammadpur",
+      "dhaka"
+    ],
+    "tags": [
+      "B-LANDMARK_REL",
+      "B-LANDMARK",
+      "I-LANDMARK",
+      "B-ROAD",
+      "I-ROAD",
+      "B-THANA_UPAZILA",
+      "B-DISTRICT"
+    ],
+    "expected_thana": "Mohammadpur",
+    "expected_district": "Dhaka",
+    "is_homonym_test": true,
+    "category": "banglish_typo_landmark"
+  },
+  {
+    "id": "gold_097",
+    "raw_text": "opposite square hospital, panthapath, tejgaon, dhaka",
+    "normalized_text": "REL_FRONT square hospital, panthapath, tejgaon, dhaka",
+    "tokens": [
+      "REL_FRONT",
+      "square",
+      "hospital",
+      "panthapath",
+      "tejgaon",
+      "dhaka"
+    ],
+    "tags": [
+      "B-LANDMARK_REL",
+      "B-LANDMARK",
+      "I-LANDMARK",
+      "B-ROAD",
+      "B-THANA_UPAZILA",
+      "B-DISTRICT"
+    ],
+    "expected_thana": "Tejgaon",
+    "expected_district": "Dhaka",
+    "is_homonym_test": false,
+    "category": "banglish_typo_landmark"
+  },
+  {
+    "id": "gold_098",
+    "raw_text": "behind bashundhara city, panthapath, kalabagan, dhaka",
+    "normalized_text": "REL_BEHIND bashundhara city, panthapath, kalabagan, dhaka",
+    "tokens": [
+      "REL_BEHIND",
+      "bashundhara",
+      "city",
+      "panthapath",
+      "kalabagan",
+      "dhaka"
+    ],
+    "tags": [
+      "B-LANDMARK_REL",
+      "B-LANDMARK",
+      "I-LANDMARK",
+      "B-ROAD",
+      "B-THANA_UPAZILA",
+      "B-DISTRICT"
+    ],
+    "expected_thana": "Kalabagan",
+    "expected_district": "Dhaka",
+    "is_homonym_test": false,
+    "category": "banglish_typo_landmark"
+  },
+  {
+    "id": "gold_099",
+    "raw_text": "beside brack bank, rd 11, banani, dhaka",
+    "normalized_text": "REL_NEAR brack bank, RD# 11, banani, dhaka",
+    "tokens": [
+      "REL_NEAR",
+      "brack",
+      "bank",
+      "RD#",
+      "11",
+      "banani",
+      "dhaka"
+    ],
+    "tags": [
+      "B-LANDMARK_REL",
+      "B-LANDMARK",
+      "I-LANDMARK",
+      "B-ROAD",
+      "I-ROAD",
+      "B-THANA_UPAZILA",
+      "B-DISTRICT"
+    ],
+    "expected_thana": "Banani",
+    "expected_district": "Dhaka",
+    "is_homonym_test": false,
+    "category": "banglish_typo_landmark"
+  },
+  {
+    "id": "gold_100",
+    "raw_text": "opp labaid hospital, road 4, dhanmondi, dhaka",
+    "normalized_text": "opp labaid hospital, RD# 4, dhanmondi, dhaka",
+    "tokens": [
+      "opp",
+      "labaid",
+      "hospital",
+      "RD#",
+      "4",
+      "dhanmondi",
+      "dhaka"
+    ],
+    "tags": [
+      "B-LANDMARK_REL",
+      "B-LANDMARK",
+      "I-LANDMARK",
+      "B-ROAD",
+      "I-ROAD",
+      "B-THANA_UPAZILA",
+      "B-DISTRICT"
+    ],
+    "expected_thana": "Dhanmondi",
+    "expected_district": "Dhaka",
+    "is_homonym_test": false,
+    "category": "banglish_typo_landmark"
+  }
+]
