@@ -181,10 +181,22 @@ def test_homonym_mohammadpur_three_way(
     res3 = resolve_location_hierarchy(["Mohammadpur"], ctx_magura, gazetteer, matcher)
     assert res3["resolved_node"].district.name == "Magura"
 
-    # Context 4: Mohammadpur in Noakhali
+    # Context 4: Mohammadpur in Noakhali (Subarnachar)
     ctx_noakhali = ["Mohammadpur", "Subarnachar", "Noakhali"]
     res4 = resolve_location_hierarchy(["Mohammadpur"], ctx_noakhali, gazetteer, matcher)
     assert res4["resolved_node"].district.name == "Noakhali"
+
+    # Context 5: Real-world user query - Holding 45, Tajmahal Road, Mohammadpur -> Dhaka
+    ctx_tajmahal = ["Holding", "45", "Tajmahal", "Road", "Mohammadpur"]
+    res5 = resolve_location_hierarchy(["Tajmahal Road", "Mohammadpur"], ctx_tajmahal, gazetteer, matcher)
+    assert res5["resolved_node"].district.name == "Dhaka"
+    assert res5["hierarchy"]["thana"] == "Mohammadpur"
+
+    # Context 6: Real-world user query - Village: Mohammadpur, Upazila: Chatkhil, Noakhali -> Noakhali
+    ctx_chatkhil = ["Village", "Mohammadpur", "Upazila", "Chatkhil", "Noakhali"]
+    res6 = resolve_location_hierarchy(["Mohammadpur", "Chatkhil", "Noakhali"], ctx_chatkhil, gazetteer, matcher)
+    assert res6["resolved_node"].district.name == "Noakhali"
+    assert res6["hierarchy"]["upazila"] == "Chatkhil"
 
 
 # =============================================================================

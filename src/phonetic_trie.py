@@ -474,3 +474,22 @@ class PhoneticGazetteerMatcher:
             "max_collision_count": len(max_collision_nodes),
             "top_collisions": top_collision_info,
         }
+
+
+def MeasureCollisionRate(
+    gazetteer_or_matcher: Optional[Any] = None,
+) -> Dict[str, Any]:
+    """
+    Standalone function to measure and print phonetic collision statistics across BangladeshGazetteer.
+    Accepts an existing BangladeshGazetteer or PhoneticGazetteerMatcher instance,
+    or instantiates a new one if omitted.
+    """
+    if gazetteer_or_matcher is None:
+        gz = BangladeshGazetteer()
+        matcher = PhoneticGazetteerMatcher(gz)
+    elif isinstance(gazetteer_or_matcher, BangladeshGazetteer):
+        matcher = PhoneticGazetteerMatcher(gazetteer_or_matcher)
+    else:
+        matcher = gazetteer_or_matcher
+    return matcher.MeasureCollisionRate()
+

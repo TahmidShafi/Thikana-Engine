@@ -10,6 +10,7 @@ from .phonetic_trie import (
     levenshtein_distance,
     PhoneticTrie,
     PhoneticGazetteerMatcher,
+    MeasureCollisionRate,
 )
 from .disambiguator import resolve_location_hierarchy
 
@@ -22,6 +23,7 @@ __all__ = [
     "levenshtein_distance",
     "PhoneticTrie",
     "PhoneticGazetteerMatcher",
+    "MeasureCollisionRate",
     "resolve_location_hierarchy",
 ]
 
