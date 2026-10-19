@@ -19,12 +19,8 @@ import re
 import unicodedata
 from typing import Any, Dict, List, Optional, Set, Tuple
 
-try:
-    from .models import AdminLevel, AdminNode
-    from .gazetteer import BangladeshGazetteer
-except (ImportError, ValueError):
-    from models import AdminLevel, AdminNode
-    from gazetteer import BangladeshGazetteer
+from .models import AdminLevel, AdminNode
+from .gazetteer import BangladeshGazetteer
 
 
 # -----------------------------------------------------------------------------

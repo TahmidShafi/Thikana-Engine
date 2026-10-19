@@ -11,14 +11,9 @@ from __future__ import annotations
 import re
 from typing import Any, Dict, List, Optional, Set, Tuple
 
-try:
-    from .models import AdminLevel, AdminNode
-    from .gazetteer import BangladeshGazetteer
-    from .phonetic_trie import PhoneticGazetteerMatcher, banglish_phonetic_key, levenshtein_distance
-except (ImportError, ValueError):
-    from models import AdminLevel, AdminNode
-    from gazetteer import BangladeshGazetteer
-    from phonetic_trie import PhoneticGazetteerMatcher, banglish_phonetic_key, levenshtein_distance
+from .models import AdminLevel, AdminNode
+from .gazetteer import BangladeshGazetteer
+from .phonetic_trie import PhoneticGazetteerMatcher, banglish_phonetic_key, levenshtein_distance
 
 
 # -----------------------------------------------------------------------------

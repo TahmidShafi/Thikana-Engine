@@ -26,16 +26,10 @@ from typing import Any, Dict, List, Optional, Tuple
 import joblib
 import sklearn_crfsuite
 
-try:
-    from .models import AdminLevel, AdminNode
-    from .gazetteer import BangladeshGazetteer
-    from .normalizer import normalize_address
-    from .phonetic_trie import PhoneticGazetteerMatcher, banglish_phonetic_key
-except (ImportError, ValueError):
-    from models import AdminLevel, AdminNode
-    from gazetteer import BangladeshGazetteer
-    from normalizer import normalize_address
-    from phonetic_trie import PhoneticGazetteerMatcher, banglish_phonetic_key
+from .models import AdminLevel, AdminNode
+from .gazetteer import BangladeshGazetteer
+from .normalizer import normalize_address
+from .phonetic_trie import PhoneticGazetteerMatcher, banglish_phonetic_key
 
 
 # -----------------------------------------------------------------------------

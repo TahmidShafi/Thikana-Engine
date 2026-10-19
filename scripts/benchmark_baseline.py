@@ -113,10 +113,11 @@ class RegexGazetteerBaseline:
             # Upazila lookup
             if tok_l in self.upazila_map:
                 tags[i] = "B-THANA_UPAZILA"
+                upz_node = self.upazila_map[tok_l]
                 if not predicted_thana:
-                    predicted_thana = self.upazila_map[tok_l].name
-                    if not predicted_district and self.upazila_map[tok_l].district:
-                        predicted_district = self.upazila_map[tok_l].district.name
+                    predicted_thana = upz_node.name
+                    if not predicted_district and upz_node.district is not None:
+                        predicted_district = upz_node.district.name
                 i += 1
                 continue
 
@@ -126,10 +127,11 @@ class RegexGazetteerBaseline:
                 if bigram in self.upazila_map:
                     tags[i] = "B-THANA_UPAZILA"
                     tags[i + 1] = "I-THANA_UPAZILA"
+                    upz_node = self.upazila_map[bigram]
                     if not predicted_thana:
-                        predicted_thana = self.upazila_map[bigram].name
-                        if not predicted_district and self.upazila_map[bigram].district:
-                            predicted_district = self.upazila_map[bigram].district.name
+                        predicted_thana = upz_node.name
+                        if not predicted_district and upz_node.district is not None:
+                            predicted_district = upz_node.district.name
                     i += 2
                     continue
 
