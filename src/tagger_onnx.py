@@ -34,7 +34,16 @@ logger = logging.getLogger(__name__)
 DEFAULT_ONNX_DIR = Path(__file__).resolve().parent.parent / "models" / "onnx"
 DEFAULT_ONNX_PATH = DEFAULT_ONNX_DIR / "tagger.onnx"
 NUM_LABELS = len(BIO_LABELS)  # 19 labels
-FEATURE_DIM = 64  # Compact feature projection dimension
+FEATURE_DIM = 128  # Compact feature projection dimension
+
+
+def _deterministic_hash(key: str, dim: int) -> int:
+    """32-bit FNV-1a deterministic hash across Python processes."""
+    h = 2166136261
+    for b in key.encode("utf-8"):
+        h ^= b
+        h = (h * 16777619) & 0xFFFFFFFF
+    return h % dim
 
 
 # -----------------------------------------------------------------------------
@@ -135,17 +144,17 @@ def vectorize_tokens(
     feat_dicts = extract_sequence_features(tokens, matcher)
 
     for i, fd in enumerate(feat_dicts):
-        # Hash features to fixed dimension bins
+        # Hash features to fixed dimension bins deterministically
         for k, v in fd.items():
             if isinstance(v, bool):
                 if v:
-                    h = hash(k) % dim
+                    h = _deterministic_hash(k, dim)
                     vec[0, i, h] += 1.0
             elif isinstance(v, (int, float)):
-                h = hash(k) % dim
+                h = _deterministic_hash(k, dim)
                 vec[0, i, h] += float(v)
             elif isinstance(v, str):
-                h = hash(f"{k}={v}") % dim
+                h = _deterministic_hash(f"{k}={v}", dim)
                 vec[0, i, h] += 1.0
 
         # L2 normalize token vector

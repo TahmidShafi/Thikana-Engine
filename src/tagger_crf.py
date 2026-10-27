@@ -22,7 +22,7 @@ from __future__ import annotations
 import os
 import re
 import time
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Dict, List, Optional, Set, Tuple
 import joblib
 import sklearn_crfsuite
 
@@ -67,6 +67,17 @@ STAGE1_ANCHORS = {
     "REL_FRONT": "rel",
 }
 
+# Curated POI and Commercial/Institutional Head Noun Lexicon
+POI_HEAD_NOUNS: Set[str] = {
+    "bank", "limited", "ltd", "tower", "bhaban", "plaza", "mall", "market",
+    "bazar", "kacha", "masjid", "mosque", "mondir", "mandir", "church", "hospital",
+    "clinic", "pharmacy", "medical", "school", "college", "university", "varsity",
+    "bhandar", "mistanna", "restaurant", "hotel", "hall", "cinema", "park",
+    "square", "stadium", "station", "terminal", "complex", "center", "centre",
+    "ভবন", "ব্যাংক", "টাওয়ার", "প্লাজা", "মার্কেট", "বাজার", "মসজিদ", "হাসপাতাল",
+    "ক্লিনিক", "স্কুল", "কলেজ", "বিশ্ববিদ্যালয়", "ভাণ্ডার", "হোটেল", "মোড়",
+}
+
 
 # -----------------------------------------------------------------------------
 # Feature Extraction
@@ -103,6 +114,7 @@ def extract_token_features(
         "token.isdigit": token.isdigit(),
         "token.len": len(token),
         "script": script,
+        "is_poi_noun": token_lower in POI_HEAD_NOUNS,
     }
 
     # Morphological prefixes and suffixes (lengths 2, 3, 4)
@@ -160,6 +172,7 @@ def extract_token_features(
             "-1:isdigit": prev_tok.isdigit(),
             "-1:script": get_script_type(prev_tok),
             "-1:anchor": STAGE1_ANCHORS.get(prev_tok, "none"),
+            "-1:is_poi_noun": prev_tok.lower() in POI_HEAD_NOUNS,
         })
     else:
         features["BOS"] = True
@@ -181,6 +194,7 @@ def extract_token_features(
             "+1:isdigit": next_tok.isdigit(),
             "+1:script": get_script_type(next_tok),
             "+1:anchor": STAGE1_ANCHORS.get(next_tok, "none"),
+            "+1:is_poi_noun": next_tok.lower() in POI_HEAD_NOUNS,
         })
     else:
         features["EOS"] = True
@@ -191,6 +205,7 @@ def extract_token_features(
         features.update({
             "+2:token.lower": next2_tok.lower(),
             "+2:anchor": STAGE1_ANCHORS.get(next2_tok, "none"),
+            "+2:is_poi_noun": next2_tok.lower() in POI_HEAD_NOUNS,
         })
 
     return features

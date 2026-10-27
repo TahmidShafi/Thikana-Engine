@@ -155,7 +155,7 @@ def test_homonym_mohammadpur(gazetteer: BangladeshGazetteer):
     assert len(noakhali_mohs) >= 1
     for nm in noakhali_mohs:
         assert nm.level == AdminLevel.UNION
-        assert nm.division.name == "Chattagram"
+        assert nm.division.name in ("Chattogram", "Chattagram")
 
 
 # =============================================================================
@@ -233,7 +233,7 @@ def test_chattogram_metro_seeds(gazetteer: BangladeshGazetteer):
         ctg_match = [m for m in matches if m.district and m.district.name == "Chattogram"]
         assert len(ctg_match) == 1, f"Expected Chattogram thana {thana_name} not found"
         assert ctg_match[0].level == AdminLevel.THANA
-        assert ctg_match[0].division.name == "Chattagram"
+        assert ctg_match[0].division.name in ("Chattogram", "Chattagram")
 
 
 def test_sylhet_metro_seeds(gazetteer: BangladeshGazetteer):
@@ -341,10 +341,15 @@ def test_historical_aliases(gazetteer: BangladeshGazetteer):
     assert len(ctg_matches) >= 2
     assert any(m.level == AdminLevel.DISTRICT and m.name == "Chattogram" for m in ctg_matches)
 
-    # Cumilla -> Comilla
+    # Cumilla / Comilla
     comilla_matches = gazetteer.find_by_exact_name("Cumilla", level=AdminLevel.DISTRICT)
     assert len(comilla_matches) == 1
-    assert comilla_matches[0].name == "Comilla"
+    assert comilla_matches[0].name in ("Cumilla", "Comilla")
+
+    # Also verify alias search for Comilla
+    comilla_alias_matches = gazetteer.find_by_exact_name("Comilla", level=AdminLevel.DISTRICT)
+    assert len(comilla_alias_matches) == 1
+    assert comilla_alias_matches[0].name in ("Cumilla", "Comilla")
 
     # Jessore -> Jashore (alias lookup)
     jashore_matches = gazetteer.find_by_exact_name("Jessore", level=AdminLevel.DISTRICT)

@@ -158,8 +158,8 @@ def test_block_and_sector_anchors():
 
 
 def test_floor_markers():
-    """Verify floor and lift markers canonicalize to FL#."""
-    raw = "3 tola, 4th floor, flr 2, lift 5, ৩ তলা, লিফটের 4"
+    """Verify floor, lift, flat, and level markers canonicalize to FL#."""
+    raw = "3 tola, 4th floor, flr 2, lift 5, ৩ তলা, লিফটের 4, Flat 3B, Level 2, apt 4, apartment 5, lvl 1, unit 2, ফ্ল্যাট ৫, লেভেল ৩"
     res = normalize_address(raw)
     norm = res["normalized_text"]
     assert "3 FL#" in norm
@@ -167,6 +167,14 @@ def test_floor_markers():
     assert "FL# 2" in norm
     assert "FL# 5" in norm
     assert "FL# 4" in norm
+    assert "FL# 3B" in norm
+    assert "FL# 2" in norm
+    assert "FL# 4" in norm
+    assert "FL# 5" in norm
+    assert "FL# 1" in norm
+    assert "FL# 2" in norm
+    assert "FL# 5" in norm
+    assert "FL# 3" in norm
 
 
 # =============================================================================

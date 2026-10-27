@@ -35,13 +35,13 @@ POSTCODE_TO_ADMIN: Dict[str, Dict[str, str]] = {
     "1208": {"upazila": "Tejgaon", "district": "Dhaka", "division": "Dhaka"},
     "1215": {"upazila": "Tejgaon", "district": "Dhaka", "division": "Dhaka"},
     # Chattogram Metro
-    "4216": {"upazila": "Halishahar", "district": "Chattogram", "division": "Chattagram"},
-    "4224": {"upazila": "Halishahar", "district": "Chattogram", "division": "Chattagram"},
-    "4225": {"upazila": "Halishahar", "district": "Chattogram", "division": "Chattagram"},
-    "4000": {"upazila": "Kotwali", "district": "Chattogram", "division": "Chattagram"},
-    "4100": {"upazila": "Agrabad", "district": "Chattogram", "division": "Chattagram"},
-    "4203": {"upazila": "Panchlaish", "district": "Chattogram", "division": "Chattagram"},
-    "4212": {"upazila": "Chandgaon", "district": "Chattogram", "division": "Chattagram"},
+    "4216": {"upazila": "Halishahar", "district": "Chattogram", "division": "Chattogram"},
+    "4224": {"upazila": "Halishahar", "district": "Chattogram", "division": "Chattogram"},
+    "4225": {"upazila": "Halishahar", "district": "Chattogram", "division": "Chattogram"},
+    "4000": {"upazila": "Kotwali", "district": "Chattogram", "division": "Chattogram"},
+    "4100": {"upazila": "Agrabad", "district": "Chattogram", "division": "Chattogram"},
+    "4203": {"upazila": "Panchlaish", "district": "Chattogram", "division": "Chattogram"},
+    "4212": {"upazila": "Chandgaon", "district": "Chattogram", "division": "Chattogram"},
     # Sylhet Metro
     "3100": {"upazila": "Shahjalal Upashahar", "district": "Sylhet", "division": "Sylhet"},
     # Kushtia
@@ -53,9 +53,9 @@ POSTCODE_TO_ADMIN: Dict[str, Dict[str, str]] = {
     "7631": {"upazila": "Mohammadpur", "district": "Magura", "division": "Khulna"},
     "7600": {"district": "Magura", "division": "Khulna"},
     # Noakhali
-    "3830": {"upazila": "Subarnachar", "district": "Noakhali", "division": "Chattagram"},
-    "3870": {"upazila": "Chatkhil", "district": "Noakhali", "division": "Chattagram"},
-    "3850": {"upazila": "Senbug", "district": "Noakhali", "division": "Chattagram"},
+    "3830": {"upazila": "Subarnachar", "district": "Noakhali", "division": "Chattogram"},
+    "3870": {"upazila": "Chatkhil", "district": "Noakhali", "division": "Chattogram"},
+    "3850": {"upazila": "Senbug", "district": "Noakhali", "division": "Chattogram"},
 }
 
 DISTRACTOR_SUFFIXES = {

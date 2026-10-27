@@ -46,6 +46,20 @@ COMMON_ALIASES: Dict[str, List[str]] = {
     "যশোর": ["যশোহর"],
 }
 
+OFFICIAL_2018_CANONICAL_NAMES: Dict[str, str] = {
+    "chittagong": "Chattogram",
+    "chattagram": "Chattogram",
+    "comilla": "Cumilla",
+    "barisal": "Barishal",
+    "jessore": "Jashore",
+    "bogra": "Bogura",
+}
+
+
+def canonicalize_admin_name(name: str) -> str:
+    """Canonicalizes official 2018 English spellings for divisions/districts."""
+    return OFFICIAL_2018_CANONICAL_NAMES.get(name.strip().lower(), name.strip())
+
 
 def _normalize_name(name: str) -> str:
     """Normalize a query or entity name for exact index lookup."""
@@ -288,7 +302,8 @@ class BangladeshGazetteer:
         rows = self._read_table_json(self.divisions_file)
         for r in rows:
             raw_id = str(r["id"]).strip()
-            name = str(r["name"]).strip()
+            raw_name = str(r["name"]).strip()
+            name = canonicalize_admin_name(raw_name)
             bn_name = str(r.get("bn_name", "")).strip()
             url = str(r.get("url", "")).strip() or None
 
@@ -312,7 +327,8 @@ class BangladeshGazetteer:
         for r in rows:
             raw_id = str(r["id"]).strip()
             raw_div_id = str(r.get("division_id", "")).strip()
-            name = str(r["name"]).strip()
+            raw_name = str(r["name"]).strip()
+            name = canonicalize_admin_name(raw_name)
             bn_name = str(r.get("bn_name", "")).strip()
 
             lat = float(r["lat"]) if r.get("lat") else None

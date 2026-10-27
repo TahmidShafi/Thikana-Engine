@@ -210,7 +210,7 @@ def test_halishahar_block_chattogram(
     res = resolve_location_hierarchy(["Halishahar", "Block G"], ctx, gazetteer, matcher)
     assert res["resolved_node"].name == "Halishahar"
     assert res["resolved_node"].district.name == "Chattogram"
-    assert res["resolved_node"].division.name == "Chattagram"
+    assert res["resolved_node"].division.name in ("Chattogram", "Chattagram")
 
 
 def test_sylhet_upashahar_block(

@@ -81,40 +81,67 @@ flowchart TD
 
 Evaluated against the **Gold 100 Dataset** (`data/eval/gold_100.json`) consisting of 100 hand-crafted, PII-free commercial delivery addresses spanning Dhaka, Chattogram, Sylhet, Khulna, Rajshahi, rural Unions, and 32 adversarial homonym/distractor collisions:
 
-| Metric | Pipeline A: Regex + Gazetteer Baseline | Pipeline B: Thikana-Engine (CRF + Disambiguator) | Delta / Improvement |
+| Metric | Pipeline A: Regex + Gazetteer (No ML) | Pipeline B: Stage 1 + CRF + Disambiguator | Pipeline C: Stage 1 + ONNX + Viterbi |
 | :--- | :---: | :---: | :---: |
-| **Entity Macro-F1** | `41.15%` | **`65.27%`** | **`+24.12%`** |
-| **End-to-End Accuracy** | `41.0%` (41/100) | **`62.0%`** (62/100) | **`+21.0%`** |
-| **Homonym Subset Accuracy** | `28.1%` (9/32) | **`59.4%`** (19/32) | **`+31.2%`** |
-| **CPU Latency (p50)** | `0.036 ms` | **`1.398 ms`** | *Well within 10ms SLA* |
-| **CPU Latency (p95)** | `0.077 ms` | **`3.845 ms`** | *Well within 10ms SLA* |
-| **CPU Latency (p99)** | `0.086 ms` | **`5.642 ms`** | *Well within 10ms SLA* |
+| **Entity Macro-F1** | `48.07%` | **`77.40%`** | `70.33%` |
+| **End-to-End Thana/District Accuracy** | `42.0%` (42/100) | `63.0%` (63/100) | **`67.0%`** (67/100) |
+| **Homonym Subset Accuracy** | `31.2%` (10/32) | `62.5%` (20/32) | **`65.6%`** (21/32) |
+| **CPU Latency (p50)** | `0.032 ms` | `3.884 ms` | `5.302 ms` |
+| **CPU Latency (p95)** | `0.046 ms` | `9.586 ms` | `11.138 ms` |
+| **CPU Latency (p99)** | `0.055 ms` | `14.429 ms` | `14.680 ms` |
 
-### Entity Tag Classification Report (Pipeline B)
+### Detailed Entity Tag Classification Report (Pipeline B - CRF)
 
 ```
                  precision    recall  f1-score   support
 
-        B-HOUSE       1.00      0.87      0.93        52
-        I-HOUSE       1.00      0.87      0.93        52
-   B-FLOOR_FLAT       1.00      0.30      0.46        10
-   I-FLOOR_FLAT       1.00      0.27      0.43        11
-         B-ROAD       0.86      0.84      0.85        58
-         I-ROAD       0.96      0.85      0.90        65
  B-BLOCK_SECTOR       1.00      0.76      0.86        21
- I-BLOCK_SECTOR       1.00      0.76      0.86        21
-     B-LANDMARK       1.00      0.21      0.35        33
-     I-LANDMARK       0.88      0.32      0.47        47
+     B-DISTRICT       0.95      0.99      0.97       100
+   B-FLOOR_FLAT       0.86      0.60      0.71        10
+        B-HOUSE       1.00      0.87      0.93        52
+     B-LANDMARK       1.00      0.27      0.43        33
  B-LANDMARK_REL       1.00      0.80      0.89         5
-      B-SUBAREA       0.74      0.82      0.78        71
-      I-SUBAREA       0.42      0.61      0.50        36
-B-THANA_UPAZILA       0.81      0.95      0.88        97
+         B-ROAD       0.86      0.83      0.84        58
+      B-SUBAREA       0.73      0.82      0.77        71
+B-THANA_UPAZILA       0.84      0.95      0.89        97
+ I-BLOCK_SECTOR       1.00      0.76      0.86        21
+   I-FLOOR_FLAT       0.88      0.64      0.74        11
+        I-HOUSE       1.00      0.87      0.93        52
+     I-LANDMARK       0.84      0.34      0.48        47
+         I-ROAD       0.95      0.83      0.89        65
+      I-SUBAREA       0.42      0.58      0.49        36
 I-THANA_UPAZILA       0.70      0.70      0.70        10
-     B-DISTRICT       0.93      0.99      0.96       100
 
-      micro avg       0.85      0.78      0.81       689
-      macro avg       0.80      0.61      0.65       689
-   weighted avg       0.88      0.78      0.80       689
+      micro avg       0.86      0.79      0.82       689
+      macro avg       0.88      0.73      0.77       689
+   weighted avg       0.88      0.79      0.81       689
+```
+
+### Detailed Entity Tag Classification Report (Pipeline C - ONNX + Viterbi)
+
+```
+                 precision    recall  f1-score   support
+
+ B-BLOCK_SECTOR       0.89      0.81      0.85        21
+     B-DISTRICT       0.95      0.99      0.97       100
+   B-FLOOR_FLAT       1.00      0.80      0.89        10
+        B-HOUSE       0.96      0.87      0.91        52
+     B-LANDMARK       0.60      0.27      0.38        33
+ B-LANDMARK_REL       1.00      0.80      0.89         5
+         B-ROAD       0.64      0.81      0.72        58
+      B-SUBAREA       0.49      0.68      0.57        71
+B-THANA_UPAZILA       0.50      0.69      0.58        97
+ I-BLOCK_SECTOR       0.94      0.81      0.87        21
+   I-FLOOR_FLAT       0.86      0.55      0.67        11
+        I-HOUSE       0.98      0.77      0.86        52
+     I-LANDMARK       0.75      0.13      0.22        47
+         I-ROAD       0.87      0.83      0.85        65
+      I-SUBAREA       0.35      0.31      0.33        36
+I-THANA_UPAZILA       0.86      0.60      0.71        10
+
+      micro avg       0.72      0.70      0.71       689
+      macro avg       0.79      0.67      0.70       689
+   weighted avg       0.74      0.70      0.70       689
 ```
 
 ---

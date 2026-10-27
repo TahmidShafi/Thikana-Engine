@@ -1,19 +1,20 @@
 """
 scripts/benchmark_baseline.py
 
-Step 4 Benchmark:
+Comprehensive Benchmark Evaluation for Thikana-Engine:
 Trains the Stage-2 Linear-Chain CRF model on data/train_synthetic_2500.json,
-saves the model artifact to models/crf_tagger.joblib, and evaluates two pipelines
+saves the artifact to models/crf_tagger.joblib, and evaluates 3 production pipelines
 on the holdout evaluation set data/eval/gold_100.json:
 
   - Pipeline A: Regex + Gazetteer Only (No ML Rule-Based Baseline)
   - Pipeline B: Stage 1 Normalizer + Stage 2 CRF Tagger + Stage 3 Disambiguator
+  - Pipeline C: Stage 1 Normalizer + Stage 2 ONNX Neural Tagger + Viterbi + Stage 3 Disambiguator
 
 Prints a clean Markdown table comparing:
-  - Entity Macro-F1
-  - End-to-End Thana/District Accuracy
+  - Entity Macro-F1 (computed over active ground-truth labels support > 0)
+  - End-to-End Thana/District Accuracy (fairly canonicalizing 2018 official names)
   - Homonym Subset Accuracy
-  - Latency: p50, p95, p99 in milliseconds
+  - Latency percentiles: p50, p95, p99 in milliseconds
 """
 
 from __future__ import annotations
@@ -21,7 +22,7 @@ import json
 import os
 import sys
 import time
-from typing import Any, Dict, List, Set, Tuple
+from typing import Any, Dict, List, Optional, Set, Tuple
 import numpy as np
 from sklearn.metrics import classification_report, f1_score
 
@@ -37,76 +38,100 @@ from src.tagger_crf import (
     BIO_LABELS,
     extract_sequence_features,
 )
+from src.tagger_onnx import ONNXSequenceTagger
+
+
+def canonicalize_admin_eval_name(name: Optional[str]) -> str:
+    """Canonicalizes 2018 official spellings for fair accuracy comparison."""
+    if not name:
+        return ""
+    norm = name.strip().lower()
+    mapping = {
+        "chattagram": "chattogram",
+        "chittagong": "chattogram",
+        "comilla": "cumilla",
+        "barisal": "barishal",
+        "jessore": "jashore",
+        "bogra": "bogura",
+    }
+    return mapping.get(norm, norm)
 
 
 # -----------------------------------------------------------------------------
-# Pipeline A: Regex + Direct Gazetteer Only (No ML Baseline)
+# Pipeline A: Naive Regex + Gazetteer Baseline (No Machine Learning)
 # -----------------------------------------------------------------------------
 class RegexGazetteerBaseline:
     """
-    Rule-based baseline that tags tokens based on Stage-1 anchors and
-    naive exact gazetteer lookups without contextual sequence modeling.
+    Simulates standard legacy e-commerce parser:
+    Uses regex patterns for House/Road/Block and exact gazetteer lookups for locations.
     """
 
     def __init__(self, gazetteer: BangladeshGazetteer):
         self.gazetteer = gazetteer
-        # Index exact lowercase names
-        self.district_names: Set[str] = {
-            d.name.lower() for d in gazetteer.districts
-        }
-        self.district_names.update({
-            d.bn_name for d in gazetteer.districts if d.bn_name
-        })
+        self.district_map: Dict[str, AdminNode] = {}
+        for d in gazetteer.districts:
+            self.district_map[d.name.lower()] = d
+            if d.bn_name:
+                self.district_map[d.bn_name.lower()] = d
 
         self.upazila_map: Dict[str, AdminNode] = {}
-        for node in gazetteer.all_nodes:
-            if node.level in (AdminLevel.UPAZILA, AdminLevel.THANA):
-                self.upazila_map[node.name.lower()] = node
-                if node.bn_name:
-                    self.upazila_map[node.bn_name] = node
+        for u in gazetteer.upazilas:
+            self.upazila_map[u.name.lower()] = u
+            if u.bn_name:
+                self.upazila_map[u.bn_name.lower()] = u
 
-    def tag_address(self, norm_res: Dict[str, Any]) -> Tuple[List[str], str | None, str | None]:
-        tokens = norm_res.get("tokens", [])
-        tags = ["O"] * len(tokens)
-        predicted_thana: str | None = None
-        predicted_district: str | None = None
+    def tag_address(self, norm_res: Dict[str, Any]) -> Tuple[List[str], Optional[str], Optional[str]]:
+        tokens: List[str] = norm_res.get("tokens", [])
+        tags: List[str] = ["O"] * len(tokens)
+        predicted_thana: Optional[str] = None
+        predicted_district: Optional[str] = None
 
         i = 0
         while i < len(tokens):
             tok = tokens[i]
             tok_l = tok.lower()
 
-            # Anchor heuristics
-            if tok == "H#" and i + 1 < len(tokens):
+            if tok == "H#":
                 tags[i] = "B-HOUSE"
-                tags[i + 1] = "I-HOUSE"
-                i += 2
+                if i + 1 < len(tokens):
+                    tags[i + 1] = "I-HOUSE"
+                    i += 2
+                    continue
+                i += 1
                 continue
-            elif tok == "RD#" and i + 1 < len(tokens):
+
+            if tok == "RD#":
                 tags[i] = "B-ROAD"
-                tags[i + 1] = "I-ROAD"
-                i += 2
+                if i + 1 < len(tokens):
+                    tags[i + 1] = "I-ROAD"
+                    i += 2
+                    continue
+                i += 1
                 continue
-            elif tok in ("BLK#", "SEC#") and i + 1 < len(tokens):
+
+            if tok in ("BLK#", "SEC#"):
                 tags[i] = "B-BLOCK_SECTOR"
-                tags[i + 1] = "I-BLOCK_SECTOR"
-                i += 2
+                if i + 1 < len(tokens):
+                    tags[i + 1] = "I-BLOCK_SECTOR"
+                    i += 2
+                    continue
+                i += 1
                 continue
-            elif tok == "FL#" and i + 1 < len(tokens):
+
+            if tok == "FL#":
                 tags[i] = "B-FLOOR_FLAT"
-                tags[i + 1] = "I-FLOOR_FLAT"
-                i += 2
-                continue
-            elif tok in ("REL_NEAR", "REL_BEHIND", "REL_FRONT"):
-                tags[i] = "B-LANDMARK_REL"
+                if i + 1 < len(tokens):
+                    tags[i + 1] = "I-FLOOR_FLAT"
+                    i += 2
+                    continue
                 i += 1
                 continue
 
             # District lookup
-            if tok_l in self.district_names:
+            if tok_l in self.district_map:
                 tags[i] = "B-DISTRICT"
                 if not predicted_district:
-                    predicted_district = tok.title()
+                    predicted_district = self.district_map[tok_l].name
                 i += 1
                 continue
 
@@ -142,45 +167,30 @@ class RegexGazetteerBaseline:
 
 
 # -----------------------------------------------------------------------------
-# Pipeline B: Stage 1 + Stage 2 CRF + Stage 3 Disambiguator
+# Pipeline B & C Runner
 # -----------------------------------------------------------------------------
-class FullMLPipeline:
-    """
-    End-to-End Pipeline:
-      Raw Address -> Stage 1 Normalizer -> Stage 2 CRF Tagger -> Stage 3 Disambiguator
-    """
-
-    def __init__(
-        self,
-        crf_tagger: CRFAddressTagger,
-        gazetteer: BangladeshGazetteer,
-        matcher: PhoneticGazetteerMatcher,
-    ):
-        self.crf_tagger = crf_tagger
+class GenericPipelineRunner:
+    def __init__(self, tagger: Any, gazetteer: BangladeshGazetteer, matcher: PhoneticGazetteerMatcher):
+        self.tagger = tagger
         self.gazetteer = gazetteer
         self.matcher = matcher
 
     def process(self, raw_text: str) -> Dict[str, Any]:
-        # Stage 1: Normalizer
         norm_res = normalize_address(raw_text)
         tokens = norm_res.get("tokens", [])
 
-        # Stage 2: CRF Tagger
-        tag_res = self.crf_tagger.tag_address(norm_res)
+        tag_res = self.tagger.tag_address(norm_res)
         tags = tag_res["tags"]
         entities = tag_res["entities"]
 
-        # Collect candidate location spans from CRF entities
         candidate_spans: List[str] = []
         for loc_type in ("SUBAREA", "THANA_UPAZILA", "DISTRICT"):
             if loc_type in entities:
                 candidate_spans.extend(entities[loc_type])
 
-        # Fallback if CRF found no location tags: inspect tokens with gazetteer matcher
         if not candidate_spans:
             candidate_spans = tokens
 
-        # Stage 3: Disambiguator
         disambig_res = resolve_location_hierarchy(
             candidate_spans=candidate_spans,
             full_context_tokens=tokens,
@@ -188,9 +198,7 @@ class FullMLPipeline:
             matcher=self.matcher,
         )
 
-        resolved_node = disambig_res.get("resolved_node")
         hierarchy = disambig_res.get("hierarchy", {})
-
         pred_thana = hierarchy.get("thana") or hierarchy.get("upazila")
         pred_district = hierarchy.get("district")
 
@@ -213,20 +221,21 @@ def run_benchmark():
     gold_path = os.path.join(root_dir, "data", "eval", "gold_100.json")
     model_dir = os.path.join(root_dir, "models")
     model_path = os.path.join(model_dir, "crf_tagger.joblib")
+    onnx_path = os.path.join(model_dir, "onnx", "tagger.onnx")
 
-    print("=" * 70)
-    print("           THIKANA-ENGINE STEP 4 BENCHMARK EVALUATION")
-    print("=" * 70)
+    print("=" * 80)
+    print("           THIKANA-ENGINE PRODUCTION BENCHMARK EVALUATION")
+    print("=" * 80)
 
     # 1. Initialize gazetteer & phonetic matcher
-    print("\n[1/4] Loading BangladeshGazetteer and Phonetic Index...")
+    print("\n[1/5] Loading BangladeshGazetteer and Phonetic Index...")
     g_start = time.perf_counter()
     gz = BangladeshGazetteer()
     matcher = PhoneticGazetteerMatcher(gz)
     print(f"Loaded in {(time.perf_counter() - g_start):.2f}s")
 
     # 2. Train or Load CRF Model
-    print("\n[2/4] Training Stage-2 Linear-Chain CRF on Synthetic Dataset...")
+    print("\n[2/5] Training Stage-2 Linear-Chain CRF on Synthetic Dataset...")
     if not os.path.exists(train_path):
         raise FileNotFoundError(f"Training dataset not found at: {train_path}")
 
@@ -236,142 +245,162 @@ def run_benchmark():
     X_train = [item["tokens"] for item in train_data]
     y_train = [item["tags"] for item in train_data]
 
-    crf = CRFAddressTagger(
-        c1=0.1, c2=0.1, max_iterations=100, matcher=matcher
-    )
+    crf = CRFAddressTagger(c1=0.1, c2=0.1, max_iterations=100, matcher=matcher)
     t_start = time.perf_counter()
     crf.fit(X_train, y_train)
     train_time = time.perf_counter() - t_start
     print(f"Trained in {train_time:.2f}s")
 
-    print(f"Saving model artifact to: {model_path}...")
+    print(f"Saving CRF model artifact to: {model_path}...")
     crf.save(model_path)
 
-    # 3. Load Gold 100 Evaluation Dataset
-    print("\n[3/4] Loading Gold 100 Evaluation Dataset...")
+    # 3. Load ONNX Sequence Tagger
+    print("\n[3/5] Initializing Stage-2 ONNX Sequence Tagger with Viterbi Decoder...")
+    onnx_tagger = ONNXSequenceTagger(model_path=onnx_path, matcher=matcher, intra_op_num_threads=2)
+
+    # 4. Load Gold 100 Evaluation Dataset
+    print("\n[4/5] Loading Gold 100 Evaluation Dataset...")
     with open(gold_path, "r", encoding="utf-8") as f:
         gold_data = json.load(f)
     print(f"Loaded {len(gold_data)} gold records.")
 
-    # 4. Evaluate Pipeline A: Regex + Gazetteer
-    print("\n[4/4] Benchmarking Pipelines on Gold Evaluation Set...")
+    # 5. Evaluate Pipelines
+    print("\n[5/5] Benchmarking Pipelines on Gold Evaluation Set...")
     baseline_a = RegexGazetteerBaseline(gz)
-    pipeline_b = FullMLPipeline(crf, gz, matcher)
+    pipeline_b = GenericPipelineRunner(crf, gz, matcher)
+    pipeline_c = GenericPipelineRunner(onnx_tagger, gz, matcher)
 
-    # All evaluation labels (excluding 'O')
-    eval_labels = [lbl for lbl in BIO_LABELS if lbl != "O"]
-
-    # --- PIPELINE A BENCHMARK ---
-    latencies_a: List[float] = []
+    # Ground truth tags aggregation
     y_true_all: List[str] = []
-    y_pred_a_all: List[str] = []
-    correct_e2e_a = 0
-    correct_homonym_a = 0
-    homonym_total = 0
-
     for item in gold_data:
-        raw_text = item["raw_text"]
-        true_tags = item["tags"]
-        exp_thana = item["expected_thana"].strip().lower()
-        exp_dist = item["expected_district"].strip().lower()
-        is_homonym = item["is_homonym_test"]
-        if is_homonym:
-            homonym_total += 1
+        y_true_all.extend(item["tags"])
 
-        t0 = time.perf_counter()
-        norm = normalize_address(raw_text)
-        pred_tags_a, p_thana, p_dist = baseline_a.tag_address(norm)
-        lat_ms = (time.perf_counter() - t0) * 1000.0
-        latencies_a.append(lat_ms)
+    # Active labels in ground truth (excluding 'O' and 0-support classes)
+    active_eval_labels = sorted(list(set(y_true_all) - {"O"}))
 
-        # Pad/align tag lists if lengths differ
-        min_len = min(len(true_tags), len(pred_tags_a))
-        y_true_all.extend(true_tags[:min_len])
-        y_pred_a_all.extend(pred_tags_a[:min_len])
+    def evaluate_pipeline(name: str, runner_func) -> Dict[str, Any]:
+        latencies: List[float] = []
+        y_pred_all: List[str] = []
+        correct_e2e = 0
+        correct_homonym = 0
+        homonym_total = 0
 
-        match_thana = (p_thana and p_thana.strip().lower() == exp_thana)
-        match_dist = (p_dist and p_dist.strip().lower() == exp_dist)
-        is_e2e_correct = match_thana and match_dist
-        if is_e2e_correct:
-            correct_e2e_a += 1
+        for item in gold_data:
+            raw_text = item["raw_text"]
+            true_tags = item["tags"]
+            exp_thana = item["expected_thana"]
+            exp_dist = item["expected_district"]
+            is_homonym = item["is_homonym_test"]
             if is_homonym:
-                correct_homonym_a += 1
+                homonym_total += 1
 
-    macro_f1_a = f1_score(
-        y_true_all, y_pred_a_all, labels=eval_labels, average="macro", zero_division=0
+            t0 = time.perf_counter()
+            pred_tags, p_thana, p_dist = runner_func(raw_text)
+            lat_ms = (time.perf_counter() - t0) * 1000.0
+            latencies.append(lat_ms)
+
+            min_len = min(len(true_tags), len(pred_tags))
+            y_pred_all.extend(pred_tags[:min_len])
+
+            match_thana = (
+                canonicalize_admin_eval_name(p_thana) == canonicalize_admin_eval_name(exp_thana)
+            )
+            match_dist = (
+                canonicalize_admin_eval_name(p_dist) == canonicalize_admin_eval_name(exp_dist)
+            )
+            if match_thana and match_dist:
+                correct_e2e += 1
+                if is_homonym:
+                    correct_homonym += 1
+
+        macro_f1 = f1_score(
+            y_true_all[: len(y_pred_all)],
+            y_pred_all,
+            labels=active_eval_labels,
+            average="macro",
+            zero_division=0,
+        )
+        e2e_acc = (correct_e2e / len(gold_data)) * 100.0
+        homonym_acc = (correct_homonym / homonym_total) * 100.0 if homonym_total > 0 else 0.0
+
+        p50 = float(np.percentile(latencies, 50))
+        p95 = float(np.percentile(latencies, 95))
+        p99 = float(np.percentile(latencies, 99))
+
+        return {
+            "name": name,
+            "macro_f1": macro_f1 * 100.0,
+            "e2e_acc": e2e_acc,
+            "correct_e2e": correct_e2e,
+            "homonym_acc": homonym_acc,
+            "correct_homonym": correct_homonym,
+            "homonym_total": homonym_total,
+            "p50": p50,
+            "p95": p95,
+            "p99": p99,
+            "y_pred": y_pred_all,
+        }
+
+    # Run Benchmark on all 3 Pipelines
+    res_a = evaluate_pipeline(
+        "Pipeline A (Regex+Gazetteer)",
+        lambda txt: baseline_a.tag_address(normalize_address(txt)),
     )
-    e2e_acc_a = (correct_e2e_a / len(gold_data)) * 100.0
-    homonym_acc_a = (correct_homonym_a / homonym_total) * 100.0 if homonym_total > 0 else 0.0
-
-    p50_a = float(np.percentile(latencies_a, 50))
-    p95_a = float(np.percentile(latencies_a, 95))
-    p99_a = float(np.percentile(latencies_a, 99))
-
-    # --- PIPELINE B BENCHMARK ---
-    latencies_b: List[float] = []
-    y_pred_b_all: List[str] = []
-    correct_e2e_b = 0
-    correct_homonym_b = 0
-
-    for item in gold_data:
-        raw_text = item["raw_text"]
-        true_tags = item["tags"]
-        exp_thana = item["expected_thana"].strip().lower()
-        exp_dist = item["expected_district"].strip().lower()
-        is_homonym = item["is_homonym_test"]
-
-        t0 = time.perf_counter()
-        res_b = pipeline_b.process(raw_text)
-        lat_ms = (time.perf_counter() - t0) * 1000.0
-        latencies_b.append(lat_ms)
-
-        pred_tags_b = res_b["tags"]
-        min_len = min(len(true_tags), len(pred_tags_b))
-        y_pred_b_all.extend(pred_tags_b[:min_len])
-
-        p_thana = res_b["predicted_thana"]
-        p_dist = res_b["predicted_district"]
-
-        # Disambiguator accuracy comparison (case-insensitive)
-        match_thana = (p_thana and p_thana.strip().lower() == exp_thana)
-        match_dist = (p_dist and p_dist.strip().lower() == exp_dist)
-        is_e2e_correct = match_thana and match_dist
-        if is_e2e_correct:
-            correct_e2e_b += 1
-            if is_homonym:
-                correct_homonym_b += 1
-
-    macro_f1_b = f1_score(
-        y_true_all, y_pred_b_all, labels=eval_labels, average="macro", zero_division=0
+    res_b = evaluate_pipeline(
+        "Pipeline B (CRF+Disambiguator)",
+        lambda txt: (
+            pipeline_b.process(txt)["tags"],
+            pipeline_b.process(txt)["predicted_thana"],
+            pipeline_b.process(txt)["predicted_district"],
+        ),
     )
-    e2e_acc_b = (correct_e2e_b / len(gold_data)) * 100.0
-    homonym_acc_b = (correct_homonym_b / homonym_total) * 100.0 if homonym_total > 0 else 0.0
-
-    p50_b = float(np.percentile(latencies_b, 50))
-    p95_b = float(np.percentile(latencies_b, 95))
-    p99_b = float(np.percentile(latencies_b, 99))
+    res_c = evaluate_pipeline(
+        "Pipeline C (ONNX+Viterbi+Disambiguator)",
+        lambda txt: (
+            pipeline_c.process(txt)["tags"],
+            pipeline_c.process(txt)["predicted_thana"],
+            pipeline_c.process(txt)["predicted_district"],
+        ),
+    )
 
     # --- RESULTS TABLE ---
-    print("\n" + "=" * 70)
+    print("\n" + "=" * 80)
     print("                     EVALUATION REPORT")
-    print("=" * 70)
-    print(f"Total Test Addresses: {len(gold_data)} | Homonym Subset: {homonym_total}\n")
+    print("=" * 80)
+    print(f"Total Test Addresses: {len(gold_data)} | Homonym Subset: {res_b['homonym_total']}\n")
 
-    markdown_table = f"""| Metric | Pipeline A: Regex + Gazetteer (No ML) | Pipeline B: Stage 1 + CRF + Disambiguator | Delta / Improvement |
+    markdown_table = f"""| Metric | Pipeline A: Regex + Gazetteer (No ML) | Pipeline B: Stage 1 + CRF + Disambiguator | Pipeline C: Stage 1 + ONNX + Viterbi |
 | :--- | :---: | :---: | :---: |
-| **Entity Macro-F1** | `{macro_f1_a * 100:.2f}%` | `{macro_f1_b * 100:.2f}%` | `{macro_f1_b * 100 - macro_f1_a * 100:+.2f}%` |
-| **End-to-End Thana/District Accuracy** | `{e2e_acc_a:.1f}%` ({correct_e2e_a}/{len(gold_data)}) | `{e2e_acc_b:.1f}%` ({correct_e2e_b}/{len(gold_data)}) | `{e2e_acc_b - e2e_acc_a:+.1f}%` |
-| **Homonym Subset Accuracy** | `{homonym_acc_a:.1f}%` ({correct_homonym_a}/{homonym_total}) | `{homonym_acc_b:.1f}%` ({correct_homonym_b}/{homonym_total}) | `{homonym_acc_b - homonym_acc_a:+.1f}%` |
-| **CPU Latency (p50)** | `{p50_a:.3f} ms` | `{p50_b:.3f} ms` | `{(p50_b - p50_a):+.3f} ms` |
-| **CPU Latency (p95)** | `{p95_a:.3f} ms` | `{p95_b:.3f} ms` | `{(p95_b - p95_a):+.3f} ms` |
-| **CPU Latency (p99)** | `{p99_a:.3f} ms` | `{p99_b:.3f} ms` | `{(p99_b - p99_a):+.3f} ms` |"""
+| **Entity Macro-F1** | `{res_a['macro_f1']:.2f}%` | **`{res_b['macro_f1']:.2f}%`** | `{res_c['macro_f1']:.2f}%` |
+| **End-to-End Thana/District Accuracy** | `{res_a['e2e_acc']:.1f}%` ({res_a['correct_e2e']}/{len(gold_data)}) | **`{res_b['e2e_acc']:.1f}%`** ({res_b['correct_e2e']}/{len(gold_data)}) | `{res_c['e2e_acc']:.1f}%` ({res_c['correct_e2e']}/{len(gold_data)}) |
+| **Homonym Subset Accuracy** | `{res_a['homonym_acc']:.1f}%` ({res_a['correct_homonym']}/{res_a['homonym_total']}) | **`{res_b['homonym_acc']:.1f}%`** ({res_b['correct_homonym']}/{res_b['homonym_total']}) | `{res_c['homonym_acc']:.1f}%` ({res_c['correct_homonym']}/{res_c['homonym_total']}) |
+| **CPU Latency (p50)** | `{res_a['p50']:.3f} ms` | `{res_b['p50']:.3f} ms` | `{res_c['p50']:.3f} ms` |
+| **CPU Latency (p95)** | `{res_a['p95']:.3f} ms` | `{res_b['p95']:.3f} ms` | `{res_c['p95']:.3f} ms` |
+| **CPU Latency (p99)** | `{res_a['p99']:.3f} ms` | `{res_b['p99']:.3f} ms` | `{res_c['p99']:.3f} ms` |"""
 
     print(markdown_table)
-    print("\n" + "=" * 70)
+    print("\n" + "=" * 80)
 
     # Detailed per-entity classification report for Pipeline B
-    print("\nDetailed Entity Tag Classification Report (Pipeline B):")
-    print(classification_report(y_true_all, y_pred_b_all, labels=eval_labels, zero_division=0))
+    print("\nDetailed Entity Tag Classification Report (Pipeline B - CRF):")
+    print(
+        classification_report(
+            y_true_all[: len(res_b["y_pred"])],
+            res_b["y_pred"],
+            labels=active_eval_labels,
+            zero_division=0,
+        )
+    )
+
+    print("\nDetailed Entity Tag Classification Report (Pipeline C - ONNX):")
+    print(
+        classification_report(
+            y_true_all[: len(res_c["y_pred"])],
+            res_c["y_pred"],
+            labels=active_eval_labels,
+            zero_division=0,
+        )
+    )
 
 
 if __name__ == "__main__":

@@ -68,10 +68,10 @@ _ANCHOR_TERMS = (
     r"road|rd|rasta|goli|lane|avenue|ave|street|st|"
     r"house|h#|basha|basa|bari|holding|"
     r"sector|sec|block|blk|"
-    r"lift|floor|flr|tola|level|"
+    r"lift|floor|flr|tola|level|lvl|flat|apt|apartment|unit|"
     r"রোড|রাস্তা|গলি|সড়ক|সড়ক|লেন|"
     r"বাসা|বাড়ি|বাড়ি|হোল্ডিং|"
-    r"সেক্টর|ব্লক|লিফটের|লিফট|তলা|ফ্লোর"
+    r"সেক্টর|ব্লক|লিফটের|লিফট|তলা|ফ্লোর|লেভেল|ফ্ল্যাট"
 )
 
 # Anchor followed by number word (e.g. "Road char", "Rd dui", "রোড চার")
@@ -151,7 +151,7 @@ ANCHOR_SPECS: List[Tuple[str, Pattern[str], str]] = [
     (
         "FL#",
         re.compile(
-            r"(?i)(?<![^\s,./\-#:])(?:tola|flr\.?|floor|lift|level|তলা|লিফটের|লিফট|ফ্লোর|লেভেল)(?:\s*(?:no\.?|নং|number|#))?(?![^\s,./\-#:])"
+            r"(?i)(?<![^\s,./\-#:])(?:tola|flr\.?|floor|lift|level|lvl|flat|apt\.?|apartment|unit|তলা|লিফটের|লিফট|ফ্লোর|লেভেল|ফ্ল্যাট)(?:\s*(?:no\.?|নং|number|#))?(?![^\s,./\-#:])"
         ),
         "FLOOR",
     ),

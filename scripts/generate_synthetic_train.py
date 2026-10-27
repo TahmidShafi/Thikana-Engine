@@ -49,8 +49,8 @@ ROAD_PREFIXES_EN = ["Road", "RD#", "Rasta", "Lane", "Goli", "Avenue", "Street", 
 ROAD_PREFIXES_BN = ["রোড নং", "রাস্তা", "সড়ক", "গলি", "লেন"]
 BLOCK_PREFIXES_EN = ["Block", "BLK#", "Sector", "SEC#"]
 BLOCK_PREFIXES_BN = ["ব্লক", "সেক্টর"]
-FLOOR_PREFIXES_EN = ["Flat", "Level", "Floor", "tola", "lift"]
-FLOOR_PREFIXES_BN = ["ফ্ল্যাট", "তলা", "লেভেল", "ফ্লোর"]
+FLOOR_PREFIXES_EN = ["Flat", "flat", "Level", "level", "lvl", "Floor", "tola", "lift", "Apt", "apt", "Apartment", "Unit"]
+FLOOR_PREFIXES_BN = ["ফ্ল্যাট", "তলা", "লেভেল", "ফ্লোর", "লিফট"]
 
 RURAL_VILLAGE_PREFIXES_EN = ["Village:", "Gram:", "Vill:", "Gram"]
 RURAL_VILLAGE_PREFIXES_BN = ["গ্রাম:", "গ্রাম"]
@@ -72,15 +72,29 @@ CARE_OF_NAMES_BN = [
 ]
 
 LANDMARKS_EN = [
+    # General & Commercial POIs
     "Bismillah Pharmacy", "Sikder Medical", "Agrani Bank", "Pubali Bank",
     "Rupali Bank", "Janata Bank", "Central Jame Masjid", "Railway Station",
     "Govt High School", "Girls College", "Bazar Mosque", "City Super Market",
-    "Modern Diagnostic Center", "Al Madina Bakery", "Bismillah Auto Rice Mill"
+    "Modern Diagnostic Center", "Al Madina Bakery", "Bismillah Auto Rice Mill",
+    # Commercial & Corporate District-Preceding POIs (Distractor Training)
+    "Uttara Bank Limited", "Dhaka Bank Limited", "National Bank Ltd", "City Bank Plaza",
+    "Sonali Bank Branch", "Pubali Bank Tower", "Islami Bank Hospital", "Brac Bank Centre",
+    "Jamuna Future Park", "Bashundhara City Complex", "Navana Tower", "Concord Plaza",
+    "Baitul Mukarram Market", "Popular Diagnostic Centre", "Square Hospital", "Labaid Clinic",
+    "Green Road Clinic", "Eden College", "Notre Dame College", "Dhaka Medical College",
+    "Comilla Sweets", "Noakhali Bhaban", "Chittagong Store", "Sylhet Mart",
+    "Bogra Doi Ghor", "Barisal Sweet Meat", "Khulna Complex", "Rajshahi Silk Center",
+    "New Market", "Kacha Bazar", "Town Hall", "Police Station", "Bus Terminal"
 ]
 LANDMARKS_BN = [
-    "অগ্রণী ব্যাংক", "পূবালী ব্যাংক", "রূপালী ব্যাংক", "জনতা ব্যাংক",
+    "অগ্রণী ব্যাংক", "পূবালী ব্যাংক", "রূপালী ব্যাংক", "জনতা ব্যাংক", "ইসলামী ব্যাংক",
+    "ঢাকা ব্যাংক লিমিটেড", "উত্তরা ব্যাংক লিমিটেড", "সোনালী ব্যাংক", "সিটি ব্যাংক",
     "কেন্দ্রীয় জামে মসজিদ", "রেলওয়ে স্টেশন", "সরকারি উচ্চ বিদ্যালয়",
-    "মহিলা কলেজ", "সিটি সুপার মার্কেট", "আল মদিনা বেকারি"
+    "মহিলা কলেজ", "সিটি সুপার মার্কেট", "আল মদিনা বেকারি", "স্কয়ার হাসপাতাল",
+    "পপুলার ডায়াগনস্টিক", "নভানা টাওয়ার", "কনকর্ড প্লাজা", "যমুনা ফিউচার পার্ক",
+    "বসুন্ধরা সিটি", "বায়তুল মোকাররম", "কাঁচা বাজার", "বাস টার্মিনাল",
+    "কুমিল্লা মিষ্টান্ন ভাণ্ডার", "নোয়াখালী ভবন", "চট্টগ্রাম প্লাজা"
 ]
 
 LANDMARK_RELS_EN = ["near", "opposite", "behind", "beside", "in front of"]
@@ -163,7 +177,7 @@ def build_synthetic_dataset(
 
         elif template_choice == 1:
             # Template 2: Flat + House + Road + Block + Upazila + District (English)
-            flt_num = f"{random.choice(['Flat', 'Level', 'Floor'])} {random.choice(['2A', '3B', '4C', '5', '3', '4'])}"
+            flt_num = f"{random.choice(FLOOR_PREFIXES_EN)} {random.choice(['2A', '3B', '4C', '5', '3', '4', '1A', '6B', '2', '1', '7D'])}"
             h_num = f"House {random.randint(1, 99)}"
             r_num = f"Road {random.randint(1, 25)}"
             blk = f"{random.choice(['Block', 'Sector'])} {random.choice(['A', 'B', 'C', 'D', '1', '2', '3'])}"
@@ -218,14 +232,16 @@ def build_synthetic_dataset(
             ])
 
         elif template_choice == 4:
-            # Template 5: Bangla Script Urban: বাসা + রোড + ব্লক + উপজেলা + জেলা
+            # Template 5: Bangla Script Urban: ফ্ল্যাট/তলা + বাসা + রোড + ব্লক + উপজেলা + জেলা
+            flt_bn = f"{random.choice(FLOOR_PREFIXES_BN)} {random.choice(['৩এ', '৪বি', '২', '৩', '৪', '৫'])}"
             h_bn = f"বাসা নং {random.randint(1, 99)}"
             r_bn = f"রোড নং {random.randint(1, 20)}"
             b_bn = f"ব্লক {random.choice(['এ', 'বি', 'সি', 'ডি', '১', '২'])}"
             upz_bn = upz.bn_name or upz.name
             dist_bn = dist.bn_name or dist.name
-            raw_parts = [h_bn, r_bn, b_bn, upz_bn, dist_bn]
+            raw_parts = [flt_bn, h_bn, r_bn, b_bn, upz_bn, dist_bn]
             token_annotations = [
+                (flt_bn, "FLOOR_FLAT"),
                 (h_bn, "HOUSE"),
                 (r_bn, "ROAD"),
                 (b_bn, "BLOCK_SECTOR"),

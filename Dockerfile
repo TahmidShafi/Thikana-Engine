@@ -3,7 +3,7 @@
 # Optimized for Docker, Hugging Face Spaces (Docker Space), and Cloud Run.
 # =============================================================================
 
-FROM python:3.11-slim
+FROM python:3.12-slim
 
 # Set environment flags
 ENV PYTHONUNBUFFERED=1 \
@@ -36,6 +36,10 @@ USER user
 
 # Warm up gazetteer and model during build/startup
 RUN python -c "from src.pipeline import ThikanaPipeline; p = ThikanaPipeline(); p.parse('House 1, Road 1, Dhanmondi, Dhaka')"
+
+# Healthcheck to ensure container is responsive
+HEALTHCHECK --interval=30s --timeout=5s --start-period=5s --retries=3 \
+    CMD curl -f http://localhost:${PORT:-7860}/health || exit 1
 
 # Expose default port (7860 for Hugging Face Spaces, 8000 for standard Docker)
 EXPOSE 7860 8000
