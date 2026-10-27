@@ -120,10 +120,12 @@ def test_homonym_mirpur(gazetteer: BangladeshGazetteer):
 
     # Check division parents
     dhaka_mirpur = districts["Dhaka"]
+    assert dhaka_mirpur.division is not None
     assert dhaka_mirpur.division.name == "Dhaka"
     assert dhaka_mirpur.level == AdminLevel.THANA
 
     kushtia_mirpur = districts["Kushtia"]
+    assert kushtia_mirpur.division is not None
     assert kushtia_mirpur.division.name == "Khulna"
     assert kushtia_mirpur.level == AdminLevel.UPAZILA
 
@@ -143,11 +145,13 @@ def test_homonym_mohammadpur(gazetteer: BangladeshGazetteer):
     # Verify Dhaka match
     dhaka_moh = [m for m in results if m.district and m.district.name == "Dhaka"][0]
     assert dhaka_moh.level == AdminLevel.THANA
+    assert dhaka_moh.division is not None
     assert dhaka_moh.division.name == "Dhaka"
 
     # Verify Magura match
     magura_moh = [m for m in results if m.district and m.district.name == "Magura" and m.level == AdminLevel.UPAZILA][0]
     assert magura_moh.level == AdminLevel.UPAZILA
+    assert magura_moh.division is not None
     assert magura_moh.division.name == "Khulna"
 
     # Verify Noakhali matches
@@ -155,6 +159,7 @@ def test_homonym_mohammadpur(gazetteer: BangladeshGazetteer):
     assert len(noakhali_mohs) >= 1
     for nm in noakhali_mohs:
         assert nm.level == AdminLevel.UNION
+        assert nm.division is not None
         assert nm.division.name in ("Chattogram", "Chattagram")
 
 
@@ -182,6 +187,7 @@ def test_bangla_search_dhanmondi(gazetteer: BangladeshGazetteer):
     assert len(results) == 1
     dhan = results[0]
     assert dhan.name == "Dhanmondi"
+    assert dhan.district is not None
     assert dhan.district.name == "Dhaka"
 
 
@@ -217,6 +223,7 @@ def test_dhaka_metro_seeds(gazetteer: BangladeshGazetteer):
         matches = gazetteer.find_by_exact_name(sub)
         assert len(matches) == 1, f"Expected subarea {sub} not found"
         assert matches[0].level == AdminLevel.SUBAREA
+        assert matches[0].parent is not None
         assert matches[0].parent.name == "Mirpur"
 
 
@@ -233,6 +240,7 @@ def test_chattogram_metro_seeds(gazetteer: BangladeshGazetteer):
         ctg_match = [m for m in matches if m.district and m.district.name == "Chattogram"]
         assert len(ctg_match) == 1, f"Expected Chattogram thana {thana_name} not found"
         assert ctg_match[0].level == AdminLevel.THANA
+        assert ctg_match[0].division is not None
         assert ctg_match[0].division.name in ("Chattogram", "Chattagram")
 
 
@@ -246,6 +254,7 @@ def test_sylhet_metro_seeds(gazetteer: BangladeshGazetteer):
         syl_match = [m for m in matches if m.district and m.district.name == "Sylhet"]
         assert len(syl_match) == 1, f"Expected Sylhet thana {thana_name} not found"
         assert syl_match[0].level == AdminLevel.THANA
+        assert syl_match[0].division is not None
         assert syl_match[0].division.name == "Sylhet"
 
 
@@ -312,6 +321,7 @@ def test_node_full_names_and_summary_dict(gazetteer: BangladeshGazetteer):
 
 def test_pydantic_model_dump_without_recursion(gazetteer: BangladeshGazetteer):
     dhaka_dist = gazetteer.get_district("Dhaka")
+    assert dhaka_dist is not None
     dump = dhaka_dist.model_dump()
     assert dump["name"] == "Dhaka"
     assert "parent" not in dump or dump["parent"] is None
