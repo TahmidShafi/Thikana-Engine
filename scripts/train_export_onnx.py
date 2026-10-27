@@ -167,7 +167,7 @@ def train_and_export(
 
     torch.onnx.export(
         model,
-        dummy_input,
+        (dummy_input,),
         str(output_path),
         export_params=True,
         opset_version=17,
