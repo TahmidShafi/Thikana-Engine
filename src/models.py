@@ -190,3 +190,67 @@ class AdminNode(BaseModel):
             "url": self.url,
             "children_count": len(self.children),
         }
+
+
+# -----------------------------------------------------------------------------
+# Courier Routing & Pipeline Response Data Models
+# -----------------------------------------------------------------------------
+
+class GeocodeInfo(BaseModel):
+    """
+    Truthful geographic coordinate resolution with explicit precision level.
+    """
+    lat: Optional[float] = None
+    lon: Optional[float] = None
+    precision: str = "UNKNOWN"  # "SUBAREA_CENTROID", "DISTRICT_CENTROID", or "UNKNOWN"
+    source_node: Optional[str] = None
+
+
+class PathaoRouting(BaseModel):
+    """Pathao courier merchant routing codes."""
+    city_id: Optional[int] = None
+    zone_id: Optional[int] = None
+    area_id: Optional[int] = None
+    city_name: Optional[str] = None
+    zone_name: Optional[str] = None
+    area_name: Optional[str] = None
+
+
+class SteadfastRouting(BaseModel):
+    """Steadfast courier delivery hub code."""
+    hub_code: Optional[str] = None
+    hub_name: Optional[str] = None
+
+
+class RedxRouting(BaseModel):
+    """RedX courier delivery area ID."""
+    delivery_area_id: Optional[int] = None
+    area_name: Optional[str] = None
+
+
+class CourierRouting(BaseModel):
+    """Multi-courier hub mapping payload."""
+    pathao: PathaoRouting = Field(default_factory=PathaoRouting)
+    steadfast: SteadfastRouting = Field(default_factory=SteadfastRouting)
+    redx: RedxRouting = Field(default_factory=RedxRouting)
+
+
+class AddressParseResponse(BaseModel):
+    """
+    Unified end-to-end address parse response from ThikanaPipeline.
+    """
+    raw_address: str
+    normalized_address: str
+    tokens: List[str]
+    tags: List[str]
+    entities: Dict[str, List[str]]
+    hierarchy: Dict[str, str]
+    hierarchy_bn: Dict[str, str]
+    resolved_node_id: Optional[str] = None
+    resolved_level: Optional[str] = None
+    confidence: float
+    geocode: GeocodeInfo = Field(default_factory=GeocodeInfo)
+    courier_routing: CourierRouting = Field(default_factory=CourierRouting)
+    backend: str
+    latency_ms: float
+

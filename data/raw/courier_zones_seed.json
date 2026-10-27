@@ -1,0 +1,248 @@
+{
+  "cities": {
+    "dhaka": {"city_id": 1, "name": "Dhaka"},
+    "chattogram": {"city_id": 2, "name": "Chattogram"},
+    "sylhet": {"city_id": 3, "name": "Sylhet"},
+    "rajshahi": {"city_id": 4, "name": "Rajshahi"},
+    "khulna": {"city_id": 5, "name": "Khulna"},
+    "barishal": {"city_id": 6, "name": "Barishal"},
+    "rangpur": {"city_id": 7, "name": "Rangpur"},
+    "mymensingh": {"city_id": 8, "name": "Mymensingh"},
+    "noakhali": {"city_id": 9, "name": "Noakhali"},
+    "kushtia": {"city_id": 10, "name": "Kushtia"},
+    "comilla": {"city_id": 11, "name": "Cumilla"},
+    "bogura": {"city_id": 12, "name": "Bogura"},
+    "gazipur": {"city_id": 13, "name": "Gazipur"}
+  },
+  "district_fallbacks": {
+    "dhaka": {
+      "pathao": {"city_id": 1, "zone_id": 100, "city_name": "Dhaka", "zone_name": "Dhaka Sadar"},
+      "steadfast": {"hub_code": "DHK-SDR", "hub_name": "Dhaka Sadar Hub"},
+      "redx": {"delivery_area_id": 1000, "area_name": "Dhaka Sadar"}
+    },
+    "chattogram": {
+      "pathao": {"city_id": 2, "zone_id": 200, "city_name": "Chattogram", "zone_name": "Chattogram Sadar"},
+      "steadfast": {"hub_code": "CTG-SDR", "hub_name": "Chattogram Sadar Hub"},
+      "redx": {"delivery_area_id": 2000, "area_name": "Chattogram Sadar"}
+    },
+    "sylhet": {
+      "pathao": {"city_id": 3, "zone_id": 300, "city_name": "Sylhet", "zone_name": "Sylhet Sadar"},
+      "steadfast": {"hub_code": "SYL-SDR", "hub_name": "Sylhet Sadar Hub"},
+      "redx": {"delivery_area_id": 3000, "area_name": "Sylhet Sadar"}
+    },
+    "rajshahi": {
+      "pathao": {"city_id": 4, "zone_id": 400, "city_name": "Rajshahi", "zone_name": "Rajshahi Sadar"},
+      "steadfast": {"hub_code": "RAJ-SDR", "hub_name": "Rajshahi Sadar Hub"},
+      "redx": {"delivery_area_id": 4000, "area_name": "Rajshahi Sadar"}
+    },
+    "khulna": {
+      "pathao": {"city_id": 5, "zone_id": 500, "city_name": "Khulna", "zone_name": "Khulna Sadar"},
+      "steadfast": {"hub_code": "KHU-SDR", "hub_name": "Khulna Sadar Hub"},
+      "redx": {"delivery_area_id": 5000, "area_name": "Khulna Sadar"}
+    },
+    "noakhali": {
+      "pathao": {"city_id": 9, "zone_id": 900, "city_name": "Noakhali", "zone_name": "Noakhali Sadar"},
+      "steadfast": {"hub_code": "NOA-SDR", "hub_name": "Noakhali Sadar Hub"},
+      "redx": {"delivery_area_id": 9000, "area_name": "Noakhali Sadar"}
+    },
+    "kushtia": {
+      "pathao": {"city_id": 10, "zone_id": 1000, "city_name": "Kushtia", "zone_name": "Kushtia Sadar"},
+      "steadfast": {"hub_code": "KUS-SDR", "hub_name": "Kushtia Sadar Hub"},
+      "redx": {"delivery_area_id": 10000, "area_name": "Kushtia Sadar"}
+    },
+    "comilla": {
+      "pathao": {"city_id": 11, "zone_id": 1100, "city_name": "Cumilla", "zone_name": "Cumilla Sadar"},
+      "steadfast": {"hub_code": "CUM-SDR", "hub_name": "Cumilla Sadar Hub"},
+      "redx": {"delivery_area_id": 11000, "area_name": "Cumilla Sadar"}
+    },
+    "bogura": {
+      "pathao": {"city_id": 12, "zone_id": 1200, "city_name": "Bogura", "zone_name": "Bogura Sadar"},
+      "steadfast": {"hub_code": "BOG-SDR", "hub_name": "Bogura Sadar Hub"},
+      "redx": {"delivery_area_id": 12000, "area_name": "Bogura Sadar"}
+    },
+    "gazipur": {
+      "pathao": {"city_id": 13, "zone_id": 1300, "city_name": "Gazipur", "zone_name": "Gazipur Sadar"},
+      "steadfast": {"hub_code": "GAZ-SDR", "hub_name": "Gazipur Sadar Hub"},
+      "redx": {"delivery_area_id": 13000, "area_name": "Gazipur Sadar"}
+    }
+  },
+  "thanas": {
+    "dhaka:mirpur": {
+      "pathao": {"city_id": 1, "zone_id": 101, "city_name": "Dhaka", "zone_name": "Mirpur"},
+      "steadfast": {"hub_code": "DHK-MIR", "hub_name": "Mirpur Hub"},
+      "redx": {"delivery_area_id": 1001, "area_name": "Mirpur"}
+    },
+    "dhaka:mohammadpur": {
+      "pathao": {"city_id": 1, "zone_id": 102, "city_name": "Dhaka", "zone_name": "Mohammadpur"},
+      "steadfast": {"hub_code": "DHK-MOH", "hub_name": "Mohammadpur Hub"},
+      "redx": {"delivery_area_id": 1002, "area_name": "Mohammadpur"}
+    },
+    "dhaka:dhanmondi": {
+      "pathao": {"city_id": 1, "zone_id": 103, "city_name": "Dhaka", "zone_name": "Dhanmondi"},
+      "steadfast": {"hub_code": "DHK-DHN", "hub_name": "Dhanmondi Hub"},
+      "redx": {"delivery_area_id": 1003, "area_name": "Dhanmondi"}
+    },
+    "dhaka:gulshan": {
+      "pathao": {"city_id": 1, "zone_id": 104, "city_name": "Dhaka", "zone_name": "Gulshan"},
+      "steadfast": {"hub_code": "DHK-GLS", "hub_name": "Gulshan Hub"},
+      "redx": {"delivery_area_id": 1004, "area_name": "Gulshan"}
+    },
+    "dhaka:banani": {
+      "pathao": {"city_id": 1, "zone_id": 105, "city_name": "Dhaka", "zone_name": "Banani"},
+      "steadfast": {"hub_code": "DHK-BAN", "hub_name": "Banani Hub"},
+      "redx": {"delivery_area_id": 1005, "area_name": "Banani"}
+    },
+    "dhaka:uttara": {
+      "pathao": {"city_id": 1, "zone_id": 106, "city_name": "Dhaka", "zone_name": "Uttara"},
+      "steadfast": {"hub_code": "DHK-UTT", "hub_name": "Uttara Hub"},
+      "redx": {"delivery_area_id": 1006, "area_name": "Uttara"}
+    },
+    "dhaka:badda": {
+      "pathao": {"city_id": 1, "zone_id": 107, "city_name": "Dhaka", "zone_name": "Badda"},
+      "steadfast": {"hub_code": "DHK-BAD", "hub_name": "Badda Hub"},
+      "redx": {"delivery_area_id": 1007, "area_name": "Badda"}
+    },
+    "dhaka:tejgaon": {
+      "pathao": {"city_id": 1, "zone_id": 108, "city_name": "Dhaka", "zone_name": "Tejgaon"},
+      "steadfast": {"hub_code": "DHK-TEJ", "hub_name": "Tejgaon Hub"},
+      "redx": {"delivery_area_id": 1008, "area_name": "Tejgaon"}
+    },
+    "dhaka:motijheel": {
+      "pathao": {"city_id": 1, "zone_id": 109, "city_name": "Dhaka", "zone_name": "Motijheel"},
+      "steadfast": {"hub_code": "DHK-MOT", "hub_name": "Motijheel Hub"},
+      "redx": {"delivery_area_id": 1009, "area_name": "Motijheel"}
+    },
+    "dhaka:paltan": {
+      "pathao": {"city_id": 1, "zone_id": 110, "city_name": "Dhaka", "zone_name": "Paltan"},
+      "steadfast": {"hub_code": "DHK-PLT", "hub_name": "Paltan Hub"},
+      "redx": {"delivery_area_id": 1010, "area_name": "Paltan"}
+    },
+    "dhaka:vatara": {
+      "pathao": {"city_id": 1, "zone_id": 111, "city_name": "Dhaka", "zone_name": "Vatara"},
+      "steadfast": {"hub_code": "DHK-VAT", "hub_name": "Vatara Hub"},
+      "redx": {"delivery_area_id": 1011, "area_name": "Vatara"}
+    },
+    "dhaka:ramna": {
+      "pathao": {"city_id": 1, "zone_id": 112, "city_name": "Dhaka", "zone_name": "Ramna"},
+      "steadfast": {"hub_code": "DHK-RAM", "hub_name": "Ramna Hub"},
+      "redx": {"delivery_area_id": 1012, "area_name": "Ramna"}
+    },
+    "dhaka:kalabagan": {
+      "pathao": {"city_id": 1, "zone_id": 113, "city_name": "Dhaka", "zone_name": "Kalabagan"},
+      "steadfast": {"hub_code": "DHK-KLB", "hub_name": "Kalabagan Hub"},
+      "redx": {"delivery_area_id": 1013, "area_name": "Kalabagan"}
+    },
+    "chattogram:halishahar": {
+      "pathao": {"city_id": 2, "zone_id": 201, "city_name": "Chattogram", "zone_name": "Halishahar"},
+      "steadfast": {"hub_code": "CTG-HAL", "hub_name": "Halishahar Hub"},
+      "redx": {"delivery_area_id": 2001, "area_name": "Halishahar"}
+    },
+    "chattogram:panchlaish": {
+      "pathao": {"city_id": 2, "zone_id": 202, "city_name": "Chattogram", "zone_name": "Panchlaish"},
+      "steadfast": {"hub_code": "CTG-PNC", "hub_name": "Panchlaish Hub"},
+      "redx": {"delivery_area_id": 2002, "area_name": "Panchlaish"}
+    },
+    "chattogram:kotwali": {
+      "pathao": {"city_id": 2, "zone_id": 203, "city_name": "Chattogram", "zone_name": "Kotwali"},
+      "steadfast": {"hub_code": "CTG-KOT", "hub_name": "Kotwali Hub"},
+      "redx": {"delivery_area_id": 2003, "area_name": "Kotwali"}
+    },
+    "chattogram:chandgaon": {
+      "pathao": {"city_id": 2, "zone_id": 204, "city_name": "Chattogram", "zone_name": "Chandgaon"},
+      "steadfast": {"hub_code": "CTG-CDG", "hub_name": "Chandgaon Hub"},
+      "redx": {"delivery_area_id": 2004, "area_name": "Chandgaon"}
+    },
+    "chattogram:double mooring": {
+      "pathao": {"city_id": 2, "zone_id": 205, "city_name": "Chattogram", "zone_name": "Agrabad"},
+      "steadfast": {"hub_code": "CTG-AGR", "hub_name": "Agrabad Hub"},
+      "redx": {"delivery_area_id": 2005, "area_name": "Agrabad"}
+    },
+    "chattogram:patenga": {
+      "pathao": {"city_id": 2, "zone_id": 206, "city_name": "Chattogram", "zone_name": "Patenga"},
+      "steadfast": {"hub_code": "CTG-PAT", "hub_name": "Patenga Hub"},
+      "redx": {"delivery_area_id": 2006, "area_name": "Patenga"}
+    },
+    "sylhet:kotwali": {
+      "pathao": {"city_id": 3, "zone_id": 301, "city_name": "Sylhet", "zone_name": "Kotwali"},
+      "steadfast": {"hub_code": "SYL-KOT", "hub_name": "Kotwali Sylhet Hub"},
+      "redx": {"delivery_area_id": 3001, "area_name": "Kotwali"}
+    },
+    "sylhet:sylhet sadar": {
+      "pathao": {"city_id": 3, "zone_id": 302, "city_name": "Sylhet", "zone_name": "Sylhet Sadar"},
+      "steadfast": {"hub_code": "SYL-SDR", "hub_name": "Sylhet Sadar Hub"},
+      "redx": {"delivery_area_id": 3002, "area_name": "Sylhet Sadar"}
+    },
+    "rajshahi:boalia": {
+      "pathao": {"city_id": 4, "zone_id": 401, "city_name": "Rajshahi", "zone_name": "Boalia"},
+      "steadfast": {"hub_code": "RAJ-BOA", "hub_name": "Boalia Hub"},
+      "redx": {"delivery_area_id": 4001, "area_name": "Boalia"}
+    },
+    "khulna:sonadanga": {
+      "pathao": {"city_id": 5, "zone_id": 501, "city_name": "Khulna", "zone_name": "Sonadanga"},
+      "steadfast": {"hub_code": "KHU-SND", "hub_name": "Sonadanga Hub"},
+      "redx": {"delivery_area_id": 5001, "area_name": "Sonadanga"}
+    },
+    "khulna:khalishpur": {
+      "pathao": {"city_id": 5, "zone_id": 502, "city_name": "Khulna", "zone_name": "Khalishpur"},
+      "steadfast": {"hub_code": "KHU-KHL", "hub_name": "Khalishpur Hub"},
+      "redx": {"delivery_area_id": 5002, "area_name": "Khalishpur"}
+    },
+    "noakhali:chatkhil": {
+      "pathao": {"city_id": 9, "zone_id": 901, "city_name": "Noakhali", "zone_name": "Chatkhil"},
+      "steadfast": {"hub_code": "NOA-CHK", "hub_name": "Chatkhil Hub"},
+      "redx": {"delivery_area_id": 9001, "area_name": "Chatkhil"}
+    },
+    "kushtia:mirpur": {
+      "pathao": {"city_id": 10, "zone_id": 1001, "city_name": "Kushtia", "zone_name": "Mirpur Kushtia"},
+      "steadfast": {"hub_code": "KUS-MIR", "hub_name": "Mirpur Kushtia Hub"},
+      "redx": {"delivery_area_id": 10001, "area_name": "Mirpur Kushtia"}
+    },
+    "magura:mohammadpur": {
+      "pathao": {"city_id": 5, "zone_id": 551, "city_name": "Magura", "zone_name": "Mohammadpur Magura"},
+      "steadfast": {"hub_code": "MAG-MOH", "hub_name": "Mohammadpur Magura Hub"},
+      "redx": {"delivery_area_id": 5501, "area_name": "Mohammadpur Magura"}
+    }
+  },
+  "subareas": {
+    "dhaka:mirpur:mirpur 10": {
+      "pathao": {"city_id": 1, "zone_id": 101, "area_id": 10110, "area_name": "Mirpur 10"},
+      "steadfast": {"hub_code": "DHK-MIR", "hub_name": "Mirpur Hub"},
+      "redx": {"delivery_area_id": 1001, "area_name": "Mirpur 10"}
+    },
+    "dhaka:mirpur:mirpur 11": {
+      "pathao": {"city_id": 1, "zone_id": 101, "area_id": 10111, "area_name": "Mirpur 11"},
+      "steadfast": {"hub_code": "DHK-MIR", "hub_name": "Mirpur Hub"},
+      "redx": {"delivery_area_id": 1001, "area_name": "Mirpur 11"}
+    },
+    "dhaka:mohammadpur:tajmahal road": {
+      "pathao": {"city_id": 1, "zone_id": 102, "area_id": 10202, "area_name": "Tajmahal Road"},
+      "steadfast": {"hub_code": "DHK-MOH", "hub_name": "Mohammadpur Hub"},
+      "redx": {"delivery_area_id": 1002, "area_name": "Tajmahal Road"}
+    },
+    "dhaka:mohammadpur:town hall": {
+      "pathao": {"city_id": 1, "zone_id": 102, "area_id": 10201, "area_name": "Town Hall"},
+      "steadfast": {"hub_code": "DHK-MOH", "hub_name": "Mohammadpur Hub"},
+      "redx": {"delivery_area_id": 1002, "area_name": "Town Hall"}
+    },
+    "dhaka:dhanmondi:dhanmondi 27": {
+      "pathao": {"city_id": 1, "zone_id": 103, "area_id": 10327, "area_name": "Dhanmondi 27"},
+      "steadfast": {"hub_code": "DHK-DHN", "hub_name": "Dhanmondi Hub"},
+      "redx": {"delivery_area_id": 1003, "area_name": "Dhanmondi 27"}
+    },
+    "dhaka:dhanmondi:dhanmondi 32": {
+      "pathao": {"city_id": 1, "zone_id": 103, "area_id": 10332, "area_name": "Dhanmondi 32"},
+      "steadfast": {"hub_code": "DHK-DHN", "hub_name": "Dhanmondi Hub"},
+      "redx": {"delivery_area_id": 1003, "area_name": "Dhanmondi 32"}
+    },
+    "chattogram:halishahar:block g": {
+      "pathao": {"city_id": 2, "zone_id": 201, "area_id": 20107, "area_name": "Halishahar Block G"},
+      "steadfast": {"hub_code": "CTG-HAL", "hub_name": "Halishahar Hub"},
+      "redx": {"delivery_area_id": 2001, "area_name": "Block G"}
+    },
+    "sylhet:kotwali:shahjalal upashahar": {
+      "pathao": {"city_id": 3, "zone_id": 301, "area_id": 30104, "area_name": "Shahjalal Upashahar"},
+      "steadfast": {"hub_code": "SYL-UPA", "hub_name": "Upashahar Hub"},
+      "redx": {"delivery_area_id": 3001, "area_name": "Shahjalal Upashahar"}
+    }
+  }
+}
