@@ -23,7 +23,10 @@ from .models import (
     AdminLevel,
     AdminNode,
     CourierRouting,
+    DisambiguationCandidate,
     GeocodeInfo,
+    ParsedComponents,
+    StageLatencies,
 )
 from .gazetteer import BangladeshGazetteer
 from .normalizer import normalize_address
@@ -124,9 +127,11 @@ class ThikanaPipeline:
         # ---------------------------------------------------------------------
         # Stage 1: Deterministic Script, Unicode & Numeral Normalization
         # ---------------------------------------------------------------------
+        t0 = time.perf_counter()
         norm_res = normalize_address(raw_address)
         tokens = norm_res.get("tokens", [])
         norm_text = norm_res.get("normalized_text", "")
+        t1 = time.perf_counter()
 
         # ---------------------------------------------------------------------
         # Stage 2: Sequence Tagging & Entity Span Aggregation
@@ -140,6 +145,7 @@ class ThikanaPipeline:
 
         tags = tag_res.get("tags", [])
         entities = tag_res.get("entities", {})
+        t2 = time.perf_counter()
 
         # ---------------------------------------------------------------------
         # Stage 3: Context-Aware Administrative Homonym Disambiguation
@@ -164,6 +170,27 @@ class ThikanaPipeline:
         hierarchy = disambig_res.get("hierarchy", {})
         hierarchy_bn = disambig_res.get("hierarchy_bn", {})
         confidence = float(disambig_res.get("confidence", 0.0))
+        candidates_ranked = disambig_res.get("candidates_ranked", [])
+        t3 = time.perf_counter()
+
+        # Ambiguity check
+        is_ambiguous = False
+        if len(candidates_ranked) > 1:
+            margin = candidates_ranked[0]["score"] - candidates_ranked[1]["score"]
+            if margin <= 12.0:
+                is_ambiguous = True
+
+        disambiguation_candidates = [
+            DisambiguationCandidate(
+                id=c["id"],
+                name=c["name"],
+                level=c["level"],
+                district=c.get("district"),
+                score=round(c["score"], 2),
+                reasons=c.get("reasons", []),
+            )
+            for c in candidates_ranked[:5]
+        ]
 
         # ---------------------------------------------------------------------
         # Stage 4: Multi-Courier Hub Mapping & Truthful Geocoding
@@ -176,8 +203,33 @@ class ThikanaPipeline:
             resolved_node=resolved_node,
             hierarchy=hierarchy,
         )
+        t4 = time.perf_counter()
 
-        total_latency_ms = (time.perf_counter() - start_time) * 1000.0
+        s1_ms = (t1 - t0) * 1000.0
+        s2_ms = (t2 - t1) * 1000.0
+        s3_ms = (t3 - t2) * 1000.0
+        s4_ms = (t4 - t3) * 1000.0
+        total_latency_ms = (t4 - start_time) * 1000.0
+
+        stage_latencies = StageLatencies(
+            stage1_normalizer=round(s1_ms, 3),
+            stage2_tagger=round(s2_ms, 3),
+            stage3_disambiguator=round(s3_ms, 3),
+            stage4_courier_mapper=round(s4_ms, 3),
+            total=round(total_latency_ms, 3),
+        )
+
+        parsed_components = ParsedComponents(
+            house=" ".join(entities.get("HOUSE", [])) or None,
+            floor_flat=" ".join(entities.get("FLOOR_FLAT", [])) or None,
+            road=" ".join(entities.get("ROAD", [])) or None,
+            block_sector=" ".join(entities.get("BLOCK_SECTOR", [])) or None,
+            landmark=" ".join(entities.get("LANDMARK", [])) or None,
+            subarea=hierarchy.get("subarea") or (" ".join(entities.get("SUBAREA", [])) if "SUBAREA" in entities else None),
+            thana_upazila=hierarchy.get("thana") or hierarchy.get("upazila") or (" ".join(entities.get("THANA_UPAZILA", [])) if "THANA_UPAZILA" in entities else None),
+            district=hierarchy.get("district") or (" ".join(entities.get("DISTRICT", [])) if "DISTRICT" in entities else None),
+            division=hierarchy.get("division") or None,
+        )
 
         return AddressParseResponse(
             raw_address=raw_address,
@@ -185,15 +237,19 @@ class ThikanaPipeline:
             tokens=tokens,
             tags=tags,
             entities=entities,
+            parsed_components=parsed_components,
             hierarchy=hierarchy,
             hierarchy_bn=hierarchy_bn,
             resolved_node_id=resolved_node.id if resolved_node else None,
             resolved_level=resolved_node.level.value if resolved_node else None,
             confidence=confidence,
+            is_ambiguous=is_ambiguous,
+            disambiguation_candidates=disambiguation_candidates,
             geocode=geocode_info,
             courier_routing=courier_routing,
             backend=self.backend,
-            latency_ms=total_latency_ms,
+            stage_latencies_ms=stage_latencies,
+            latency_ms=round(total_latency_ms, 3),
         )
 
     def parse_batch(self, raw_addresses: List[str]) -> List[AddressParseResponse]:

@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thikana-Engine | Production Address Parsing & Courier Routing Playground</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <!-- Leaflet CSS & JS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          colors: {
+            brand: {
+              50: '#f0fdf4',
+              500: '#22c55e',
+              600: '#16a34a',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .mono { font-family: 'JetBrains Mono', monospace; }
+    /* Leaflet dark theme fix */
+    .leaflet-container { background: #090d16; }
+    .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
+    .custom-scrollbar::-webkit-scrollbar-track { background: #0f172a; }
+    .custom-scrollbar::-webkit-scrollbar-thumb { background: #334155; border-radius: 3px; }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col antialiased selection:bg-emerald-500/30 selection:text-emerald-200">
+
+  <!-- Top Navigation Bar -->
+  <header class="border-b border-slate-800/80 bg-slate-900/60 backdrop-blur-md sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-emerald-600 via-teal-500 to-cyan-400 flex items-center justify-center shadow-lg shadow-emerald-500/20">
+          <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+          </svg>
+        </div>
+        <div>
+          <span class="text-lg font-bold tracking-tight bg-gradient-to-r from-white via-slate-200 to-slate-400 bg-clip-text text-transparent">Thikana-Engine</span>
+          <span class="ml-2 text-xs uppercase tracking-wider font-semibold px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">v1.0.0 SLA &lt;10ms</span>
+        </div>
+      </div>
+      <div class="flex items-center space-x-4">
+        <div class="flex items-center space-x-2 bg-slate-800/80 rounded-lg p-1 border border-slate-700/60 text-xs">
+          <span class="px-2 py-1 text-slate-400">Backend:</span>
+          <button id="backend-crf-btn" onclick="setBackend('crf')" class="px-2.5 py-1 rounded-md font-medium transition-all bg-emerald-500 text-white shadow-sm">CRF</button>
+          <button id="backend-onnx-btn" onclick="setBackend('onnx')" class="px-2.5 py-1 rounded-md font-medium transition-all text-slate-300 hover:text-white">ONNX</button>
+        </div>
+        <a href="/docs" target="_blank" class="text-xs text-slate-400 hover:text-white flex items-center space-x-1 transition-colors">
+          <span>OpenAPI Docs</span>
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+        </a>
+        <a href="https://github.com/TahmidShafi/Thikana-Engine" target="_blank" class="text-slate-400 hover:text-white transition-colors">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Area -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex-1 w-full space-y-6">
+
+    <!-- Top Headline Banner -->
+    <div class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 border border-slate-800 p-6 shadow-xl">
+      <div class="absolute -right-10 -bottom-10 w-64 h-64 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-white flex items-center gap-2">
+            Bangla & Banglish Address Intelligence
+          </h1>
+          <p class="text-sm text-slate-400 mt-1 max-w-2xl">
+            Deterministic Unicode/Numeral Normalizer, Linear-Chain CRF Sequence Tagger, Multi-Factor Homonym Disambiguator, and Automated Courier Zone Mapper (Pathao, Steadfast, RedX).
+          </p>
+        </div>
+        <div class="flex items-center gap-3">
+          <div class="px-4 py-2.5 rounded-xl bg-slate-800/80 border border-slate-700/80 text-center">
+            <div class="text-xs uppercase tracking-wider text-slate-400">Total Gazetteer Nodes</div>
+            <div id="stat-nodes" class="text-lg font-bold text-emerald-400 mono">5,285</div>
+          </div>
+          <div class="px-4 py-2.5 rounded-xl bg-slate-800/80 border border-slate-700/80 text-center">
+            <div class="text-xs uppercase tracking-wider text-slate-400">P50 CPU Latency</div>
+            <div class="text-lg font-bold text-cyan-400 mono">&lt; 1.5 ms</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5 One-Click Presets -->
+    <div class="space-y-2">
+      <div class="flex items-center justify-between">
+        <label class="text-xs font-semibold uppercase tracking-wider text-slate-400">Production Test Presets</label>
+        <span class="text-xs text-slate-500">Click to instantly parse and benchmark</span>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-2.5">
+        <button onclick="applyPreset(0)" class="p-2.5 text-left rounded-xl bg-slate-900/80 hover:bg-slate-850 border border-slate-800 hover:border-emerald-500/50 transition-all group">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-semibold text-emerald-400 group-hover:text-emerald-300">Urban Dhaka</span>
+            <span class="text-[10px] px-1.5 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">Metro</span>
+          </div>
+          <div class="text-xs text-slate-300 truncate mt-1">H# 45, Rd 4, Mirpur 10, Dhaka</div>
+        </button>
+
+        <button onclick="applyPreset(1)" class="p-2.5 text-left rounded-xl bg-slate-900/80 hover:bg-slate-850 border border-slate-800 hover:border-amber-500/50 transition-all group">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-semibold text-amber-400 group-hover:text-amber-300">Homonym Collision</span>
+            <span class="text-[10px] px-1.5 py-0.5 rounded bg-amber-500/10 text-amber-400 border border-amber-500/20">No District</span>
+          </div>
+          <div class="text-xs text-slate-300 truncate mt-1">Holding 45, Tajmahal Road, Mohammadpur</div>
+        </button>
+
+        <button onclick="applyPreset(2)" class="p-2.5 text-left rounded-xl bg-slate-900/80 hover:bg-slate-850 border border-slate-800 hover:border-cyan-500/50 transition-all group">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-semibold text-cyan-400 group-hover:text-cyan-300">Chattogram Blocks</span>
+            <span class="text-[10px] px-1.5 py-0.5 rounded bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">Port City</span>
+          </div>
+          <div class="text-xs text-slate-300 truncate mt-1">Halishahar Block G, Chattogram</div>
+        </button>
+
+        <button onclick="applyPreset(3)" class="p-2.5 text-left rounded-xl bg-slate-900/80 hover:bg-slate-850 border border-slate-800 hover:border-rose-500/50 transition-all group">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-semibold text-rose-400 group-hover:text-rose-300">Distractor Road</span>
+            <span class="text-[10px] px-1.5 py-0.5 rounded bg-rose-500/10 text-rose-400 border border-rose-500/20">Anti-Greedy</span>
+          </div>
+          <div class="text-xs text-slate-300 truncate mt-1">Uttara Bank Limited, Road 27, Dhanmondi, Dhaka</div>
+        </button>
+
+        <button onclick="applyPreset(4)" class="p-2.5 text-left rounded-xl bg-slate-900/80 hover:bg-slate-850 border border-slate-800 hover:border-indigo-500/50 transition-all group">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-semibold text-indigo-400 group-hover:text-indigo-300">Rural Union</span>
+            <span class="text-[10px] px-1.5 py-0.5 rounded bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">Bangla Script</span>
+          </div>
+          <div class="text-xs text-slate-300 truncate mt-1">গ্রাম: মোহাম্মদপুর, উপজেলা: চাটখিল, নোয়াখালী</div>
+        </button>
+      </div>
+    </div>
+
+    <!-- Input Form & Action Controls -->
+    <div class="bg-slate-900/70 border border-slate-800 rounded-2xl p-5 shadow-lg space-y-4">
+      <div class="flex flex-col sm:flex-row gap-3">
+        <div class="relative flex-1">
+          <input
+            id="address-input"
+            type="text"
+            placeholder="Type any Bangla or Banglish delivery address (e.g., 'বাসা ১২, রোড ৪, সেক্টর ৩, উত্তরা, ঢাকা')"
+            class="w-full bg-slate-950/80 border border-slate-700/80 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/60 focus:border-emerald-500 font-medium"
+            onkeydown="if(event.key === 'Enter') parseAddress()"
+          />
+        </div>
+        <button
+          id="parse-btn"
+          onclick="parseAddress()"
+          class="px-6 py-3 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 text-white font-semibold text-sm shadow-lg shadow-emerald-500/20 flex items-center justify-center space-x-2 transition-all cursor-pointer"
+        >
+          <svg id="parse-spinner" class="w-4 h-4 animate-spin hidden" fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
+          </svg>
+          <span id="parse-btn-text">Parse Address</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Results Section (Split Layout) -->
+    <div id="results-container" class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+      <!-- Left Column: Pipeline Execution & Tagging & Disambiguation (7 cols) -->
+      <div class="lg:col-span-7 space-y-6">
+
+        <!-- Stage Latency Breakdown Meter -->
+        <div class="bg-slate-900/70 border border-slate-800 rounded-2xl p-5 shadow-lg space-y-3">
+          <div class="flex items-center justify-between">
+            <h3 class="text-sm font-semibold tracking-wide text-slate-200 flex items-center gap-2">
+              <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+              Stage Latency Breakdown vs 10ms SLA Target
+            </h3>
+            <div id="sla-badge" class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">
+              0.00 ms (0.0% of SLA)
+            </div>
+          </div>
+
+          <!-- Segmented Latency Bar -->
+          <div class="w-full bg-slate-950 rounded-full h-3 flex overflow-hidden border border-slate-800 p-0.5">
+            <div id="bar-stage1" class="bg-sky-500 h-full rounded-l-full transition-all duration-300" style="width: 10%" title="Stage 1: Normalizer"></div>
+            <div id="bar-stage2" class="bg-emerald-500 h-full transition-all duration-300" style="width: 50%" title="Stage 2: CRF/ONNX Tagger"></div>
+            <div id="bar-stage3" class="bg-amber-500 h-full transition-all duration-300" style="width: 25%" title="Stage 3: Disambiguator"></div>
+            <div id="bar-stage4" class="bg-indigo-500 h-full rounded-r-full transition-all duration-300" style="width: 15%" title="Stage 4: Courier Mapper"></div>
+          </div>
+
+          <!-- Micro Legend & Stats -->
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-1 text-xs">
+            <div class="flex items-center space-x-1.5">
+              <span class="w-2.5 h-2.5 rounded-full bg-sky-500"></span>
+              <span class="text-slate-400">Stage 1 Norm:</span>
+              <span id="lat-stage1" class="text-slate-200 mono font-semibold">0.05ms</span>
+            </div>
+            <div class="flex items-center space-x-1.5">
+              <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+              <span class="text-slate-400">Stage 2 Tagger:</span>
+              <span id="lat-stage2" class="text-slate-200 mono font-semibold">0.20ms</span>
+            </div>
+            <div class="flex items-center space-x-1.5">
+              <span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span>
+              <span class="text-slate-400">Stage 3 Disambig:</span>
+              <span id="lat-stage3" class="text-slate-200 mono font-semibold">0.10ms</span>
+            </div>
+            <div class="flex items-center space-x-1.5">
+              <span class="w-2.5 h-2.5 rounded-full bg-indigo-500"></span>
+              <span class="text-slate-400">Stage 4 Courier:</span>
+              <span id="lat-stage4" class="text-slate-200 mono font-semibold">0.03ms</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tokenized BIO Entity Extraction -->
+        <div class="bg-slate-900/70 border border-slate-800 rounded-2xl p-5 shadow-lg space-y-3">
+          <div class="flex items-center justify-between">
+            <h3 class="text-sm font-semibold tracking-wide text-slate-200 flex items-center gap-2">
+              <svg class="w-4 h-4 text-teal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"/></svg>
+              BIO Sequence Entity Tagging
+            </h3>
+            <span id="token-count-badge" class="text-xs text-slate-400 mono">0 tokens</span>
+          </div>
+
+          <div id="token-pills-container" class="flex flex-wrap gap-2 pt-1 min-h-[60px] p-3 rounded-xl bg-slate-950/60 border border-slate-800/80">
+            <!-- Dynamically populated pills -->
+          </div>
+
+          <!-- Fine-Grained Components Grid -->
+          <div class="border-t border-slate-800 pt-3">
+            <div class="text-xs uppercase font-semibold tracking-wider text-slate-400 mb-2">Parsed Address Components</div>
+            <div id="components-grid" class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Administrative Hierarchy & Disambiguation Candidates -->
+        <div class="bg-slate-900/70 border border-slate-800 rounded-2xl p-5 shadow-lg space-y-4">
+          <div class="flex items-center justify-between">
+            <h3 class="text-sm font-semibold tracking-wide text-slate-200 flex items-center gap-2">
+              <svg class="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/></svg>
+              Administrative Hierarchy & Disambiguation
+            </h3>
+            <div id="ambiguity-badge" class="text-xs px-2.5 py-0.5 rounded-full font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">
+              Resolved Confidently
+            </div>
+          </div>
+
+          <!-- Breadcrumb Path -->
+          <div id="hierarchy-breadcrumbs" class="flex flex-wrap items-center gap-1.5 text-xs mono">
+            <!-- Dynamically populated -->
+          </div>
+
+          <!-- Disambiguation Candidates Table -->
+          <div class="border-t border-slate-800 pt-3 space-y-2">
+            <div class="flex items-center justify-between text-xs text-slate-400">
+              <span class="uppercase font-semibold tracking-wider">Disambiguation Candidate Scoring</span>
+              <span id="confidence-label" class="text-slate-300 font-semibold mono">Confidence: 0.0%</span>
+            </div>
+            <div class="overflow-x-auto custom-scrollbar">
+              <table class="w-full text-xs text-left">
+                <thead class="text-slate-400 border-b border-slate-800 uppercase text-[10px] tracking-wider">
+                  <tr>
+                    <th class="py-1.5 px-2">Node Name</th>
+                    <th class="py-1.5 px-2">Level</th>
+                    <th class="py-1.5 px-2">District</th>
+                    <th class="py-1.5 px-2">Score</th>
+                    <th class="py-1.5 px-2">Scoring Rules</th>
+                  </tr>
+                </thead>
+                <tbody id="candidates-tbody" class="divide-y divide-slate-800/60 text-slate-300">
+                  <!-- Dynamically populated -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Right Column: Leaflet Map & Courier Hub Cards (5 cols) -->
+      <div class="lg:col-span-5 space-y-6">
+
+        <!-- Leaflet Map Container -->
+        <div class="bg-slate-900/70 border border-slate-800 rounded-2xl p-4 shadow-lg space-y-3">
+          <div class="flex items-center justify-between">
+            <h3 class="text-sm font-semibold tracking-wide text-slate-200 flex items-center gap-2">
+              <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/></svg>
+              Resolved Centroid Pin
+            </h3>
+            <span id="precision-badge" class="text-xs px-2.5 py-0.5 rounded-full font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">
+              SUBAREA_CENTROID
+            </span>
+          </div>
+
+          <div id="map" class="h-64 w-full rounded-xl border border-slate-800 z-10"></div>
+
+          <div class="flex items-center justify-between text-xs text-slate-400 pt-1 mono">
+            <span>Lat: <span id="lat-val" class="text-slate-200">23.8103</span></span>
+            <span>Lon: <span id="lon-val" class="text-slate-200">90.4125</span></span>
+            <span>Node: <span id="source-node-val" class="text-slate-200">Dhaka</span></span>
+          </div>
+        </div>
+
+        <!-- Courier Routing Cards -->
+        <div class="bg-slate-900/70 border border-slate-800 rounded-2xl p-5 shadow-lg space-y-3">
+          <div class="flex items-center justify-between">
+            <h3 class="text-sm font-semibold tracking-wide text-slate-200 flex items-center gap-2">
+              <svg class="w-4 h-4 text-rose-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 4H6a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-2m-4-1v8m0 0l3-3m-3 3L9 8m-5 5h2.586a1 1 0 01.707.293l2.414 2.414a1 1 0 00.707.293h3.172a1 1 0 00.707-.293l2.414-2.414a1 1 0 01.707-.293H20"/></svg>
+              Resolved Courier Delivery Hubs
+            </h3>
+            <span class="text-[11px] text-slate-500 uppercase tracking-wider font-semibold">Tier-4 Mapped</span>
+          </div>
+
+          <div class="space-y-2.5">
+            <!-- Pathao Card -->
+            <div class="p-3 rounded-xl bg-slate-950/70 border border-red-900/30 hover:border-red-600/40 transition-colors">
+              <div class="flex items-center justify-between mb-2">
+                <div class="flex items-center space-x-2">
+                  <span class="w-2.5 h-2.5 rounded-full bg-red-500 animate-pulse"></span>
+                  <span class="text-xs font-bold text-red-400 uppercase tracking-wider">Pathao Merchant API</span>
+                </div>
+                <span id="pathao-status" class="text-[10px] px-1.5 py-0.5 rounded bg-red-500/10 text-red-400 border border-red-500/30 font-medium">Auto-Mapped</span>
+              </div>
+              <div class="grid grid-cols-3 gap-2 text-xs">
+                <div class="p-1.5 rounded-lg bg-slate-900/90 border border-slate-800">
+                  <div class="text-[10px] text-slate-400">City ID</div>
+                  <div id="pathao-city" class="text-slate-100 font-semibold mono">1</div>
+                </div>
+                <div class="p-1.5 rounded-lg bg-slate-900/90 border border-slate-800">
+                  <div class="text-[10px] text-slate-400">Zone ID</div>
+                  <div id="pathao-zone" class="text-slate-100 font-semibold mono">101</div>
+                </div>
+                <div class="p-1.5 rounded-lg bg-slate-900/90 border border-slate-800">
+                  <div class="text-[10px] text-slate-400">Area ID</div>
+                  <div id="pathao-area" class="text-slate-100 font-semibold mono">10110</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Steadfast Card -->
+            <div class="p-3 rounded-xl bg-slate-950/70 border border-cyan-900/30 hover:border-cyan-600/40 transition-colors">
+              <div class="flex items-center justify-between mb-2">
+                <div class="flex items-center space-x-2">
+                  <span class="w-2.5 h-2.5 rounded-full bg-cyan-400"></span>
+                  <span class="text-xs font-bold text-cyan-400 uppercase tracking-wider">Steadfast Courier</span>
+                </div>
+                <span id="steadfast-status" class="text-[10px] px-1.5 py-0.5 rounded bg-cyan-500/10 text-cyan-400 border border-cyan-500/30 font-medium">Hub Resolved</span>
+              </div>
+              <div class="flex items-center justify-between text-xs p-2 rounded-lg bg-slate-900/90 border border-slate-800">
+                <span class="text-slate-400">Hub Code:</span>
+                <span id="steadfast-hub" class="text-cyan-300 font-bold mono">DHK-MIR</span>
+              </div>
+            </div>
+
+            <!-- RedX Card -->
+            <div class="p-3 rounded-xl bg-slate-950/70 border border-orange-900/30 hover:border-orange-600/40 transition-colors">
+              <div class="flex items-center justify-between mb-2">
+                <div class="flex items-center space-x-2">
+                  <span class="w-2.5 h-2.5 rounded-full bg-orange-500"></span>
+                  <span class="text-xs font-bold text-orange-400 uppercase tracking-wider">RedX Delivery</span>
+                </div>
+                <span id="redx-status" class="text-[10px] px-1.5 py-0.5 rounded bg-orange-500/10 text-orange-400 border border-orange-500/30 font-medium">Area Resolved</span>
+              </div>
+              <div class="flex items-center justify-between text-xs p-2 rounded-lg bg-slate-900/90 border border-slate-800">
+                <span class="text-slate-400">Delivery Area ID:</span>
+                <span id="redx-area" class="text-orange-300 font-bold mono">1001</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Raw JSON Payload Collapsible -->
+        <div class="bg-slate-900/70 border border-slate-800 rounded-2xl p-4 shadow-lg space-y-2">
+          <button onclick="toggleRawJson()" class="w-full flex items-center justify-between text-xs font-semibold uppercase tracking-wider text-slate-400 hover:text-white transition-colors">
+            <span class="flex items-center gap-1.5">
+              <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>
+              Raw Pydantic JSON Response
+            </span>
+            <span id="json-toggle-icon">▼</span>
+          </button>
+          <div id="raw-json-container" class="hidden pt-2">
+            <div class="relative">
+              <pre id="raw-json" class="text-[11px] mono bg-slate-950 p-3 rounded-xl border border-slate-800 text-slate-300 overflow-x-auto max-h-72 custom-scrollbar">{}</pre>
+              <button onclick="copyRawJson()" class="absolute top-2 right-2 px-2 py-1 bg-slate-800 hover:bg-slate-700 rounded text-[10px] text-slate-300 font-mono transition-colors">
+                Copy
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-slate-800/80 bg-slate-900/40 py-4 mt-8">
+    <div class="max-w-7xl mx-auto px-4 text-center text-xs text-slate-500 space-y-1">
+      <div>Thikana-Engine: Open-Source Bangladeshi Address Parsing, Disambiguation & Courier Routing Microservice.</div>
+      <div>Gazetteer data licensed under MIT Disclosures (nuhil/bangladesh-geocode &amp; bdapis). Built with Linear-Chain CRF &amp; ONNX Runtime.</div>
+    </div>
+  </footer>
+
+  <!-- Application Logic -->
+  <script>
+    let currentBackend = 'crf';
+    let map = null;
+    let marker = null;
+    let circle = null;
+
+    const PRESETS = [
+      "H# 45, Rd 4, Mirpur 10, Dhaka",
+      "Holding 45, Tajmahal Road, Mohammadpur",
+      "Halishahar Block G, Chattogram",
+      "Uttara Bank Limited, Road 27, Dhanmondi, Dhaka",
+      "গ্রাম: মোহাম্মদপুর, উপজেলা: চাটখিল, নোয়াখালী"
+    ];
+
+    // Initialize Leaflet Map
+    function initMap() {
+      map = L.map('map', {
+        zoomControl: true,
+        attributionControl: false
+      }).setView([23.8103, 90.4125], 11);
+
+      // CartoDB Dark Matter tiles
+      L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+        maxZoom: 19,
+        subdomains: 'abcd',
+      }).addTo(map);
+    }
+
+    function updateMap(lat, lon, precision, label) {
+      if (!map) return;
+      if (lat === null || lon === null || isNaN(lat) || isNaN(lon)) return;
+
+      const zoom = precision === 'SUBAREA_CENTROID' ? 14 : 11;
+      map.setView([lat, lon], zoom);
+
+      if (marker) map.removeLayer(marker);
+      if (circle) map.removeLayer(circle);
+
+      // Circle representing centroid uncertainty
+      const radius = precision === 'SUBAREA_CENTROID' ? 800 : 4000;
+      const color = precision === 'SUBAREA_CENTROID' ? '#10b981' : '#f59e0b';
+
+      circle = L.circle([lat, lon], {
+        color: color,
+        fillColor: color,
+        fillOpacity: 0.15,
+        radius: radius
+      }).addTo(map);
+
+      // Custom pulsing pin
+      const icon = L.divIcon({
+        className: 'custom-pin',
+        html: `<div style="background-color: ${color}; width: 14px; height: 14px; border-radius: 50%; border: 2px solid white; box-shadow: 0 0 10px ${color};"></div>`,
+        iconSize: [14, 14],
+        iconAnchor: [7, 7]
+      });
+
+      marker = L.marker([lat, lon], { icon: icon }).addTo(map)
+        .bindPopup(`<b>${label}</b><br><span style="font-size:11px;color:#94a3b8">${precision}</span>`)
+        .openPopup();
+    }
+
+    function setBackend(b) {
+      currentBackend = b;
+      const crfBtn = document.getElementById('backend-crf-btn');
+      const onnxBtn = document.getElementById('backend-onnx-btn');
+      if (b === 'crf') {
+        crfBtn.className = "px-2.5 py-1 rounded-md font-medium transition-all bg-emerald-500 text-white shadow-sm";
+        onnxBtn.className = "px-2.5 py-1 rounded-md font-medium transition-all text-slate-300 hover:text-white";
+      } else {
+        onnxBtn.className = "px-2.5 py-1 rounded-md font-medium transition-all bg-cyan-500 text-white shadow-sm";
+        crfBtn.className = "px-2.5 py-1 rounded-md font-medium transition-all text-slate-300 hover:text-white";
+      }
+      parseAddress();
+    }
+
+    function applyPreset(index) {
+      document.getElementById('address-input').value = PRESETS[index];
+      parseAddress();
+    }
+
+    function toggleRawJson() {
+      const container = document.getElementById('raw-json-container');
+      const icon = document.getElementById('json-toggle-icon');
+      if (container.classList.contains('hidden')) {
+        container.classList.remove('hidden');
+        icon.innerText = '▲';
+      } else {
+        container.classList.add('hidden');
+        icon.innerText = '▼';
+      }
+    }
+
+    function copyRawJson() {
+      const text = document.getElementById('raw-json').innerText;
+      navigator.clipboard.writeText(text);
+      alert('Raw JSON copied to clipboard!');
+    }
+
+    // Color tag mapping for BIO entities
+    function getTagStyle(tag) {
+      if (tag.includes('HOUSE')) return 'bg-amber-500/20 text-amber-300 border-amber-500/40';
+      if (tag.includes('FLOOR_FLAT')) return 'bg-orange-500/20 text-orange-300 border-orange-500/40';
+      if (tag.includes('ROAD')) return 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40';
+      if (tag.includes('BLOCK_SECTOR')) return 'bg-teal-500/20 text-teal-300 border-teal-500/40';
+      if (tag.includes('LANDMARK_REL')) return 'bg-violet-500/20 text-violet-300 border-violet-500/40';
+      if (tag.includes('LANDMARK')) return 'bg-purple-500/20 text-purple-300 border-purple-500/40';
+      if (tag.includes('SUBAREA')) return 'bg-sky-500/20 text-sky-300 border-sky-500/40';
+      if (tag.includes('THANA_UPAZILA')) return 'bg-indigo-500/20 text-indigo-300 border-indigo-500/40';
+      if (tag.includes('DISTRICT')) return 'bg-fuchsia-500/20 text-fuchsia-300 border-fuchsia-500/40';
+      return 'bg-slate-800 text-slate-400 border-slate-700';
+    }
+
+    async function parseAddress() {
+      const input = document.getElementById('address-input');
+      const address = input.value.trim();
+      if (!address) return;
+
+      const btn = document.getElementById('parse-btn');
+      const spinner = document.getElementById('parse-spinner');
+      const btnText = document.getElementById('parse-btn-text');
+
+      spinner.classList.remove('hidden');
+      btnText.innerText = 'Resolving...';
+      btn.disabled = true;
+
+      try {
+        const resp = await fetch('/v1/parse', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            address: address,
+            backend: currentBackend
+          })
+        });
+
+        if (!resp.ok) {
+          const errData = await resp.json();
+          alert('API Error: ' + (errData.detail || resp.statusText));
+          return;
+        }
+
+        const data = await resp.json();
+        renderResults(data);
+      } catch (err) {
+        console.error('Network error:', err);
+        alert('Network request failed. Is the FastAPI server running?');
+      } finally {
+        spinner.classList.add('hidden');
+        btnText.innerText = 'Parse Address';
+        btn.disabled = false;
+      }
+    }
+
+    function renderResults(data) {
+      // 1. Raw JSON
+      document.getElementById('raw-json').innerText = JSON.stringify(data, null, 2);
+
+      // 2. Latencies & SLA Bar
+      const lats = data.stage_latencies_ms || {};
+      const totalLat = lats.total || data.latency_ms || 0.0;
+      const s1 = lats.stage1_normalizer || 0.0;
+      const s2 = lats.stage2_tagger || 0.0;
+      const s3 = lats.stage3_disambiguator || 0.0;
+      const s4 = lats.stage4_courier_mapper || 0.0;
+
+      document.getElementById('lat-stage1').innerText = s1.toFixed(2) + 'ms';
+      document.getElementById('lat-stage2').innerText = s2.toFixed(2) + 'ms';
+      document.getElementById('lat-stage3').innerText = s3.toFixed(2) + 'ms';
+      document.getElementById('lat-stage4').innerText = s4.toFixed(2) + 'ms';
+
+      const slaPercent = Math.min(100, (totalLat / 10.0) * 100).toFixed(1);
+      const slaBadge = document.getElementById('sla-badge');
+      slaBadge.innerText = `${totalLat.toFixed(2)} ms (${slaPercent}% of 10ms SLA)`;
+      if (totalLat <= 5.0) {
+        slaBadge.className = "px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/30";
+      } else if (totalLat <= 10.0) {
+        slaBadge.className = "px-2.5 py-0.5 rounded-full text-xs font-semibold bg-amber-500/10 text-amber-400 border border-amber-500/30";
+      } else {
+        slaBadge.className = "px-2.5 py-0.5 rounded-full text-xs font-semibold bg-rose-500/10 text-rose-400 border border-rose-500/30";
+      }
+
+      // Bar proportions
+      const denom = Math.max(0.001, s1 + s2 + s3 + s4);
+      document.getElementById('bar-stage1').style.width = ((s1 / denom) * 100) + '%';
+      document.getElementById('bar-stage2').style.width = ((s2 / denom) * 100) + '%';
+      document.getElementById('bar-stage3').style.width = ((s3 / denom) * 100) + '%';
+      document.getElementById('bar-stage4').style.width = ((s4 / denom) * 100) + '%';
+
+      // 3. Token Pills
+      const tokens = data.tokens || [];
+      const tags = data.tags || [];
+      const pillsContainer = document.getElementById('token-pills-container');
+      pillsContainer.innerHTML = '';
+      document.getElementById('token-count-badge').innerText = `${tokens.length} tokens`;
+
+      for (let i = 0; i < tokens.length; i++) {
+        const t = tokens[i];
+        const tag = tags[i] || 'O';
+        const style = getTagStyle(tag);
+        const pill = document.createElement('div');
+        pill.className = `inline-flex items-center space-x-1.5 px-2.5 py-1 rounded-lg border text-xs font-medium ${style}`;
+        pill.innerHTML = `<span class="text-white">${t}</span><span class="text-[10px] uppercase font-mono opacity-70">${tag}</span>`;
+        pillsContainer.appendChild(pill);
+      }
+
+      // 4. Parsed Components Grid
+      const comp = data.parsed_components || {};
+      const compGrid = document.getElementById('components-grid');
+      const compItems = [
+        { label: 'House', val: comp.house },
+        { label: 'Road', val: comp.road },
+        { label: 'Block/Sector', val: comp.block_sector },
+        { label: 'Landmark', val: comp.landmark },
+        { label: 'Subarea', val: comp.subarea },
+        { label: 'Thana/Upazila', val: comp.thana_upazila },
+        { label: 'District', val: comp.district },
+        { label: 'Division', val: comp.division }
+      ];
+      compGrid.innerHTML = compItems.map(item => `
+        <div class="p-2 rounded-lg bg-slate-950/80 border border-slate-800">
+          <div class="text-[10px] text-slate-400 font-medium">${item.label}</div>
+          <div class="text-slate-100 font-semibold truncate ${item.val ? '' : 'text-slate-600'}">${item.val || '—'}</div>
+        </div>
+      `).join('');
+
+      // 5. Hierarchy Breadcrumbs & Ambiguity Badge
+      const hier = data.hierarchy || {};
+      const crumbs = [];
+      if (hier.division) crumbs.push({ level: 'Division', name: hier.division });
+      if (hier.district) crumbs.push({ level: 'District', name: hier.district });
+      if (hier.thana || hier.upazila) crumbs.push({ level: 'Thana', name: hier.thana || hier.upazila });
+      if (hier.subarea || hier.union) crumbs.push({ level: 'Subarea', name: hier.subarea || hier.union });
+
+      const breadcrumbEl = document.getElementById('hierarchy-breadcrumbs');
+      breadcrumbEl.innerHTML = crumbs.map((c, i) => `
+        <span class="px-2 py-0.5 rounded bg-slate-800 border border-slate-700 text-slate-200">
+          <span class="text-slate-400 text-[10px] mr-1">${c.level}:</span>${c.name}
+        </span>
+        ${i < crumbs.length - 1 ? '<span class="text-slate-600">›</span>' : ''}
+      `).join('');
+
+      const ambBadge = document.getElementById('ambiguity-badge');
+      if (data.is_ambiguous) {
+        ambBadge.innerText = 'Ambiguous Homonym';
+        ambBadge.className = 'text-xs px-2.5 py-0.5 rounded-full font-semibold bg-amber-500/10 text-amber-400 border border-amber-500/30';
+      } else {
+        ambBadge.innerText = 'Resolved Confidently';
+        ambBadge.className = 'text-xs px-2.5 py-0.5 rounded-full font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/30';
+      }
+
+      // 6. Disambiguation Candidates
+      document.getElementById('confidence-label').innerText = `Confidence: ${(data.confidence * 100).toFixed(1)}%`;
+      const candTbody = document.getElementById('candidates-tbody');
+      const candidates = data.disambiguation_candidates || [];
+      if (candidates.length === 0) {
+        candTbody.innerHTML = `<tr><td colspan="5" class="py-2 px-2 text-center text-slate-500">No alternate candidates evaluated</td></tr>`;
+      } else {
+        candTbody.innerHTML = candidates.map(c => `
+          <tr class="hover:bg-slate-850/50">
+            <td class="py-1.5 px-2 font-medium text-white">${c.name}</td>
+            <td class="py-1.5 px-2 capitalize text-slate-400">${c.level}</td>
+            <td class="py-1.5 px-2 text-slate-300">${c.district || '—'}</td>
+            <td class="py-1.5 px-2 mono font-bold ${c.score > 30 ? 'text-emerald-400' : 'text-slate-400'}">${c.score.toFixed(1)}</td>
+            <td class="py-1.5 px-2 text-[10px] text-slate-400 truncate max-w-xs">${(c.reasons || []).join(', ')}</td>
+          </tr>
+        `).join('');
+      }
+
+      // 7. Leaflet Map Update
+      const geo = data.geocode || {};
+      const precBadge = document.getElementById('precision-badge');
+      precBadge.innerText = geo.precision || 'UNKNOWN';
+      if (geo.precision === 'SUBAREA_CENTROID') {
+        precBadge.className = 'text-xs px-2.5 py-0.5 rounded-full font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/30';
+      } else {
+        precBadge.className = 'text-xs px-2.5 py-0.5 rounded-full font-semibold bg-amber-500/10 text-amber-400 border border-amber-500/30';
+      }
+
+      document.getElementById('lat-val').innerText = geo.lat !== null ? geo.lat.toFixed(4) : '—';
+      document.getElementById('lon-val').innerText = geo.lon !== null ? geo.lon.toFixed(4) : '—';
+      document.getElementById('source-node-val').innerText = geo.source_node || '—';
+
+      if (geo.lat && geo.lon) {
+        updateMap(geo.lat, geo.lon, geo.precision, geo.source_node || 'Centroid');
+      }
+
+      // 8. Courier Cards
+      const cr = data.courier_routing || {};
+      const p = cr.pathao || {};
+      document.getElementById('pathao-city').innerText = p.city_id !== null && p.city_id !== undefined ? p.city_id : '—';
+      document.getElementById('pathao-zone').innerText = p.zone_id !== null && p.zone_id !== undefined ? p.zone_id : '—';
+      document.getElementById('pathao-area').innerText = p.area_id !== null && p.area_id !== undefined ? p.area_id : '—';
+      document.getElementById('pathao-status').innerText = p.zone_id ? (p.area_id ? 'Tier-4 Area' : 'Tier-3 Zone') : 'Unmapped';
+
+      const s = cr.steadfast || {};
+      document.getElementById('steadfast-hub').innerText = s.hub_code || '—';
+      document.getElementById('steadfast-status').innerText = s.hub_code ? 'Hub Resolved' : 'Unmapped';
+
+      const r = cr.redx || {};
+      document.getElementById('redx-area').innerText = r.delivery_area_id !== null && r.delivery_area_id !== undefined ? r.delivery_area_id : '—';
+      document.getElementById('redx-status').innerText = r.delivery_area_id ? 'Area Resolved' : 'Unmapped';
+    }
+
+    // Initialize on page load
+    window.addEventListener('DOMContentLoaded', () => {
+      initMap();
+      applyPreset(0);
+    });
+  </script>
+</body>
+</html>

@@ -181,6 +181,11 @@ class BangladeshGazetteer:
         """List of all unique administrative nodes in the gazetteer."""
         return list(self._all_nodes)
 
+    @property
+    def nodes_by_id(self) -> Dict[str, AdminNode]:
+        """Dictionary mapping node IDs to AdminNode objects."""
+        return dict(self._all_nodes_by_id)
+
     def stats(self) -> Dict[str, int]:
         """Summary statistics of loaded gazetteer entities."""
         upz_list = self.upazilas

@@ -239,7 +239,11 @@ def resolve_location_hierarchy(
         upz = node.upazila
         if upz and node != upz:
             upz_name = upz.name.lower()
-            if upz_name in context_set or upz.bn_name in context_set:
+            # Prevent self-matching if node and parent share the exact same name
+            is_same_name = (upz_name == node.name.lower()) or (bool(upz.bn_name) and upz.bn_name == node.bn_name)
+            if is_same_name and context_string.count(upz_name) < 2:
+                pass  # Mentioned only once in address, not a co-occurrence
+            elif upz_name in context_set or (upz.bn_name and upz.bn_name in context_set):
                 score += 30.0
                 reasons.append(f"parent_upazila_cooccurrence_{upz.name}")
 
@@ -247,7 +251,17 @@ def resolve_location_hierarchy(
         if node.level.is_upazila_level:
             for child in node.children:
                 child_name = child.name.lower()
-                if child_name in context_string or (child.bn_name and child.bn_name in context_string):
+                is_same_name = (child_name == node.name.lower()) or (bool(child.bn_name) and child.bn_name == node.bn_name)
+                if is_same_name and context_string.count(child_name) < 2:
+                    continue  # Mentioned only once in address, not a co-occurrence
+
+                child_stem = re.sub(r"\b(road|rd#|rd|avenue|ave|lane|goli|block|blk|sector|sec)\b", "", child_name).strip()
+                matches_child = (
+                    child_name in context_string
+                    or (bool(child.bn_name) and child.bn_name in context_string)
+                    or (bool(child_stem) and len(child_stem) >= 3 and child_stem in context_string)
+                )
+                if matches_child:
                     score += 20.0
                     reasons.append(f"child_subarea_cooccurrence_{child.name}")
                     break

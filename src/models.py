@@ -235,6 +235,38 @@ class CourierRouting(BaseModel):
     redx: RedxRouting = Field(default_factory=RedxRouting)
 
 
+class ParsedComponents(BaseModel):
+    """Fine-grained tokenized address components."""
+    house: Optional[str] = None
+    floor_flat: Optional[str] = None
+    road: Optional[str] = None
+    block_sector: Optional[str] = None
+    landmark: Optional[str] = None
+    subarea: Optional[str] = None
+    thana_upazila: Optional[str] = None
+    district: Optional[str] = None
+    division: Optional[str] = None
+
+
+class DisambiguationCandidate(BaseModel):
+    """Ranked candidate node evaluated during homonym disambiguation."""
+    id: str
+    name: str
+    level: str
+    district: Optional[str] = None
+    score: float
+    reasons: List[str] = Field(default_factory=list)
+
+
+class StageLatencies(BaseModel):
+    """Granular per-stage pipeline execution latencies in milliseconds."""
+    stage1_normalizer: float = 0.0
+    stage2_tagger: float = 0.0
+    stage3_disambiguator: float = 0.0
+    stage4_courier_mapper: float = 0.0
+    total: float = 0.0
+
+
 class AddressParseResponse(BaseModel):
     """
     Unified end-to-end address parse response from ThikanaPipeline.
@@ -244,13 +276,17 @@ class AddressParseResponse(BaseModel):
     tokens: List[str]
     tags: List[str]
     entities: Dict[str, List[str]]
-    hierarchy: Dict[str, str]
-    hierarchy_bn: Dict[str, str]
+    parsed_components: ParsedComponents = Field(default_factory=ParsedComponents)
+    hierarchy: Dict[str, str] = Field(default_factory=dict)
+    hierarchy_bn: Dict[str, str] = Field(default_factory=dict)
     resolved_node_id: Optional[str] = None
     resolved_level: Optional[str] = None
     confidence: float
+    is_ambiguous: bool = False
+    disambiguation_candidates: List[DisambiguationCandidate] = Field(default_factory=list)
     geocode: GeocodeInfo = Field(default_factory=GeocodeInfo)
     courier_routing: CourierRouting = Field(default_factory=CourierRouting)
     backend: str
-    latency_ms: float
+    stage_latencies_ms: StageLatencies = Field(default_factory=StageLatencies)
+    latency_ms: float = 0.0
 
