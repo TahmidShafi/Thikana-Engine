@@ -8,209 +8,578 @@
         "name": "Mirpur",
         "bn_name": "মিরপুর",
         "subareas": [
-          {"name": "Mirpur 1", "bn_name": "মিরপুর ১"},
-          {"name": "Mirpur 2", "bn_name": "মিরপুর ২"},
-          {"name": "Mirpur 6", "bn_name": "মিরপুর ৬"},
-          {"name": "Mirpur 7", "bn_name": "মিরপুর ৭"},
-          {"name": "Mirpur 10", "bn_name": "মিরপুর ১০"},
-          {"name": "Mirpur 11", "bn_name": "মিরপুর ১১"},
-          {"name": "Mirpur 11.5", "bn_name": "মিরপুর ১১.৫"},
-          {"name": "Mirpur 12", "bn_name": "মিরপুর ১২"},
-          {"name": "Mirpur 13", "bn_name": "মিরপুর ১৩"},
-          {"name": "Mirpur 14", "bn_name": "মিরপুর ১৪"},
-          {"name": "Shewrapara", "bn_name": "শেওড়াপাড়া"},
-          {"name": "Kazipara", "bn_name": "কাজীপাড়া"},
-          {"name": "Pallabi", "bn_name": "পল্লবী"},
-          {"name": "Rupnagar", "bn_name": "রূপনগর"},
-          {"name": "Paikpara", "bn_name": "পাইকপাড়া"}
+          {
+            "name": "Mirpur 1",
+            "bn_name": "মিরপুর ১"
+          },
+          {
+            "name": "Mirpur 2",
+            "bn_name": "মিরপুর ২"
+          },
+          {
+            "name": "Mirpur 6",
+            "bn_name": "মিরপুর ৬"
+          },
+          {
+            "name": "Mirpur 7",
+            "bn_name": "মিরপুর ৭"
+          },
+          {
+            "name": "Mirpur 10",
+            "bn_name": "মিরপুর ১০"
+          },
+          {
+            "name": "Mirpur 11",
+            "bn_name": "মিরপুর ১১"
+          },
+          {
+            "name": "Mirpur 11.5",
+            "bn_name": "মিরপুর ১১.৫"
+          },
+          {
+            "name": "Mirpur 12",
+            "bn_name": "মিরপুর ১২"
+          },
+          {
+            "name": "Mirpur 13",
+            "bn_name": "মিরপুর ১৩"
+          },
+          {
+            "name": "Mirpur 14",
+            "bn_name": "মিরপুর ১৪"
+          },
+          {
+            "name": "Shewrapara",
+            "bn_name": "শেওড়াপাড়া"
+          },
+          {
+            "name": "Kazipara",
+            "bn_name": "কাজীপাড়া"
+          },
+          {
+            "name": "Pallabi",
+            "bn_name": "পল্লবী"
+          },
+          {
+            "name": "Rupnagar",
+            "bn_name": "রূপনগর"
+          },
+          {
+            "name": "Paikpara",
+            "bn_name": "পাইকপাড়া"
+          }
         ]
       },
       {
         "name": "Mohammadpur",
         "bn_name": "মোহাম্মদপুর",
         "subareas": [
-          {"name": "Town Hall", "bn_name": "টাউন হল"},
-          {"name": "Japan Garden City", "bn_name": "জাপান গার্ডেন সিটি"},
-          {"name": "Salimullah Road", "bn_name": "সলিমুল্লাহ রোড"},
-          {"name": "Noorjahan Road", "bn_name": "নূরজাহান রোড"},
-          {"name": "Tajmahal Road", "bn_name": "তাজমহল রোড"},
-          {"name": "Kaderabad Housing", "bn_name": "কাদেরাবাদ হাউজিং"},
-          {"name": "Mohammadia Housing", "bn_name": "মোহাম্মদীয়া হাউজিং"},
-          {"name": "Ring Road", "bn_name": "রিং রোড"},
-          {"name": "Babar Road", "bn_name": "বাabor রোড"},
-          {"name": "Humayun Road", "bn_name": "হুমায়ুন রোড"},
-          {"name": "Shia Mosque", "bn_name": "শিয়া মসজিদ"},
-          {"name": "Chand Uddan", "bn_name": "চাঁদ উদ্যান"}
+          {
+            "name": "Town Hall",
+            "bn_name": "টাউন হল"
+          },
+          {
+            "name": "Japan Garden City",
+            "bn_name": "জাপান গার্ডেন সিটি"
+          },
+          {
+            "name": "Salimullah Road",
+            "bn_name": "সলিমুল্লাহ রোড"
+          },
+          {
+            "name": "Noorjahan Road",
+            "bn_name": "নূরজাহান রোড"
+          },
+          {
+            "name": "Tajmahal Road",
+            "bn_name": "তাজমহল রোড"
+          },
+          {
+            "name": "Kaderabad Housing",
+            "bn_name": "কাদেরাবাদ হাউজিং"
+          },
+          {
+            "name": "Mohammadia Housing",
+            "bn_name": "মোহাম্মদীয়া হাউজিং"
+          },
+          {
+            "name": "Ring Road",
+            "bn_name": "রিং রোড"
+          },
+          {
+            "name": "Babar Road",
+            "bn_name": "বাabor রোড"
+          },
+          {
+            "name": "Humayun Road",
+            "bn_name": "হুমায়ুন রোড"
+          },
+          {
+            "name": "Shia Mosque",
+            "bn_name": "শিয়া মসজিদ"
+          },
+          {
+            "name": "Chand Uddan",
+            "bn_name": "চাঁদ উদ্যান"
+          }
         ]
       },
       {
         "name": "Dhanmondi",
         "bn_name": "ধানমন্ডি",
         "subareas": [
-          {"name": "Dhanmondi 27", "bn_name": "ধানমন্ডি ২৭"},
-          {"name": "Dhanmondi 32", "bn_name": "ধানমন্ডি ৩২"},
-          {"name": "Dhanmondi 8/A", "bn_name": "ধানমন্ডি ৮/এ"},
-          {"name": "Dhanmondi Lake", "bn_name": "ধানমন্ডি লেক"},
-          {"name": "Zigatola", "bn_name": "জিগাতলা"},
-          {"name": "Rangs Fortune Square", "bn_name": "র‌্যাংগস ফরচুন স্কয়ার"},
-          {"name": "Shankar", "bn_name": "শংকর"},
-          {"name": "Satmasjid Road", "bn_name": "সাতমসজিদ রোড"}
+          {
+            "name": "Dhanmondi 27",
+            "bn_name": "ধানমন্ডি ২৭"
+          },
+          {
+            "name": "Dhanmondi 32",
+            "bn_name": "ধানমন্ডি ৩২"
+          },
+          {
+            "name": "Dhanmondi 8/A",
+            "bn_name": "ধানমন্ডি ৮/এ"
+          },
+          {
+            "name": "Dhanmondi Lake",
+            "bn_name": "ধানমন্ডি লেক"
+          },
+          {
+            "name": "Zigatola",
+            "bn_name": "জিগাতলা"
+          },
+          {
+            "name": "Rangs Fortune Square",
+            "bn_name": "র‌্যাংগস ফরচুন স্কয়ার"
+          },
+          {
+            "name": "Shankar",
+            "bn_name": "শংকর"
+          },
+          {
+            "name": "Satmasjid Road",
+            "bn_name": "সাতমসজিদ রোড"
+          }
         ]
       },
       {
         "name": "Uttara",
         "bn_name": "উত্তরা",
         "subareas": [
-          {"name": "Uttara Sector 1", "bn_name": "উত্তরা সেক্টর ১"},
-          {"name": "Uttara Sector 3", "bn_name": "উত্তরা সেক্টর ৩"},
-          {"name": "Uttara Sector 4", "bn_name": "উত্তরা সেক্টর ৪"},
-          {"name": "Uttara Sector 5", "bn_name": "উত্তরা সেক্টর ৫"},
-          {"name": "Uttara Sector 6", "bn_name": "উত্তরা সেক্টর ৬"},
-          {"name": "Uttara Sector 7", "bn_name": "উত্তরা সেক্টর ৭"},
-          {"name": "Uttara Sector 8", "bn_name": "উত্তরা সেক্টর ৮"},
-          {"name": "Uttara Sector 9", "bn_name": "উত্তরা সেক্টর ৯"},
-          {"name": "Uttara Sector 10", "bn_name": "উত্তরা সেক্টর ১০"},
-          {"name": "Uttara Sector 11", "bn_name": "উত্তরা সেক্টর ১১"},
-          {"name": "Uttara Sector 12", "bn_name": "উত্তরা সেক্টর ১২"},
-          {"name": "Uttara Sector 13", "bn_name": "উত্তরা সেক্টর ১৩"},
-          {"name": "Uttara Sector 14", "bn_name": "উত্তরা সেক্টর ১৪"},
-          {"name": "Azampur", "bn_name": "আজমপুর"},
-          {"name": "House Building", "bn_name": "হাউস বিল্ডিং"},
-          {"name": "Abdullahpur", "bn_name": "আব্দুল্লাহপুর"},
-          {"name": "Jashimuddin", "bn_name": "জসীমউদ্দীন"},
-          {"name": "Rajlakshmi", "bn_name": "রাজলক্ষ্মী"}
+          {
+            "name": "Uttara Sector 1",
+            "bn_name": "উত্তরা সেক্টর ১"
+          },
+          {
+            "name": "Uttara Sector 3",
+            "bn_name": "উত্তরা সেক্টর ৩"
+          },
+          {
+            "name": "Uttara Sector 4",
+            "bn_name": "উত্তরা সেক্টর ৪"
+          },
+          {
+            "name": "Uttara Sector 5",
+            "bn_name": "উত্তরা সেক্টর ৫"
+          },
+          {
+            "name": "Uttara Sector 6",
+            "bn_name": "উত্তরা সেক্টর ৬"
+          },
+          {
+            "name": "Uttara Sector 7",
+            "bn_name": "উত্তরা সেক্টর ৭"
+          },
+          {
+            "name": "Uttara Sector 8",
+            "bn_name": "উত্তরা সেক্টর ৮"
+          },
+          {
+            "name": "Uttara Sector 9",
+            "bn_name": "উত্তরা সেক্টর ৯"
+          },
+          {
+            "name": "Uttara Sector 10",
+            "bn_name": "উত্তরা সেক্টর ১০"
+          },
+          {
+            "name": "Uttara Sector 11",
+            "bn_name": "উত্তরা সেক্টর ১১"
+          },
+          {
+            "name": "Uttara Sector 12",
+            "bn_name": "উত্তরা সেক্টর ১২"
+          },
+          {
+            "name": "Uttara Sector 13",
+            "bn_name": "উত্তরা সেক্টর ১৩"
+          },
+          {
+            "name": "Uttara Sector 14",
+            "bn_name": "উত্তরা সেক্টর ১৪"
+          },
+          {
+            "name": "Azampur",
+            "bn_name": "আজমপুর"
+          },
+          {
+            "name": "House Building",
+            "bn_name": "হাউস বিল্ডিং"
+          },
+          {
+            "name": "Abdullahpur",
+            "bn_name": "আব্দুল্লাহপুর"
+          },
+          {
+            "name": "Jashimuddin",
+            "bn_name": "জসীমউদ্দীন"
+          },
+          {
+            "name": "Rajlakshmi",
+            "bn_name": "রাজলক্ষ্মী"
+          }
         ]
       },
       {
         "name": "Gulshan",
         "bn_name": "গুলশান",
         "subareas": [
-          {"name": "Gulshan 1", "bn_name": "গুলশান ১"},
-          {"name": "Gulshan 2", "bn_name": "গুলশান ২"},
-          {"name": "Niketan", "bn_name": "নিকেতন"},
-          {"name": "Shahjadpur", "bn_name": "শাহজাদপুর"}
+          {
+            "name": "Gulshan 1",
+            "bn_name": "গুলশান ১"
+          },
+          {
+            "name": "Gulshan 2",
+            "bn_name": "গুলশান ২"
+          },
+          {
+            "name": "Niketan",
+            "bn_name": "নিকেতন"
+          },
+          {
+            "name": "Shahjadpur",
+            "bn_name": "শাহজাদপুর"
+          }
         ]
       },
       {
         "name": "Banani",
         "bn_name": "বনানী",
         "subareas": [
-          {"name": "Banani DOHS", "bn_name": "বনানী ডিওএইচএস"},
-          {"name": "Chairman Bari", "bn_name": "চেয়ারম্যান বাড়ি"},
-          {"name": "Kamal Ataturk Avenue", "bn_name": "কামাল আতাতুর্ক এভিনিউ"},
-          {"name": "Kakoli", "bn_name": "কাকলী"}
+          {
+            "name": "Banani DOHS",
+            "bn_name": "বনানী ডিওএইচএস"
+          },
+          {
+            "name": "Chairman Bari",
+            "bn_name": "চেয়ারম্যান বাড়ি"
+          },
+          {
+            "name": "Kamal Ataturk Avenue",
+            "bn_name": "কামাল আতাতুর্ক এভিনিউ"
+          },
+          {
+            "name": "Kakoli",
+            "bn_name": "কাকলী"
+          }
         ]
       },
       {
         "name": "Badda",
         "bn_name": "বাড্ডা",
         "subareas": [
-          {"name": "North Badda", "bn_name": "উত্তর বাড্ডা"},
-          {"name": "South Badda", "bn_name": "দক্ষিণ বাড্ডা"},
-          {"name": "Middle Badda", "bn_name": "মধ্য বাড্ডা"},
-          {"name": "Merul Badda", "bn_name": "মেরুল বাড্ডা"},
-          {"name": "Aftabnagar", "bn_name": "আফতাবনগর"}
+          {
+            "name": "North Badda",
+            "bn_name": "উত্তর বাড্ডা"
+          },
+          {
+            "name": "South Badda",
+            "bn_name": "দক্ষিণ বাড্ডা"
+          },
+          {
+            "name": "Middle Badda",
+            "bn_name": "মধ্য বাড্ডা"
+          },
+          {
+            "name": "Merul Badda",
+            "bn_name": "মেরুল বাড্ডা"
+          },
+          {
+            "name": "Aftabnagar",
+            "bn_name": "আফতাবনগর"
+          }
         ]
       },
       {
         "name": "Motijheel",
         "bn_name": "মতিঝিল",
         "subareas": [
-          {"name": "Dilkusha", "bn_name": "দিলকুশা"},
-          {"name": "Fakirapool", "bn_name": "ফকিরাপুল"},
-          {"name": "Arambagh", "bn_name": "আরামবাগ"}
+          {
+            "name": "Dilkusha",
+            "bn_name": "দিলকুশা"
+          },
+          {
+            "name": "Fakirapool",
+            "bn_name": "ফকিরাপুল"
+          },
+          {
+            "name": "Arambagh",
+            "bn_name": "আরামবাগ"
+          }
         ]
       },
       {
         "name": "Tejgaon",
         "bn_name": "তেজগাঁও",
         "subareas": [
-          {"name": "Tejgaon I/A", "bn_name": "তেজগাঁও শিল্পাঞ্চল"},
-          {"name": "Farmgate", "bn_name": "ফার্মগেট"},
-          {"name": "Kawran Bazar", "bn_name": "কাওরান বাজার"},
-          {"name": "Nakhalpara", "bn_name": "নাখালপাড়া"}
+          {
+            "name": "Tejgaon I/A",
+            "bn_name": "তেজগাঁও শিল্পাঞ্চল"
+          },
+          {
+            "name": "Farmgate",
+            "bn_name": "ফার্মগেট"
+          },
+          {
+            "name": "Kawran Bazar",
+            "bn_name": "কাওরান বাজার"
+          },
+          {
+            "name": "Nakhalpara",
+            "bn_name": "নাখালপাড়া"
+          }
         ]
       },
       {
         "name": "Khilgaon",
         "bn_name": "খিলগাঁও",
         "subareas": [
-          {"name": "Gorand", "bn_name": "গোড়ান"},
-          {"name": "Taltola", "bn_name": "তালতলা"},
-          {"name": "Tilpapara", "bn_name": "তিলপাপাড়া"}
+          {
+            "name": "Gorand",
+            "bn_name": "গোড়ান"
+          },
+          {
+            "name": "Taltola",
+            "bn_name": "তালতলা"
+          },
+          {
+            "name": "Tilpapara",
+            "bn_name": "তিলপাপাড়া"
+          }
         ]
       },
       {
         "name": "Rampura",
         "bn_name": "রামপুরা",
         "subareas": [
-          {"name": "Banasree", "bn_name": "বনশ্রী"},
-          {"name": "Ulan", "bn_name": "উলন"},
-          {"name": "Mahanagar", "bn_name": "মহানগর"}
+          {
+            "name": "Banasree",
+            "bn_name": "বনশ্রী"
+          },
+          {
+            "name": "Ulan",
+            "bn_name": "উলন"
+          },
+          {
+            "name": "Mahanagar",
+            "bn_name": "মহানগর"
+          }
         ]
       },
       {
         "name": "Jatrabari",
         "bn_name": "যাত্রাবাড়ী",
         "subareas": [
-          {"name": "Sayedabad", "bn_name": "সায়েদাবাদ"},
-          {"name": "Dhalpur", "bn_name": "ধলপুর"},
-          {"name": "Matuail", "bn_name": "মাতুয়াইল"},
-          {"name": "Konapara", "bn_name": "কোনাপাড়া"}
+          {
+            "name": "Sayedabad",
+            "bn_name": "সায়েদাবাদ"
+          },
+          {
+            "name": "Dhalpur",
+            "bn_name": "ধলপুর"
+          },
+          {
+            "name": "Matuail",
+            "bn_name": "মাতুয়াইল"
+          },
+          {
+            "name": "Konapara",
+            "bn_name": "কোনাপাড়া"
+          }
         ]
       },
       {
         "name": "Lalbagh",
         "bn_name": "লালবাগ",
         "subareas": [
-          {"name": "Lalbagh Fort", "bn_name": "লালবাগ কেল্লা"},
-          {"name": "Azimpur", "bn_name": "আজিমপুর"},
-          {"name": "Postagola", "bn_name": "পোস্তগোলা"}
+          {
+            "name": "Lalbagh Fort",
+            "bn_name": "লালবাগ কেল্লা"
+          },
+          {
+            "name": "Azimpur",
+            "bn_name": "আজিমপুর"
+          },
+          {
+            "name": "Postagola",
+            "bn_name": "পোস্তগোলা"
+          }
         ]
       },
       {
         "name": "Shahbagh",
         "bn_name": "শাহবাগ",
         "subareas": [
-          {"name": "Dhaka University Campus", "bn_name": "ঢাকা বিশ্ববিদ্যালয় ক্যাম্পাস"},
-          {"name": "Katabon", "bn_name": "কাঁটাবন"},
-          {"name": "Paribagh", "bn_name": "পরীবাগ"}
+          {
+            "name": "Dhaka University Campus",
+            "bn_name": "ঢাকা বিশ্ববিদ্যালয় ক্যাম্পাস"
+          },
+          {
+            "name": "Katabon",
+            "bn_name": "কাঁটাবন"
+          },
+          {
+            "name": "Paribagh",
+            "bn_name": "পরীবাগ"
+          }
         ]
       },
       {
         "name": "Paltan",
         "bn_name": "পল্টন",
         "subareas": [
-          {"name": "Purana Paltan", "bn_name": "পুরানা পল্টন"},
-          {"name": "Naya Paltan", "bn_name": "নয়া পল্টন"},
-          {"name": "Bijoynagar", "bn_name": "বিজয় নগর"}
+          {
+            "name": "Purana Paltan",
+            "bn_name": "পুরানা পল্টন"
+          },
+          {
+            "name": "Naya Paltan",
+            "bn_name": "নয়া পল্টন"
+          },
+          {
+            "name": "Bijoynagar",
+            "bn_name": "বিজয় নগর"
+          }
         ]
       },
       {
         "name": "Kafrul",
         "bn_name": "কাফরুল",
         "subareas": [
-          {"name": "Mirpur 13", "bn_name": "মিরপুর ১৩"},
-          {"name": "Senpara Parbata", "bn_name": "সেনপাড়া পর্বতা"},
-          {"name": "Ibrahimpur", "bn_name": "ইব্রাহিমপুর"}
+          {
+            "name": "Mirpur 13",
+            "bn_name": "মিরপুর ১৩"
+          },
+          {
+            "name": "Senpara Parbata",
+            "bn_name": "সেনপাড়া পর্বতা"
+          },
+          {
+            "name": "Ibrahimpur",
+            "bn_name": "ইব্রাহিমপুর"
+          }
         ]
       },
       {
         "name": "Vatara",
         "bn_name": "ভাটারা",
         "subareas": [
-          {"name": "Bashundhara R/A", "bn_name": "বসুন্ধরা আ/এ"},
-          {"name": "Kuril", "bn_name": "কুড়িল"},
-          {"name": "Solmaid", "bn_name": "ছোলমাইদ"}
+          {
+            "name": "Bashundhara R/A",
+            "bn_name": "বসুন্ধরা আ/এ"
+          },
+          {
+            "name": "Kuril",
+            "bn_name": "কুড়িল"
+          },
+          {
+            "name": "Solmaid",
+            "bn_name": "ছোলমাইদ"
+          }
         ]
       },
       {
         "name": "Adabor",
         "bn_name": "আদাবর",
         "subareas": [
-          {"name": "Baitul Aman Housing", "bn_name": "বায়তুল আমান হাউজিং"},
-          {"name": "Shekhertek", "bn_name": "শেখেরটেক"},
-          {"name": "Mansurabad", "bn_name": "মনসুরাবাদ"}
+          {
+            "name": "Baitul Aman Housing",
+            "bn_name": "বায়তুল আমান হাউজিং"
+          },
+          {
+            "name": "Shekhertek",
+            "bn_name": "শেখেরটেক"
+          },
+          {
+            "name": "Mansurabad",
+            "bn_name": "মনসুরাবাদ"
+          }
+        ]
+      },
+      {
+        "name": "Kalabagan",
+        "bn_name": "কলাবাগান",
+        "subareas": [
+          {
+            "name": "Green Road",
+            "bn_name": "গ্রীন রোড"
+          },
+          {
+            "name": "Dolphin Goli",
+            "bn_name": "ডলফিন গলি"
+          },
+          {
+            "name": "Panthapath",
+            "bn_name": "পান্থপথ"
+          }
+        ]
+      },
+      {
+        "name": "New Market",
+        "bn_name": "নিউ মার্কেট",
+        "subareas": [
+          {
+            "name": "Elephant Road",
+            "bn_name": "এলিফ্যান্ট রোড"
+          },
+          {
+            "name": "Nilkhet",
+            "bn_name": "নীলক্ষেত"
+          },
+          {
+            "name": "Katabon",
+            "bn_name": "কাটাবন"
+          }
+        ]
+      },
+      {
+        "name": "Ramna",
+        "bn_name": "রমনা",
+        "subareas": [
+          {
+            "name": "Malibagh",
+            "bn_name": "মালিবাগ"
+          },
+          {
+            "name": "Malibagh Chowdhury Para",
+            "bn_name": "মালিবাগ চৌধুরী পাড়া"
+          },
+          {
+            "name": "Shantinagar",
+            "bn_name": "শান্তিনগর"
+          },
+          {
+            "name": "Kakrail",
+            "bn_name": "কাকরাইল"
+          },
+          {
+            "name": "Siddheswari",
+            "bn_name": "সিদ্ধেশ্বরী"
+          },
+          {
+            "name": "Baily Road",
+            "bn_name": "বেইলি রোড"
+          }
         ]
       }
     ]
@@ -224,81 +593,246 @@
         "name": "Halishahar",
         "bn_name": "হালিশহর",
         "subareas": [
-          {"name": "Halishahar H-Block", "bn_name": "হালিশহর এইচ-ব্লক"},
-          {"name": "Boropol", "bn_name": "বড়পুল"},
-          {"name": "Rampur", "bn_name": "রামপুর"},
-          {"name": "Anandabazar", "bn_name": "আনন্দবাজার"}
+          {
+            "name": "Halishahar H-Block",
+            "bn_name": "হালিশহর এইচ-ব্লক"
+          },
+          {
+            "name": "Boropol",
+            "bn_name": "বড়পুল"
+          },
+          {
+            "name": "Rampur",
+            "bn_name": "রামপুর"
+          },
+          {
+            "name": "Anandabazar",
+            "bn_name": "আনন্দবাজার"
+          }
         ]
       },
       {
         "name": "Panchlaish",
         "bn_name": "পাঁচলাইশ",
         "subareas": [
-          {"name": "Nasirabad", "bn_name": "নাসিরাবাদ"},
-          {"name": "Probartak", "bn_name": "প্রবর্তক"},
-          {"name": "Medical Gate", "bn_name": "মেডিকেল গেট"},
-          {"name": "Sholashahar", "bn_name": "ষোলশহর"}
+          {
+            "name": "Nasirabad",
+            "bn_name": "নাসিরাবাদ"
+          },
+          {
+            "name": "Probartak",
+            "bn_name": "প্রবর্তক"
+          },
+          {
+            "name": "Medical Gate",
+            "bn_name": "মেডিকেল গেট"
+          },
+          {
+            "name": "Sholashahar",
+            "bn_name": "ষোলশহর"
+          }
         ]
       },
       {
         "name": "Kotwali",
         "bn_name": "কোতোয়ালী",
         "subareas": [
-          {"name": "Anderkilla", "bn_name": "আন্দরকিল্লা"},
-          {"name": "Chawkbazar", "bn_name": "চকবাজার"},
-          {"name": "New Market", "bn_name": "নিউ মার্কেট"},
-          {"name": "Laldighi", "bn_name": "লালদীঘি"},
-          {"name": "Terribazar", "bn_name": "টেরীবাজার"},
-          {"name": "Firingi Bazar", "bn_name": "ফিরিঙ্গি বাজার"}
+          {
+            "name": "Anderkilla",
+            "bn_name": "আন্দরকিল্লা"
+          },
+          {
+            "name": "Chawkbazar",
+            "bn_name": "চকবাজার"
+          },
+          {
+            "name": "New Market",
+            "bn_name": "নিউ মার্কেট"
+          },
+          {
+            "name": "Laldighi",
+            "bn_name": "লালদীঘি"
+          },
+          {
+            "name": "Terribazar",
+            "bn_name": "টেরীবাজার"
+          },
+          {
+            "name": "Firingi Bazar",
+            "bn_name": "ফিরিঙ্গি বাজার"
+          }
         ]
       },
       {
         "name": "Chandgaon",
         "bn_name": "চান্দগাঁও",
         "subareas": [
-          {"name": "Bahaddarhat", "bn_name": "বহদ্দারহাট"},
-          {"name": "Chandgaon R/A", "bn_name": "চান্দগাঁও আ/এ"},
-          {"name": "Kalurghat", "bn_name": "কালুরঘাট"},
-          {"name": "Mohora", "bn_name": "মোহরা"}
+          {
+            "name": "Bahaddarhat",
+            "bn_name": "বহদ্দারহাট"
+          },
+          {
+            "name": "Chandgaon R/A",
+            "bn_name": "চান্দগাঁও আ/এ"
+          },
+          {
+            "name": "Kalurghat",
+            "bn_name": "কালুরঘাট"
+          },
+          {
+            "name": "Mohora",
+            "bn_name": "মোহরা"
+          }
         ]
       },
       {
         "name": "Agrabad",
         "bn_name": "আগ্রাবাদ",
         "subareas": [
-          {"name": "Agrabad C/A", "bn_name": "আগ্রাবাদ বা/এ"},
-          {"name": "Chowmuhani", "bn_name": "চৌমুহনী"},
-          {"name": "Badamtoli", "bn_name": "বাদামতলী"},
-          {"name": "Choto Pool", "bn_name": "ছোট পুল"},
-          {"name": "Access Road", "bn_name": "এক্সেস রোড"}
+          {
+            "name": "Agrabad C/A",
+            "bn_name": "আগ্রাবাদ বা/এ"
+          },
+          {
+            "name": "Chowmuhani",
+            "bn_name": "চৌমুহনী"
+          },
+          {
+            "name": "Badamtoli",
+            "bn_name": "বাদামতলী"
+          },
+          {
+            "name": "Choto Pool",
+            "bn_name": "ছোট পুল"
+          },
+          {
+            "name": "Access Road",
+            "bn_name": "এক্সেস রোড"
+          }
         ]
       },
       {
         "name": "Khulshi",
         "bn_name": "খুলশী",
         "subareas": [
-          {"name": "South Khulshi", "bn_name": "দক্ষিণ খুলশী"},
-          {"name": "North Khulshi", "bn_name": "উত্তর খুলশী"},
-          {"name": "GEC Circle", "bn_name": "জিইসি মোড়"},
-          {"name": "Zakir Hossain Road", "bn_name": "জাকির হোসেন রোড"}
+          {
+            "name": "South Khulshi",
+            "bn_name": "দক্ষিণ খুলশী"
+          },
+          {
+            "name": "North Khulshi",
+            "bn_name": "উত্তর খুলশী"
+          },
+          {
+            "name": "GEC Circle",
+            "bn_name": "জিইসি মোড়"
+          },
+          {
+            "name": "Zakir Hossain Road",
+            "bn_name": "জাকির হোসেন রোড"
+          }
         ]
       },
       {
         "name": "Pahartali",
         "bn_name": "পাহাড়তলী",
         "subareas": [
-          {"name": "Foy's Lake", "bn_name": "ফয়েজ লেক"},
-          {"name": "Saraipara", "bn_name": "সরাইপাড়া"},
-          {"name": "South Kattali", "bn_name": "দক্ষিণ কাট্টলী"}
+          {
+            "name": "Foy's Lake",
+            "bn_name": "ফয়েজ লেক"
+          },
+          {
+            "name": "Saraipara",
+            "bn_name": "সরাইপাড়া"
+          },
+          {
+            "name": "South Kattali",
+            "bn_name": "দক্ষিণ কাট্টলী"
+          }
         ]
       },
       {
         "name": "Bakalia",
         "bn_name": "বাকলিয়া",
         "subareas": [
-          {"name": "Shah Amanat Bridge", "bn_name": "শাহ আমানত সেতু"},
-          {"name": "Chawkbazar East", "bn_name": "চকবাজার পূর্ব"},
-          {"name": "Kalamiah Bazar", "bn_name": "কালামিয়া বাজার"}
+          {
+            "name": "Shah Amanat Bridge",
+            "bn_name": "শাহ আমানত সেতু"
+          },
+          {
+            "name": "Chawkbazar East",
+            "bn_name": "চকবাজার পূর্ব"
+          },
+          {
+            "name": "Kalamiah Bazar",
+            "bn_name": "কালামিয়া বাজার"
+          }
+        ]
+      },
+      {
+        "name": "Double Mooring",
+        "bn_name": "ডাবল মুরিং",
+        "subareas": [
+          {
+            "name": "Agrabad",
+            "bn_name": "আগ্রাবাদ"
+          },
+          {
+            "name": "Agrabad C/A",
+            "bn_name": "আগ্রাবাদ বাণিজ্যিক এলাকা"
+          },
+          {
+            "name": "Chowmuhani",
+            "bn_name": "চৌমুহনী"
+          },
+          {
+            "name": "Mistri Para",
+            "bn_name": "মিস্ত্রী পাড়া"
+          },
+          {
+            "name": "Akhtaruzzaman Center",
+            "bn_name": "আখতারুজ্জামান সেন্টার"
+          }
+        ]
+      },
+      {
+        "name": "Patenga",
+        "bn_name": "পতেঙ্গা",
+        "subareas": [
+          {
+            "name": "CEPZ",
+            "bn_name": "সিইপিজেড"
+          },
+          {
+            "name": "South Patenga",
+            "bn_name": "দক্ষিণ পতেঙ্গা"
+          },
+          {
+            "name": "North Patenga",
+            "bn_name": "উত্তর পতেঙ্গা"
+          },
+          {
+            "name": "Steel Mill Bazar",
+            "bn_name": "স্টিল মিল বাজার"
+          }
+        ]
+      },
+      {
+        "name": "Bayazid",
+        "bn_name": "বায়োজিদ",
+        "subareas": [
+          {
+            "name": "Bayazid Bostami",
+            "bn_name": "বায়োজিদ বোস্তামী"
+          },
+          {
+            "name": "Oxygen",
+            "bn_name": "অক্সিজেন"
+          },
+          {
+            "name": "Nasirabad I/A",
+            "bn_name": "নাসিরাবাদ শিল্প এলাকা"
+          }
         ]
       }
     ]
@@ -312,34 +846,432 @@
         "name": "Shahjalal Upashahar",
         "bn_name": "শাহজালাল উপশহর",
         "subareas": [
-          {"name": "Upashahar Block A", "bn_name": "উপশহর ব্লক এ"},
-          {"name": "Upashahar Block B", "bn_name": "উপশহর ব্লক বি"},
-          {"name": "Upashahar Block C", "bn_name": "উপশহর ব্লক সি"},
-          {"name": "Upashahar Block D", "bn_name": "উপশহর ব্লক ডি"},
-          {"name": "Upashahar Main Road", "bn_name": "উপশহর প্রধান সড়ক"}
+          {
+            "name": "Upashahar Block A",
+            "bn_name": "উপশহর ব্লক এ"
+          },
+          {
+            "name": "Upashahar Block B",
+            "bn_name": "উপশহর ব্লক বি"
+          },
+          {
+            "name": "Upashahar Block C",
+            "bn_name": "উপশহর ব্লক সি"
+          },
+          {
+            "name": "Upashahar Block D",
+            "bn_name": "উপশহর ব্লক ডি"
+          },
+          {
+            "name": "Upashahar Main Road",
+            "bn_name": "উপশহর প্রধান সড়ক"
+          }
         ]
       },
       {
         "name": "Amberkhana",
         "bn_name": "আম্বরখানা",
         "subareas": [
-          {"name": "Amberkhana Point", "bn_name": "আম্বরখানা পয়েন্ট"},
-          {"name": "Dorgah Gate", "bn_name": "দরগাহ গেট"},
-          {"name": "Housing Estate", "bn_name": "হাউজিং এস্টেট"},
-          {"name": "Chauhatta", "bn_name": "চৌহাট্টা"}
+          {
+            "name": "Amberkhana Point",
+            "bn_name": "আম্বরখানা পয়েন্ট"
+          },
+          {
+            "name": "Dorgah Gate",
+            "bn_name": "দরগাহ গেট"
+          },
+          {
+            "name": "Housing Estate",
+            "bn_name": "হাউজিং এস্টেট"
+          },
+          {
+            "name": "Chauhatta",
+            "bn_name": "চৌহাট্টা"
+          }
         ]
       },
       {
         "name": "Kotwali",
         "bn_name": "কোতোয়ালী",
         "subareas": [
-          {"name": "Zindabazar", "bn_name": "জিন্দাবাজার"},
-          {"name": "Bandar Bazar", "bn_name": "বন্দর বাজার"},
-          {"name": "Laldighirpar", "bn_name": "লালদিঘীরপাড়"},
-          {"name": "Subidbazar", "bn_name": "সুবিদবাজার"},
-          {"name": "Lamabazar", "bn_name": "লামাবাজার"},
-          {"name": "Shibganj", "bn_name": "শিবগঞ্জ"},
-          {"name": "Tilagarh", "bn_name": "টিলাগড়"}
+          {
+            "name": "Zindabazar",
+            "bn_name": "জিন্দাবাজার"
+          },
+          {
+            "name": "Bandar Bazar",
+            "bn_name": "বন্দর বাজার"
+          },
+          {
+            "name": "Laldighirpar",
+            "bn_name": "লালদিঘীরপাড়"
+          },
+          {
+            "name": "Subidbazar",
+            "bn_name": "সুবিদবাজার"
+          },
+          {
+            "name": "Lamabazar",
+            "bn_name": "লামাবাজার"
+          },
+          {
+            "name": "Shibganj",
+            "bn_name": "শিবগঞ্জ"
+          },
+          {
+            "name": "Tilagarh",
+            "bn_name": "টিলাগড়"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "district_id": "15",
+    "district_name": "Rajshahi",
+    "division_id": "2",
+    "thanas": [
+      {
+        "name": "Boalia",
+        "bn_name": "বোয়ালিয়া",
+        "subareas": [
+          {
+            "name": "Shaheb Bazar",
+            "bn_name": "সাহেব বাজার"
+          },
+          {
+            "name": "Ghoramara",
+            "bn_name": "ঘোড়ামারা"
+          },
+          {
+            "name": "Kumarpara",
+            "bn_name": "কুমারপাড়া"
+          },
+          {
+            "name": "Alupatti",
+            "bn_name": "আলুপট্টি"
+          },
+          {
+            "name": "Raninagar",
+            "bn_name": "রানী নগর"
+          },
+          {
+            "name": "Bazar",
+            "bn_name": "বাজার"
+          }
+        ]
+      },
+      {
+        "name": "Rajpara",
+        "bn_name": "রাজপাড়া",
+        "subareas": [
+          {
+            "name": "Kazihata",
+            "bn_name": "কাজীহাটা"
+          },
+          {
+            "name": "Laxmipur",
+            "bn_name": "লক্ষ্মীপুর"
+          },
+          {
+            "name": "C&B More",
+            "bn_name": "সিঅ্যান্ডবি মোড়"
+          },
+          {
+            "name": "Harupur",
+            "bn_name": "হরুপুর"
+          },
+          {
+            "name": "Court",
+            "bn_name": "কোর্ট"
+          }
+        ]
+      },
+      {
+        "name": "Rajputpara",
+        "bn_name": "রাজপুতপাড়া",
+        "subareas": [
+          {
+            "name": "Kazihata",
+            "bn_name": "কাজীহাটা"
+          },
+          {
+            "name": "Laxmipur",
+            "bn_name": "লক্ষ্মীপুর"
+          }
+        ]
+      },
+      {
+        "name": "Chandrima",
+        "bn_name": "চন্দ্রিমা",
+        "subareas": [
+          {
+            "name": "Padma Residential Area",
+            "bn_name": "পদ্মা আবাসিক এলাকা"
+          },
+          {
+            "name": "Bhadra",
+            "bn_name": "ভদ্রা"
+          },
+          {
+            "name": "Shiroil",
+            "bn_name": "শিরোইল"
+          },
+          {
+            "name": "Choto Bongram",
+            "bn_name": "ছোট বনগ্রাম"
+          }
+        ]
+      },
+      {
+        "name": "Motihar",
+        "bn_name": "মতিহার",
+        "subareas": [
+          {
+            "name": "Rajshahi University",
+            "bn_name": "রাজশাহী বিশ্ববিদ্যালয়"
+          },
+          {
+            "name": "Kajla",
+            "bn_name": "কাজলা"
+          },
+          {
+            "name": "Binodpur",
+            "bn_name": "বিনোদপুর"
+          },
+          {
+            "name": "Meherchandi",
+            "bn_name": "মেহেরচণ্ডী"
+          }
+        ]
+      },
+      {
+        "name": "Shah Makhdum",
+        "bn_name": "শাহ মখদুম",
+        "subareas": [
+          {
+            "name": "Airport",
+            "bn_name": "বিমানবন্দর"
+          },
+          {
+            "name": "Nowdapara",
+            "bn_name": "নওদাপাড়া"
+          },
+          {
+            "name": "Postal Academy",
+            "bn_name": "পোস্টাল একাডেমি"
+          },
+          {
+            "name": "Sopura I/A",
+            "bn_name": "সপুরা শিল্প এলাকা"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "district_id": "27",
+    "district_name": "Khulna",
+    "division_id": "3",
+    "thanas": [
+      {
+        "name": "Sonadanga",
+        "bn_name": "সোনাডাঙ্গা",
+        "subareas": [
+          {
+            "name": "KDA Avenue",
+            "bn_name": "কেডিএ এভিনিউ"
+          },
+          {
+            "name": "KDA Road",
+            "bn_name": "কেডিএ রোড"
+          },
+          {
+            "name": "Sonadanga Bus Stand",
+            "bn_name": "সোনাডাঙ্গা বাস স্ট্যান্ড"
+          },
+          {
+            "name": "Boyra",
+            "bn_name": "বয়রা"
+          },
+          {
+            "name": "Choto Boyra",
+            "bn_name": "ছোট বয়রা"
+          },
+          {
+            "name": "Gollamari",
+            "bn_name": "গল্লামারী"
+          }
+        ]
+      },
+      {
+        "name": "Khalishpur",
+        "bn_name": "খালিশপুর",
+        "subareas": [
+          {
+            "name": "Mujgunni Residential Area",
+            "bn_name": "মুজগুন্নী আবাসিক এলাকা"
+          },
+          {
+            "name": "Boyra",
+            "bn_name": "বয়রা"
+          },
+          {
+            "name": "New Market",
+            "bn_name": "নিউ মার্কেট"
+          },
+          {
+            "name": "Platinum Jubilee Jute Mills",
+            "bn_name": "প্লাটিনাম জুবিলী জুট মিলস"
+          },
+          {
+            "name": "BIDC Road",
+            "bn_name": "বিআইডিসি রোড"
+          }
+        ]
+      },
+      {
+        "name": "Khulna Sadar",
+        "bn_name": "খুলনা সদর",
+        "subareas": [
+          {
+            "name": "Iqbal Road",
+            "bn_name": "ইকবাল রোড"
+          },
+          {
+            "name": "Dakbangla",
+            "bn_name": "ডাকবাংলা"
+          },
+          {
+            "name": "Rupsha Strand Road",
+            "bn_name": "রূপসা স্ট্র্যান্ড রোড"
+          },
+          {
+            "name": "Tutpara",
+            "bn_name": "টুটপাড়া"
+          },
+          {
+            "name": "Moilapota",
+            "bn_name": "ময়লাপোতা"
+          }
+        ]
+      },
+      {
+        "name": "Daulatpur",
+        "bn_name": "দৌলতপুর",
+        "subareas": [
+          {
+            "name": "Daulatpur Bazar",
+            "bn_name": "দৌলতপুর বাজার"
+          },
+          {
+            "name": "Muhsinnagar",
+            "bn_name": "মহসিননগর"
+          },
+          {
+            "name": "BL College",
+            "bn_name": "বিএল কলেজ"
+          },
+          {
+            "name": "Deyana",
+            "bn_name": "দেয়ানা"
+          }
+        ]
+      },
+      {
+        "name": "Khan Jahan Ali",
+        "bn_name": "খান জাহান আলী",
+        "subareas": [
+          {
+            "name": "Shiromoni",
+            "bn_name": "শিরোমণি"
+          },
+          {
+            "name": "Fulbarigate",
+            "bn_name": "ফুলবাড়িগেট"
+          },
+          {
+            "name": "Gilmora",
+            "bn_name": "গিলতলা"
+          },
+          {
+            "name": "Attaki",
+            "bn_name": "আটরা"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "district_id": "59",
+    "district_name": "Rangpur",
+    "division_id": "7",
+    "thanas": [
+      {
+        "name": "Kotwali",
+        "bn_name": "কোতোয়ালী",
+        "subareas": [
+          {
+            "name": "Jaj Court",
+            "bn_name": "জজ কোর্ট"
+          },
+          {
+            "name": "Dhap",
+            "bn_name": "ধাপ"
+          },
+          {
+            "name": "Kachari Bazar",
+            "bn_name": "কাচারী বাজার"
+          },
+          {
+            "name": "Station Road",
+            "bn_name": "স্টেশন রোড"
+          },
+          {
+            "name": "Payra Chottor",
+            "bn_name": "পায়রা চত্বর"
+          },
+          {
+            "name": "Medical More",
+            "bn_name": "মেডিকেল মোড়"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "district_id": "41",
+    "district_name": "Gazipur",
+    "division_id": "6",
+    "thanas": [
+      {
+        "name": "Tongi",
+        "bn_name": "টঙ্গী",
+        "subareas": [
+          {
+            "name": "Tongi Bazar",
+            "bn_name": "টঙ্গী বাজার"
+          },
+          {
+            "name": "Cherag Ali",
+            "bn_name": "চেরাগ আলী"
+          },
+          {
+            "name": "Station Road",
+            "bn_name": "স্টেশন রোড"
+          },
+          {
+            "name": "Tongi I/A",
+            "bn_name": "টঙ্গী শিল্প এলাকা"
+          },
+          {
+            "name": "Hossain Market",
+            "bn_name": "হোসেন মার্কেট"
+          },
+          {
+            "name": "Mill Gate",
+            "bn_name": "মিল গেট"
+          }
         ]
       }
     ]

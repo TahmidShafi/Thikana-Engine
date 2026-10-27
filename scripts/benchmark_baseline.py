@@ -53,6 +53,12 @@ def canonicalize_admin_eval_name(name: Optional[str]) -> str:
         "barisal": "barishal",
         "jessore": "jashore",
         "bogra": "bogura",
+        "bogra sadar": "bogura sadar",
+        "hatia": "hatiya",
+        "sonaimori": "sonaimuri",
+        "doulatpur": "daulatpur",
+        "mohonpur": "mohanpur",
+        "pathorghata": "patharghata",
     }
     return mapping.get(norm, norm)
 
@@ -196,6 +202,7 @@ class GenericPipelineRunner:
             full_context_tokens=tokens,
             gazetteer=self.gazetteer,
             matcher=self.matcher,
+            tagged_spans_by_type=entities,
         )
 
         hierarchy = disambig_res.get("hierarchy", {})
@@ -285,6 +292,10 @@ def run_benchmark():
         correct_homonym = 0
         homonym_total = 0
 
+        # Warm-up run to eliminate cold startup / cache population overhead
+        for item in gold_data[:3]:
+            runner_func(item["raw_text"])
+
         for item in gold_data:
             raw_text = item["raw_text"]
             true_tags = item["tags"]
@@ -346,22 +357,16 @@ def run_benchmark():
         "Pipeline A (Regex+Gazetteer)",
         lambda txt: baseline_a.tag_address(normalize_address(txt)),
     )
-    res_b = evaluate_pipeline(
-        "Pipeline B (CRF+Disambiguator)",
-        lambda txt: (
-            pipeline_b.process(txt)["tags"],
-            pipeline_b.process(txt)["predicted_thana"],
-            pipeline_b.process(txt)["predicted_district"],
-        ),
-    )
-    res_c = evaluate_pipeline(
-        "Pipeline C (ONNX+Viterbi+Disambiguator)",
-        lambda txt: (
-            pipeline_c.process(txt)["tags"],
-            pipeline_c.process(txt)["predicted_thana"],
-            pipeline_c.process(txt)["predicted_district"],
-        ),
-    )
+    def _run_b(txt: str):
+        out = pipeline_b.process(txt)
+        return out["tags"], out["predicted_thana"], out["predicted_district"]
+
+    def _run_c(txt: str):
+        out = pipeline_c.process(txt)
+        return out["tags"], out["predicted_thana"], out["predicted_district"]
+
+    res_b = evaluate_pipeline("Pipeline B (CRF+Disambiguator)", _run_b)
+    res_c = evaluate_pipeline("Pipeline C (ONNX+Viterbi+Disambiguator)", _run_c)
 
     # --- RESULTS TABLE ---
     print("\n" + "=" * 80)

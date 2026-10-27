@@ -138,12 +138,11 @@ def extract_token_features(
 
     # Gazetteer Phonetic Match Features (Fast O(1) Inverted Index Lookup)
     if matcher is not None:
-        # 1. Single token phonetic match
-        pk, _ = banglish_phonetic_key(token)
-        nodes = matcher.primary_index.get(pk)
-        if nodes:
+        # 1. Single token phonetic match (cached)
+        node = matcher.lookup_token(token)
+        if node:
             features["gaz_matched"] = True
-            features["gaz_level"] = nodes[0].level.value
+            features["gaz_level"] = node.level.value
         else:
             features["gaz_matched"] = False
 

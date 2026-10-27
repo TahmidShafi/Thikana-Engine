@@ -37,6 +37,16 @@ COMMON_ALIASES: Dict[str, List[str]] = {
     # English spelling variants
     "muhammadpur": ["mohammadpur"],
     "mohammadpur": ["muhammadpur", "mahammadpur"],
+    "hatia": ["hatiya"],
+    "hatiya": ["hatia"],
+    "sonaimori": ["sonaimuri"],
+    "sonaimuri": ["sonaimori"],
+    "bogra sadar": ["bogura sadar"],
+    "bogura sadar": ["bogra sadar"],
+    "doulatpur": ["daulatpur"],
+    "daulatpur": ["doulatpur"],
+    "mohonpur": ["mohanpur"],
+    "mohanpur": ["mohonpur"],
     # Bengali common orthographic & historical variants
     "মহম্মদপুর": ["মোহাম্মদপুর"],
     "মোহাম্মদপুর": ["মহম্মদপুর"],

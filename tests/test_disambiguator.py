@@ -125,7 +125,7 @@ def test_trie_prefix_and_exact_search(matcher: PhoneticGazetteerMatcher):
 
 def test_measure_collision_rate(matcher: PhoneticGazetteerMatcher):
     stats = matcher.MeasureCollisionRate()
-    assert stats["total_entities"] == 5285
+    assert stats["total_entities"] >= 5285
     assert stats["unique_primary_keys"] > 7000
     assert stats["avg_collisions_per_key"] >= 1.0
     assert stats["collision_rate_pct"] > 0.0

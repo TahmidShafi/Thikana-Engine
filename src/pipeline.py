@@ -164,6 +164,7 @@ class ThikanaPipeline:
             full_context_tokens=tokens,
             gazetteer=self.gazetteer,
             matcher=self.matcher,
+            tagged_spans_by_type=entities,
         )
 
         resolved_node = disambig_res.get("resolved_node")

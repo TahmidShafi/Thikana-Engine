@@ -15,6 +15,7 @@ Provides:
 """
 
 from __future__ import annotations
+import functools
 import re
 import unicodedata
 from typing import Any, Dict, List, Optional, Set, Tuple
@@ -61,6 +62,7 @@ def transliterate_bangla(text: str) -> str:
 # -----------------------------------------------------------------------------
 # Phonetic Key Generation
 # -----------------------------------------------------------------------------
+@functools.lru_cache(maxsize=16384)
 def banglish_phonetic_key(word: str) -> Tuple[str, str]:
     """
     Computes canonical Banglish phonetic keys:
@@ -325,6 +327,21 @@ class PhoneticGazetteerMatcher:
             if node.bn_name:
                 self._index_name(node.bn_name, node)
 
+    @functools.lru_cache(maxsize=16384)
+    def lookup_token(self, token: str) -> Optional[AdminNode]:
+        """Fast cached single-token gazetteer lookup."""
+        if not token:
+            return None
+        t_clean = token.strip().lower()
+        if t_clean in self.name_to_nodes:
+            return self.name_to_nodes[t_clean][0]
+        pk, _ = banglish_phonetic_key(t_clean)
+        nodes = self.primary_index.get(pk)
+        if nodes:
+            return nodes[0]
+        return None
+
+    @functools.lru_cache(maxsize=8192)
     def search(
         self, query: str, max_results: int = 10
     ) -> List[Tuple[AdminNode, float]]:
@@ -373,9 +390,8 @@ class PhoneticGazetteerMatcher:
                     score = max(0.5, 0.9 - (dist * 0.1))
                     candidates[node.id] = (node, score)
 
-
-        # 3. Trie prefix / fuzzy matches
-        if len(candidates) < max_results:
+        # 4. Trie prefix matches
+        if len(candidates) < max_results and len(pk) >= 3:
             prefix_matches = self.trie.search_prefix(pk)
             for node in prefix_matches:
                 if node.id not in candidates:
@@ -383,8 +399,8 @@ class PhoneticGazetteerMatcher:
                     score = max(0.4, 0.85 - (dist * 0.1))
                     candidates[node.id] = (node, score)
 
-        # 4. Fuzzy Levenshtein on Trie
-        if len(candidates) < max_results:
+        # 5. Fuzzy Levenshtein on Trie (only as fallback when zero candidates and compact key)
+        if not candidates and 3 <= len(pk) <= 10:
             fuzzy_matches = self.trie.fuzzy_search(pk, max_distance=1)
             for node, dist in fuzzy_matches:
                 if node.id not in candidates:

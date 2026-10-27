@@ -12,7 +12,7 @@ import re
 from typing import Any, Dict, List, Optional, Set, Tuple
 
 from .models import AdminLevel, AdminNode
-from .gazetteer import BangladeshGazetteer
+from .gazetteer import BangladeshGazetteer, canonicalize_admin_name
 from .phonetic_trie import PhoneticGazetteerMatcher, banglish_phonetic_key, levenshtein_distance
 
 
@@ -93,6 +93,7 @@ def resolve_location_hierarchy(
     full_context_tokens: List[str],
     gazetteer: Optional[BangladeshGazetteer] = None,
     matcher: Optional[PhoneticGazetteerMatcher] = None,
+    tagged_spans_by_type: Optional[Dict[str, List[str]]] = None,
 ) -> Dict[str, Any]:
     """
     Resolves ambiguous administrative candidate spans into the single most confident
@@ -103,6 +104,7 @@ def resolve_location_hierarchy(
       full_context_tokens: All tokens from normalized address string.
       gazetteer: Optional pre-loaded BangladeshGazetteer instance.
       matcher: Optional pre-loaded PhoneticGazetteerMatcher instance.
+      tagged_spans_by_type: Optional Stage 2 typed entity dictionary (e.g. DISTRICT, THANA_UPAZILA).
 
     Returns:
       {
@@ -129,9 +131,38 @@ def resolve_location_hierarchy(
     context_set = set(normalized_context)
     context_string = " ".join(normalized_context)
 
-    # 1. Gather all potential AdminNode candidates from candidate spans
+    # 1. Gather all potential AdminNode candidates from candidate spans & tagged spans
     candidates_pool: Dict[str, AdminNode] = {}
     span_matches_map: Dict[str, List[str]] = {}
+
+    if tagged_spans_by_type:
+        # Explicit DISTRICT spans: constrain lookup to AdminLevel.DISTRICT
+        for d_span in tagged_spans_by_type.get("DISTRICT", []):
+            clean_d = d_span.strip()
+            if not clean_d:
+                continue
+            d_nodes = gazetteer.find_by_exact_name(clean_d, level=AdminLevel.DISTRICT)
+            if not d_nodes:
+                d_nodes = gazetteer.find_by_exact_name(canonicalize_admin_name(clean_d), level=AdminLevel.DISTRICT)
+            for node in d_nodes:
+                candidates_pool[node.id] = node
+                span_matches_map.setdefault(node.id, []).append(clean_d)
+
+        # Explicit THANA_UPAZILA spans: prioritize AdminLevel.THANA / AdminLevel.UPAZILA
+        for t_span in tagged_spans_by_type.get("THANA_UPAZILA", []):
+            clean_t = t_span.strip()
+            if not clean_t:
+                continue
+            t_nodes = gazetteer.find_by_exact_name(clean_t, level=AdminLevel.UPAZILA)
+            for node in t_nodes:
+                candidates_pool[node.id] = node
+                span_matches_map.setdefault(node.id, []).append(clean_t)
+            if not t_nodes:
+                p_matches = matcher.search(clean_t, max_results=5)
+                for node, p_score in p_matches:
+                    if node.level.is_upazila_level and p_score >= 0.5:
+                        candidates_pool[node.id] = node
+                        span_matches_map.setdefault(node.id, []).append(clean_t)
 
     for span in candidate_spans:
         clean_span = span.strip()
@@ -305,6 +336,31 @@ def resolve_location_hierarchy(
                 score -= 35.0
                 reasons.append(f"distractor_road_penalty_{node.name}")
 
+        # (i) Stage 2 Explicit Type Anchoring
+        if tagged_spans_by_type:
+            st2_districts = [d.strip().lower() for d in tagged_spans_by_type.get("DISTRICT", []) if d.strip()]
+            st2_thanas = [t.strip().lower() for t in tagged_spans_by_type.get("THANA_UPAZILA", []) if t.strip()]
+
+            # 1. District Anchoring (+40.0)
+            if st2_districts:
+                canon_st2_districts = {canonicalize_admin_name(d).lower() for d in st2_districts}
+                if node.level == AdminLevel.DISTRICT and (node.name.lower() in st2_districts or node.name.lower() in canon_st2_districts):
+                    score += 40.0
+                    reasons.append("stage2_district_anchor")
+                elif node.district and (node.district.name.lower() in st2_districts or node.district.name.lower() in canon_st2_districts):
+                    score += 40.0
+                    reasons.append("stage2_parent_district_anchor")
+
+            # 2. Thana / Upazila Prioritization (+35.0)
+            if st2_thanas:
+                is_thana_match = node.level.is_upazila_level and any(
+                    node.name.lower() == t or t in node.name.lower() or (node.bn_name and node.bn_name == t)
+                    for t in st2_thanas
+                )
+                if is_thana_match:
+                    score += 35.0
+                    reasons.append(f"stage2_thana_anchor_{node.name}")
+
         candidate_scores.append({
             "node": node,
             "score": score,
@@ -323,11 +379,53 @@ def resolve_location_hierarchy(
     gap = top_score - second_score
     confidence = min(1.0, max(0.5, 0.5 + (gap / 40.0))) if top_score > 0 else 0.0
 
+    hierarchy = dict(best_node.hierarchy_dict)
+    hierarchy_bn = dict(best_node.hierarchy_bn_dict)
+
+    # When a metro Thana or Upazila is tagged by Stage 2 alongside a valid District,
+    # preserve Stage 2's extracted Thana name as a fallback rather than dropping it.
+    if tagged_spans_by_type:
+        st2_thanas = tagged_spans_by_type.get("THANA_UPAZILA", [])
+        if st2_thanas and not (hierarchy.get("thana") or hierarchy.get("upazila")):
+            matched_thana_node = None
+            for t_str in st2_thanas:
+                # 1. Exact match
+                t_matches = gazetteer.find_by_exact_name(t_str, level=AdminLevel.UPAZILA)
+                for tm in t_matches:
+                    if tm.district and hierarchy.get("district") and tm.district.name.lower() == hierarchy["district"].lower():
+                        matched_thana_node = tm
+                        break
+                if matched_thana_node:
+                    break
+
+                # 2. Substring match under the resolved district (e.g. 'Baridhara Vatara' -> Vatara)
+                dist_name = hierarchy.get("district")
+                if dist_name:
+                    dist_nodes = gazetteer.find_by_exact_name(dist_name, level=AdminLevel.DISTRICT)
+                    if dist_nodes:
+                        dist_node = dist_nodes[0]
+                        t_str_lower = t_str.lower()
+                        for child_thana in dist_node.children:
+                            if child_thana.level.is_upazila_level:
+                                c_name = child_thana.name.lower()
+                                if c_name in t_str_lower or t_str_lower in c_name:
+                                    matched_thana_node = child_thana
+                                    break
+                        if matched_thana_node:
+                            break
+
+            if matched_thana_node:
+                hierarchy["thana"] = matched_thana_node.name
+                if matched_thana_node.bn_name:
+                    hierarchy_bn["thana"] = matched_thana_node.bn_name
+            else:
+                hierarchy["thana"] = st2_thanas[0]
+
     return {
         "resolved_node": best_node,
         "confidence": round(confidence, 3),
-        "hierarchy": best_node.hierarchy_dict,
-        "hierarchy_bn": best_node.hierarchy_bn_dict,
+        "hierarchy": hierarchy,
+        "hierarchy_bn": hierarchy_bn,
         "matched_spans": best["spans"],
         "score": best["score"],
         "candidates_ranked": [
