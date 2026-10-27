@@ -259,7 +259,11 @@ class ONNXSequenceTagger:
             [self.output_name],
             {self.input_name: input_data},
         )
-        emissions = outputs[0][0]  # shape: (seq_len, num_labels)
+        raw_output = outputs[0]
+        if isinstance(raw_output, np.ndarray):
+            emissions = raw_output[0]
+        else:
+            emissions = np.asarray(raw_output)[0]
 
         # Decode via constrained Viterbi
         return self.decoder.decode(emissions)
